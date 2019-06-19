@@ -1,0 +1,229 @@
+﻿@using BookingEnginePMS.Models;
+@using BookingEnginePMS.Controllers;
+@using System;
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+
+    Hotel hotel = new Hotel();
+    if (Session["HotelForBooking"] != null)
+    {
+        hotel = (Hotel)Session["HotelForBooking"];
+    }
+    AllDataBook_Home allDataBook = new AllDataBook_Home();
+    if (Session["allDataBook"] != null)
+    {
+        allDataBook = (AllDataBook_Home)Session["allDataBook"];
+    }
+}
+<script src="~/Content/js/Home/book-success.js"></script>
+
+<style>
+    .b-message {
+        padding: 10px;
+        background: #e5e5e5;
+        font-size: 1em;
+    }
+
+    .t-m-booking {
+        width: 99.5%;
+        float: left;
+        margin: 10px 0px;
+        border: 3px solid #e5e5e5;
+        background: #e5e5e5;
+    }
+
+        .t-m-booking h2 {
+            font-size: 1em;
+            padding: 5px;
+        }
+
+    .ui-widget-content {
+        font-size: 14px;
+    }
+
+    .t-m-booking div.ct-info-message {
+        background: #fff;
+        padding: 10px;
+        font-size: 1em;
+        font-weight: normal;
+    }
+
+    .ct-info-message div.w-info-booking {
+        border: none;
+        font-size: 0.9em;
+    }
+
+    .t-m-booking div.ct-info-a {
+        width: 300px;
+    }
+
+    .t-m-booking div.ct-info-b {
+        width: 400px;
+    }
+
+    .t-m-booking div.ct-info-c {
+        width: 268px;
+    }
+
+    .item-service {
+        font-size: 0.85em;
+        margin-bottom: 20px;
+    }
+
+        .item-service div.title-info-s span {
+            font-size: 1.2em;
+        }
+
+        .item-service div.title-info-s {
+            width: 100%;
+            float: left;
+            border-bottom: 1px solid #917A7A;
+        }
+</style>
+
+<header>
+    @Html.Partial("~/Views/PartialView/pTimeLine.cshtml", transition)
+</header>
+<div class="content-checkavail">
+    <div id="header-avail">
+        <div id="left-header-avail">
+            @Html.Partial("~/Views/PartialView/pInfoCompany.cshtml", transition)
+        </div>
+        <div id="right-header-avail">
+            <div class="change-search" style="margin-right:0">
+                <a href="/?hotelKey=@allDataBook.param.hotelKey">@(transition.Translate(2394, "Create another new booking"))</a>
+            </div>
+        </div>
+    </div>
+    <div class="full-width wrap-selectdate">
+        <p class="b-message">
+            @(transition.Translate(2395, "MessageConfirmSuccess"))
+        </p>
+        <div class="t-m-booking">
+            <h2>@(transition.Translate(2380, "Booking Process Complete"))</h2>
+            <div class="ct-info-message"><strong>@(transition.Translate(2381, "Booking Reference")): @allDataBook.reservationId</strong></div>
+        </div>
+        <div class="t-m-booking">
+            <h2>@(transition.Translate(2382, "Booking Summary")) -{{Hotel.NameHotel}}</h2>
+            <div class="ct-info-message">
+                <div class="w-info-booking ct-info-a">
+                    <div class="item-info-booking">
+                        <div class="left title-booking">@(transition.Translate(2383, "Check in date"))</div>
+                        <div class="item-cbk"><strong>@allDataBook.param.fromDate.ToString("ddd, MMM d, yyyy")</strong></div>
+                    </div>
+                    <div class="item-info-booking">
+                        <div class="left title-booking">@(transition.Translate(2384, "Check out date"))</div>
+                        <div class="item-cbk"><strong>@allDataBook.param.toDate.ToString("ddd, MMM d, yyyy")</strong></div>
+                    </div>
+                    <div class="item-info-booking">
+                        <div class="left title-booking">@(transition.Translate(2385, "Nights"))</div>
+                        <div class="item-cbk"><strong>@((allDataBook.param.toDate - allDataBook.param.fromDate).Days)</strong></div>
+                    </div>
+                    <div class="item-info-booking">
+                        <div class="left title-booking">@(transition.Translate(2357, "Adults"))</div>
+                        <div class="item-cbk"><strong>@allDataBook.param.adults</strong></div>
+                    </div>
+                    <div class="item-info-booking">
+                        <div class="left title-booking">@(transition.Translate(2358, "Children"))</div>
+                        <div class="item-cbk"><strong>@allDataBook.param.child</strong></div>
+                    </div>
+                </div>
+                <div class="w-info-booking ct-info-b">
+                    @foreach (RoomType_Home roomtype in allDataBook.dataDefault)
+                    {
+                        <div class="item-info-booking">
+                            <div class="left title-booking">@(transition.Translate(2291, "Room type")) </div>
+                            <div class="item-cbk"><a href="javascript:void(0)">@roomtype.RoomTypeName</a></div>
+                        </div>
+                        <div class="item-info-booking">
+                            <div class="left title-booking">@(transition.Translate(2386, "Number of Room(s)")) </div>
+                            <div class="item-cbk">
+                                @roomtype.PromotionHome.ChooseRoom
+                            </div>
+                        </div>
+                    }
+                    <div class="item-info-booking">
+                        <div class="left title-booking">@(transition.Translate(2387, "Additional Services"))</div>
+                        <div class="item-cbk">
+                            <a href="javascript:void(0)">@(transition.Translate(2388, "Services Selected"))</a>
+                            <ul style="list-style: circle;margin-left: 15px;">
+                                @foreach (Service_Home item in allDataBook.services)
+                                {
+                                    <li>
+                                        <p> @item.ServiceName - (@item.NumberChoose)</p>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item-info-booking">
+                        <div class="left title-booking">@(transition.Translate(2389, "Additional Extrabed"))</div>
+                        <div class="item-cbk">
+                            <a href="javascript:void(0)">@(transition.Translate(2390, "Extrabed Selected For Room"))</a>
+                            <ul style="list-style: circle;margin-left: 15px;">
+                                @foreach (Extrabed_Home item in allDataBook.extrabeds)
+                                {
+                                    <li>
+                                        <p> @item.ExtrabedName - (@item.RoomTypeName)</p>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-info-booking ct-info-c">
+                    <div class="item-info-booking">
+                        <div class="left title-booking">@(transition.Translate(2360, "Room charges")) </div>
+                        <div class="item-cbk text-right"><strong>@String.Format("{0:n}", ViewBag.totalPriceRoom)</strong> <span class="unit-price">@allDataBook.param.currency</span></div>
+                    </div>
+                    <div class="item-info-booking">
+                        <div class="left title-booking">VAT</div>
+                        <div class="item-cbk text-right"><strong>@String.Format("{0:n}", ViewBag.totalVAT)</strong> <span class="unit-price">@allDataBook.param.currency</span></div>
+                    </div>
+                    <div class="item-info-booking">
+                        <div class="left title-booking">@(transition.Translate(2369, "Service charge"))</div>
+                        <div class="item-cbk text-right"><strong id="p-service">@String.Format("{0:n}", ViewBag.totalServiceCharge)</strong> <span class="unit-price">@allDataBook.param.currency</span></div>
+                    </div>
+                    <div class="item-info-booking bd-top">
+                        <div class="left title-booking"><strong>@(transition.Translate(2361, "Added services"))</strong></div>
+                        <div class="item-cbk text-right"><strong id="p-total">@String.Format("{0:n}", ViewBag.totalPriceService)</strong> <span class="unit-price">@allDataBook.param.currency</span></div>
+                    </div>
+                    <div class="item-info-booking bd-top">
+                        <div class="left title-booking"><strong>@(transition.Translate(2362, "Added extrabed"))</strong></div>
+                        <div class="item-cbk text-right"><strong id="p-total">@String.Format("{0:n}", ViewBag.totalPriceExtrabed)</strong> <span class="unit-price">@allDataBook.param.currency</span></div>
+                    </div>
+                    <div class="item-info-booking bd-top">
+                        <div class="left title-booking"><strong>@(transition.Translate(2363, "Voucher")): <span style="color:red"> @allDataBook.voucher.VoucherCode</span></strong></div>
+                        <div class="item-cbk text-right"><strong id="p-total">- @String.Format("{0:n}", ViewBag.totalPriceVoucher)</strong> <span class="unit-price">@allDataBook.param.currency</span></div>
+                    </div>
+                    <div class="item-info-booking bd-top">
+                        <div class="left title-booking"><strong>@(transition.Translate(2370, "Total amount"))</strong></div>
+                        <div class="item-cbk text-right"><strong id="p-total">@String.Format("{0:n}", (ViewBag.totalPrice + ViewBag.totalVAT + ViewBag.totalServiceCharge))</strong> <span class="unit-price">@allDataBook.param.currency</span></div>
+                    </div>
+                    <div class="item-info-booking">
+                        <div class="left title-booking" style="width: 64%;"><strong>@(transition.Translate(2371, "Deposit"))</strong></div>
+                        <div class="item-cbk text-right" style="width: 35%;"><strong>@String.Format("{0:n}", ViewBag.totalDeposit)</strong> <span class="unit-price">@allDataBook.param.currency</span></div>
+                    </div>
+                    <div class="item-info-booking">
+                        <div class="left" style="width: 61%"><strong>@(transition.Translate(2372, "Balance due on arrival"))</strong></div>
+                        <div class="item-cbk text-right" style="width: 39%;"><strong id="p-arrival">@String.Format("{0:n}", ((ViewBag.totalPrice + ViewBag.totalVAT + ViewBag.totalServiceCharge) - ViewBag.totalDeposit))</strong> <span class="unit-price">@allDataBook.param.currency</span></div>
+                    </div>
+                </div>
+                <div style="clear: both"></div>
+            </div>
+        </div>
+        <div class="t-m-booking">
+            <h2>@(transition.Translate(2381, "Booking Reference"))</h2>
+            <div class="ct-info-message">
+                @(transition.Translate(2391, "Thank you for booking with")) <strong>@hotel.Name.</strong><br />
+                @(transition.Translate(2392, "A Booking Confirmation email has been send to you at")) <strong>@allDataBook.guest.Email.</strong><br />
+
+                @(transition.Translate(2393, "Would you like to make another booking? If so click here"))
+                <a href="/?hotelKey=@allDataBook.param.hotelKey">@(transition.Translate(2394, "Make another new booking"))</a>
+            </div>
+        </div>
+    </div>
+</div>

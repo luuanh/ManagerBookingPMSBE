@@ -1,0 +1,32 @@
+﻿@using BookingEnginePMS.Models;
+@model Transition
+<div class="uk-grid">
+    <div class="uk-width-1 uk-margin-bottom">
+        <h4 style="font-weight: bold;">
+            <b><u>@Model.Translate(205, "Service Categories")</u></b>
+        </h4>
+    </div>
+</div>
+<div class="uk-grid grid-service">
+    <div class="uk-width-large-1-10 uk-width-medium-1-6 uk-width-1-4 box-service-category uk-margin-small-bottom" ng-repeat="serviceCategory in ServiceCategories">
+        <div ng-click="changeTypeServiceCategory(serviceCategory.ServiceCategoryId)" id="box_serviceCategory_{{serviceCategory.ServiceCategoryId}}">
+            <img ng-src="{{serviceCategory.Image}}" />
+            <p>{{serviceCategory.ServiceCategoryName}}</p>
+        </div>
+    </div>
+</div>
+<div class="uk-grid">
+    <div class="uk-width-1 uk-margin-bottom">
+        <h4>
+            <b><u>@Model.Translate(109, "Services")</u></b>
+        </h4>
+    </div>
+</div>
+<div class="uk-grid grid-service">
+    <div class="uk-width-large-1-10 uk-width-medium-1-6 uk-width-1-4 box-service-category uk-margin-small-bottom" ng-repeat="service in services">
+        <div ng-click="addService(service)">
+            <img ng-src="{{service.Photo}}" />
+            <p>{{service.ServiceName}}</p>
+        </div>
+    </div>
+</div>

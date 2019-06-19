@@ -1,0 +1,47 @@
+﻿@using BookingEnginePMS.Models;
+@using BookingEnginePMS.Controllers;
+@{
+    ViewBag.Title = "Invoice Pay Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+
+    Hotel hotel = new Hotel();
+    if (Session["HotelForBooking"] != null)
+    {
+        hotel = (Hotel)Session["HotelForBooking"];
+    }
+}
+<script src="~/Content/js/Home/invoice-pay-success.js"></script>
+<header>
+    @Html.Partial("~/Views/PartialView/pTimeLine.cshtml", transition)
+</header>
+<div class="content-checkavail">
+    <div id="header-avail">
+        <div id="left-header-avail">
+            @Html.Partial("~/Views/PartialView/pInfoCompany.cshtml", transition)
+        </div>
+        <div id="right-header-avail">
+        </div>
+    </div>
+    <div class="full-width wrap-selectdate">
+        <div class="wrap-item-sidebar">
+            <div class="wrap-info-term-hotel" style="margin-top: 0;">
+                <div class="ct-info-term-hotel" style="font-size: 13px;">
+                    <h3>@(transition.Translate(2397, "Hotel contact info"))</h3>
+                    <strong>@(transition.Translate(2398, "Phone number"))</strong><br />
+                    <span style="color: #7f7159">@hotel.Phone</span>
+                    <strong>Email</strong><br />
+                    <a href="mailto:@hotel.Email">@hotel.Email</a>
+                </div>
+            </div>
+        </div>
+        <div class="right-content-b">
+            <div class="wc-content-b">
+                <div>
+                    <h3><span style="color:#09bd08">Thanh toán thành công</span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

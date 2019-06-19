@@ -1,0 +1,70 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+}
+<style>
+    .chatbox_avatar > img {
+        width: 24px !important;
+        height: 24px !important;
+        border-radius: 50% !important;
+        border: 1px solid #3d8fc5;
+    }
+</style>
+<script src="~/Areas/Admin/Content/js/Chat/chat.js"></script>
+<div ng-controller="chatcontroller">
+    <div id="sidebar_secondary">
+        <div class="sidebar_secondary_wrapper uk-margin-remove">
+            <ul class="md-list md-list-addon list-chatboxes" id="chatboxes">
+                <li ng-repeat="item in users" ng-click="addBoxChat(item)">
+                    <div class="md-list-addon-element">
+                        <span ng-if="item.Status" class="element-status element-status-success"></span>
+                        <span ng-if="!item.Status" class="element-status element-status-danger"></span>
+                        <img class="md-user-image md-list-addon-avatar" ng-src="{{item.Photo}}" alt="" />
+                    </div>
+                    <div class="md-list-content">
+                        <span class="md-list-heading">{{item.FullName}}</span>
+                        <span class="uk-text-small uk-text-muted uk-text-truncate">{{item.UserName}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="chatbox_wrapper" ng-cloak>
+        <div class="chatbox" ng-repeat="item in boxChat">
+            <div title="{{item.friendFullName}} - {{item.friend}}" class="chatbox_header" style="background: #1976d2 !important;">
+                <div class="header_actions">
+                    <a ng-click="removeBoxChat(item.friend)"><i class="uk-icon-close" style="color: white;margin-top: 10px;font-size: 16px;"></i></a>
+                </div>
+                <span class="header_name" style="color: white !IMPORTANT;">
+                    {{item.friendFullName}} - {{item.friend}}
+                </span>
+            </div>
+            <div class="chatbox_content chatbox_content_{{$index}}">
+                <div class="chatbox_message {{message.UserSend == item.friend? '':'own'}}" ng-repeat="message in item.messages">
+                    <a href="#" class="chatbox_avatar">
+                        <img ng-if="message.UserSend == item.friend" ng-src="{{message.PhotoFriend}}">
+                        <img ng-if="message.UserSend != item.friend" ng-src="{{message.PhotoUser}}">
+                    </a>
+                    <ul class="chatbox_message_content">
+                        <li>
+                            <span title="{{message.Date | date:'dd/MM/yyyy HH:mm:ss'}}" @*data-uk-tooltip="{pos:'right'}"*@>
+                                {{message.Content}}
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chatbox_footer">
+                <textarea id="txtChat_{{$index}}" ng-keypress="SendMessage($event,item,$index)" ng-model="item.TextChat" placeholder="@transition.Translate(1248,"Write message") ..." class="message_input" style="overflow: hidden; word-wrap: break-word; height: 48px;"></textarea>
+            </div>
+        </div>
+    </div>
+
+
+    <input ng-click="refreshUserOnline()" id="listUserOnline" type="hidden" />
+    <input ng-click="refreshBoxMessage()" id="userSendFrom" type="hidden" />
+    <button style="display:none" id="send_message_hidden"></button>
+    <button ng-click="GetAllMessageAndNotify()" style="display:none" id="btn_getNotification"></button>
+    <button style="display:none" id="get_notify"></button>
+</div>

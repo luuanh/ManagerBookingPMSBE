@@ -1,0 +1,564 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+}
+<script>
+    $("#menu_7").addClass('click-menu-top')
+</script>
+<link href="~/Areas/Admin/Content/css/promotion.css" rel="stylesheet" />
+<script src="~/Areas/Admin/Content/js/Promotion/promotion-new.js"></script>
+<link href="~/Areas/Admin/Content/css/daterangepicker.css" rel="stylesheet" />
+<script src="~/Areas/Admin/Content/js/AngularJs/moment.min.js"></script>
+<script src="~/Areas/Admin/Content/css/daterangepicker.js"></script>
+<style>
+
+    .box-datetimepicker .drp-calendar {
+        width: 50%;
+        float: left !important;
+        padding: 0 !important;
+        margin: 0;
+    }
+
+    @@media only screen and (min-width: 970px) and (max-width: 1140px) {
+        .box-datetimepicker .drp-calendar {
+            width: 100%;
+        }
+    }
+
+    @@media (max-width: 790px) {
+        .box-datetimepicker .drp-calendar {
+            width: 100%;
+        }
+    }
+</style>
+<div class="uk-grid">
+    <div class="uk-width-1-1 uk-margin-bottom">
+        <h3>@(transition.Translate(689, "New Promotion")) /<span style="font-size: 15px;">@(transition.Translate(690, "Create New Promotion"))</span></h3>
+        <hr />
+    </div>
+    <div class="uk-width-1-1 uk-margin-small-bottom" ng-cloak>
+        <div class="uk-grid uk-margin-bottom">
+            <div class="uk-width-1">
+                <article class="uk-comment">
+                    <header class="uk-comment-header">
+                        <span class="icon-left-list">
+                            <i class="uk-icon-th-list"></i>
+                        </span>
+                        <h4 class="uk-comment-title">@(transition.Translate(691, "What type of promotion is it?"))</h4>
+                        <div class="uk-comment-meta">@(transition.Translate(692, "Select a promotion that matches your business goals."))</div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <div>
+                            <div class="uk-grid">
+                                <div class="uk-width-large-1-4 uk-width-medium-1-2 uk-margin-bottom">
+                                    <div class="box-type-promotion type1 box-promotion-choose" ng-click="ChooseTypePromotion(1)">
+                                        <div>
+                                            <span class="icon-type-promotion basic-deal">
+                                                <i class="uk-icon-tag"></i>
+                                            </span>
+                                            <span class="name-promotion">Basic deal</span>
+                                            <span class="note-promotion">@(transition.Translate(693, "Give your guests a discount - in just a few clicks"))</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="uk-width-large-1-4 uk-width-medium-1-2 uk-margin-bottom">
+                                    <div class="box-type-promotion type2" ng-click="ChooseTypePromotion(2)">
+                                        <div>
+                                            <span class="icon-type-promotion last-minute">
+                                                <i class="uk-icon-clock-o"></i>
+                                            </span>
+                                            <span class="name-promotion">Last minute</span>
+                                            <span class="note-promotion">@(transition.Translate(694, "Sell leftover rooms"))</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="uk-width-large-1-4 uk-width-medium-1-2 uk-margin-bottom">
+                                    <div class="box-type-promotion type3" ng-click="ChooseTypePromotion(3)">
+                                        <div>
+                                            <span class="icon-type-promotion early-booker">
+                                                <i class="uk-icon-coffee"></i>
+                                            </span>
+                                            <span class="name-promotion">Early booker</span>
+                                            <span class="note-promotion">@(transition.Translate(695, "Get a head start"))</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="uk-width-large-1-4 uk-width-medium-1-2 uk-margin-bottom">
+                                    <div class="box-type-promotion type4" ng-click="ChooseTypePromotion(4)">
+                                        <div>
+                                            <span class="icon-type-promotion free-nights">
+                                                <i class="uk-icon-bed"></i>
+                                            </span>
+                                            <span class="name-promotion">Free nights</span>
+                                            <span class="note-promotion">@(transition.Translate(696, "Offer free nights to fill rooms for longer"))</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="uk-width-1 uk-margin-medium-bottom" ng-if="data.TypePromotion == 4">
+                <article class="uk-comment">
+                    <header class="uk-comment-header">
+                        <span class="icon-left-list">
+                            <i class="uk-icon-clock-o "></i>
+                        </span>
+                        <h4 class="uk-comment-title">@(transition.Translate(697, "Free nights configuration"))</h4>
+                        <div class="uk-comment-meta">@(transition.Translate(698, "How many paid nights will a customer need to book, in order to receive 1 free night?"))</div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <div>
+                            <div class="uk-grid">
+                                <div class="uk-width-1">
+                                    <div>
+                                        <div class="uk-grid">
+                                            <div class="uk-width-large-1-5 uk-width-medium-1-3">
+                                                <div class="uk-input-group">
+                                                    <div class="md-input-wrapper md-input-filled">
+                                                        <input ng-model="data.NightForFreeNight" type="text" class="md-input">
+                                                        <span id="err_NightForFreeNight" class="error">@(transition.Translate(699, "Value is invalid!"))</span>
+                                                    </div>
+                                                    <span class="uk-input-group-addon">
+                                                        <span style="font-size: 13px;display: block;padding-top: 20px;">@(transition.Translate(733, "Nights"))</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="uk-width-1 uk-margin-medium-bottom" ng-if="data.TypePromotion == 3">
+                <article class="uk-comment">
+                    <header class="uk-comment-header">
+                        <span class="icon-left-list">
+                            <i class="uk-icon-clock-o "></i>
+                        </span>
+                        <h4 class="uk-comment-title">@(transition.Translate(700, "How far in advance do guests need to book this promotion?"))</h4>
+                        <div class="uk-comment-meta">@(transition.Translate(701, "Guests need to book this promotion days or more before the check-in date."))</div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <div>
+                            <div class="uk-grid">
+                                <div class="uk-width-1">
+                                    <div>
+                                        <div class="uk-grid">
+                                            <div class="uk-width-large-1-5 uk-width-medium-1-3">
+                                                <div class="uk-input-group">
+                                                    <div class="md-input-wrapper md-input-filled">
+                                                        <input ng-model="data.EarlyDay" type="text" class="md-input">
+                                                        <span id="err_EarlyDay" class="error">@(transition.Translate(699, "Value is invalid!"))</span>
+                                                    </div>
+                                                    <span class="uk-input-group-addon">
+                                                        <span style="font-size: 13px;display: block;padding-top: 20px;">@(transition.Translate(702, "Days"))</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="uk-width-1 uk-margin-medium-bottom" ng-if="data.TypePromotion == 2">
+                <article class="uk-comment">
+                    <header class="uk-comment-header">
+                        <span class="icon-left-list">
+                            <i class="uk-icon-clock-o "></i>
+                        </span>
+                        <h4 class="uk-comment-title">@(transition.Translate(703, "When can guests book this promotion?"))</h4>
+                        <div class="uk-comment-meta">@(transition.Translate(704, "Guests can book this promotion days before check-in day."))</div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <div>
+                            <div class="uk-grid">
+                                <div class="uk-width-1">
+                                    <div>
+                                        <div class="uk-grid">
+                                            <div class="uk-width-large-1-5 uk-width-medium-1-3">
+                                                <div class="uk-input-group">
+                                                    <div class="md-input-wrapper md-input-filled">
+                                                        <input ng-model="data.EarlyDay" type="text" class="md-input">
+                                                        <span id="err_EarlyDay" class="error">@(transition.Translate(699, "Value is invalid!"))</span>
+                                                    </div>
+                                                    <span class="uk-input-group-addon">
+                                                        <span style="font-size: 13px;display: block;padding-top: 20px;">@(transition.Translate(702, "Days"))</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="uk-width-1 uk-margin-small-bottom" ng-if="data.TypePromotion != 4">
+                <article class="uk-comment">
+                    <header class="uk-comment-header">
+                        <span class="icon-left-list">
+                            <i class="uk-icon-clock-o "></i>
+                        </span>
+                        <h4 class="uk-comment-title">@(transition.Translate(705, "How long do guests need to stay to use this promotion?"))</h4>
+                        <div class="uk-comment-meta"></div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <div>
+                            <div class="uk-grid">
+                                <div class="uk-width-1">
+                                    <div>
+                                        @(transition.Translate(706, "Guests need to stay for at least"))
+                                        <select ng-model="data.DayInHouse" style="margin: 0 5px;padding: 5px 10px;" convert-to-number>
+                                            <option value="0" selected="selected">@(transition.Translate(707, "No minimum stay required"))</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                        </select> @(transition.Translate(708, "nights to use this promotion."))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="uk-width-1 uk-margin-medium-bottom" ng-if="data.TypePromotion != 4">
+                <article class="uk-comment">
+                    <header class="uk-comment-header">
+                        <span class="icon-left-list">
+                            <i class="uk-icon-heart "></i>
+                        </span>
+                        <h4 class="uk-comment-title">@(transition.Translate(709, "How much of a discount do you want to give?"))</h4>
+                        <div class="uk-comment-meta"></div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <div>
+                            <div class="uk-grid">
+                                <div class="uk-width-large-1-4 uk-width-medium-1-2">
+                                    <div class="uk-input-group">
+                                        <div class="md-input-wrapper md-input-filled">
+                                            <input ng-model="data.Deposit" type="text" class="md-input">
+                                            <span id="err_Deposit" class="error">@(transition.Translate(699, "Value is invalid!"))</span>
+                                        </div>
+                                        <span class="uk-input-group-addon">
+                                            <span>%</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="uk-width-1 uk-margin-medium-bottom">
+                <article class="uk-comment">
+                    <header class="uk-comment-header">
+                        <span class="icon-left-list">
+                            <i class="uk-icon-compass "></i>
+                        </span>
+                        <h4 class="uk-comment-title">@(transition.Translate(710, "Which rates?"))</h4>
+                        <div class="uk-comment-meta">@(transition.Translate(711, "The discount will be deducted from the rate(s) you select here."))</div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <div>
+                            <div class="uk-grid">
+                                <div class="uk-width-1">
+                                    <div>
+                                        <div class="uk-grid">
+                                            <div class="uk-width-1 uk-margin-small-bottom" ng-repeat="item in dataConfig.planeRates">
+                                                <label>
+                                                    <input ng-model="data.PlaneRateId" type="radio" name="rdPlaneRate" ng-change="ChangePlaneRate()" value="{{item.PlaneRateId}}" convert-to-number />
+                                                    <span>{{item.Name}}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="uk-width-1 uk-margin-medium-bottom">
+                <article class="uk-comment">
+                    <header class="uk-comment-header">
+                        <span class="icon-left-list">
+                            <i class="uk-icon-bed "></i>
+                        </span>
+                        <h4 class="uk-comment-title">@(transition.Translate(712, "Which rooms?"))</h4>
+                        <div class="uk-comment-meta">@(transition.Translate(713, "The discount will be applied to these room(s)."))</div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <div>
+                            <div class="uk-grid">
+                                <div class="uk-width-1">
+                                    <div>
+                                        <div class="uk-grid">
+                                            <div class="uk-width-1 uk-margin-small-bottom" ng-repeat="item in data.PromotionRoomTypes">
+                                                <label>
+                                                    <input type="checkbox" ng-model="item.Checked" />
+                                                    <span>{{item.RoomTypeName}}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="uk-width-1 uk-margin-medium-bottom">
+                <article class="uk-comment">
+                    <header class="uk-comment-header">
+                        <span class="icon-left-list">
+                            <i class="uk-icon-calendar "></i>
+                        </span>
+                        <h4 class="uk-comment-title">@(transition.Translate(714, "When can guests stay using the discounted rate?"))</h4>
+                        <div class="uk-comment-meta">@(transition.Translate(715, "Your discount will apply to stays on the following date(s)"))</div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <div>
+                            <div class="uk-grid">
+                                <div class="uk-width-1">
+                                    <div>
+                                        <div class="uk-grid">
+                                            <div class="uk-width-large-2-3">
+                                                <div class="box-datetimepicker">
+                                                    <input type="text" value="01/01/2018 - 01/15/2018" id="datetimeRange" name="datefilter"  style="display:none" />
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-large-1-3">
+                                                <div class="uk-margin-small-bottom">
+                                                    <b>@(transition.Translate(716, "Discounted rate available only on"))</b>
+                                                </div>
+                                                <div class="box-day-of-week">
+                                                    <ul>
+                                                        <li class="checkbox">
+                                                            <label>
+                                                                <input ng-model="data.Monday" type="checkbox">
+                                                                <span>@(transition.Translate(717, "Monday"))</span>
+                                                            </label>
+                                                        </li>
+                                                        <li class="checkbox">
+                                                            <label>
+                                                                <input ng-model="data.Tuesday" type="checkbox">
+                                                                <span>@(transition.Translate(718, "Tuesday"))</span>
+                                                            </label>
+                                                        </li>
+                                                        <li class="checkbox">
+                                                            <label>
+                                                                <input ng-model="data.Wednesday" type="checkbox">
+                                                                <span>@(transition.Translate(734, "Wednesday"))</span>
+                                                            </label>
+                                                        </li>
+                                                        <li class="checkbox">
+                                                            <label>
+                                                                <input ng-model="data.Thursday" type="checkbox">
+                                                                <span>@(transition.Translate(719, "Thursday"))</span>
+                                                            </label>
+                                                        </li>
+                                                        <li class="checkbox">
+                                                            <label>
+                                                                <input ng-model="data.Friday" type="checkbox">
+                                                                <span>@(transition.Translate(720, "Friday"))</span>
+                                                            </label>
+                                                        </li>
+                                                        <li class="checkbox">
+                                                            <label>
+                                                                <input ng-model="data.Saturday" type="checkbox">
+                                                                <span>@(transition.Translate(721, "Saturday"))</span>
+                                                            </label>
+                                                        </li>
+                                                        <li class="checkbox">
+                                                            <label>
+                                                                <input ng-model="data.Sunday" type="checkbox">
+                                                                <span>@(transition.Translate(722, "Sunday"))</span>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="uk-width-1 uk-margin-medium-bottom">
+                <article class="uk-comment">
+                    <header class="uk-comment-header">
+                        <span class="icon-left-list">
+                            <i class="uk-icon-file "></i>
+                        </span>
+                        <h4 class="uk-comment-title">@(transition.Translate(723, "What is the name of your promotion")) <span class="star-red">(*)</span>?</h4>
+                        <div class="uk-comment-meta">@(transition.Translate(724, "This name is just for your reference. It won't be displayed to customers browsing BookingEngine."))</div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <div>
+                            <div class="uk-grid">
+                                <div class="uk-width-1">
+                                    <div>
+                                        <input ng-model="data.PromotionName" type="text" class="md-input" />
+                                        <span id="err_PromotionName" class="error">@(transition.Translate(699, "Value is invalid!"))</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="uk-width-1 uk-margin-medium-bottom">
+                <article class="uk-comment">
+                    <header class="uk-comment-header">
+                        <span class="icon-left-list">
+                            <i class="uk-icon-sticky-note "></i>
+                        </span>
+                        <h4 class="uk-comment-title">@(transition.Translate(725, "Description?"))</h4>
+                        <div class="uk-comment-meta">@(transition.Translate(726, "Promotion description"))</div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <div>
+                            <div class="uk-grid">
+                                <div class="uk-width-1">
+                                    <div>
+                                        <div class="uk-grid">
+                                            <div class="uk-width-1 uk-text-right box-not-render-span">
+                                                <select ng-click="ChangeLanguage()" ng-model="languageChoose" class="box-language md-input" convert-to-number>
+                                                    <option value="{{item.LanguageId}}" ng-repeat="item in language">
+                                                        <text>{{item.Title}}</text>
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="uk-width-1">
+                                                <textarea ng-model="ModelForMultiLang.Description" class="md-input"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="uk-width-1 uk-margin-medium-bottom">
+                <article class="uk-comment">
+                    <header class="uk-comment-header">
+                        <span class="icon-left-list">
+                            <i class="uk-icon-sticky-note "></i>
+                        </span>
+                        <h4 class="uk-comment-title">@(transition.Translate(727, "Note?"))</h4>
+                        <div class="uk-comment-meta">@(transition.Translate(728, "Promotion note"))</div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <div>
+                            <div class="uk-grid">
+                                <div class="uk-width-1">
+                                    <div>
+                                        <div class="uk-grid">
+                                            <div class="uk-width-1 uk-text-right box-not-render-span">
+                                                <select ng-click="ChangeLanguage()" ng-model="languageChoose" class="md-input box-language" convert-to-number>
+                                                    <option value="{{item.LanguageId}}" ng-repeat="item in language">
+                                                        <text>{{item.Title}}</text>
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="uk-width-1">
+                                                <textarea ng-model="ModelForMultiLang.Note" class="md-input"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="uk-width-1 uk-margin-medium-bottom">
+                <article class="uk-comment">
+                    <header class="uk-comment-header">
+                        <span class="icon-left-list">
+                            <i class="uk-icon-shield "></i>
+                        </span>
+                        <h4 class="uk-comment-title">@(transition.Translate(729, "Select a policy"))</h4>
+                        <div class="uk-comment-meta"></div>
+                    </header>
+                    <div class="uk-comment-body">
+                        <div>
+                            <div class="uk-grid">
+                                <div class="uk-width-1">
+                                    <div>
+                                        <div class="uk-grid">
+                                            <div class="uk-width-1 uk-margin-small-bottom box-not-render-span">
+                                                <select class="md-input" ng-change="ChangePolicy()" ng-model="data.PolicyId" style="width: 200px;" convert-to-number>
+                                                    <option value="{{item.PolicyId}}" ng-repeat="item in dataConfig.policies">{{item.PolicyName}}</option>
+                                                </select>
+                                            </div>
+
+                                            @*<div ng-if="data.PolicyId == '6' ">*@
+                                                <div class="uk-width-1 uk-margin-small-bottom" ng-if="isRequireRate">
+                                                    <span>@(transition.Translate(730, "Rates (%) are applied to the program"))</span>
+                                                </div>
+                                                <div class="uk-width-large-1-4 uk-width-medium-1-2 uk-margin-small-bottom" ng-if="isRequireRate">
+                                                    <div class="uk-input-group">
+                                                        <div class="md-input-wrapper md-input-filled">
+                                                            <input ng-model="data.AmountRate" type="text" class="md-input">
+                                                            <span id="err_AmountRate" class="error">@(transition.Translate(699, "Value is invalid!"))</span>
+                                                        </div>
+                                                        <span class="uk-input-group-addon">
+                                                            <span>%</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            @*</div>*@
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-large-bottom">
+            <div class="uk-width-1 uk-text-center">
+                <button class="md-btn md-btn-new" ng-click="Post()">@(transition.Translate(731, "Add Promotion"))</button>
+                <a href="/Admin/Promotion/Index" class="md-btn">@(transition.Translate(732, "Cancel & Go to Promotion"))</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#datetimeRange').daterangepicker({
+            "showISOWeekNumbers": true,
+            "autoApply": true,
+            "alwaysShowCalendars": true,
+            "startDate": new Date(),
+            "endDate": new Date()
+        }, function (start, end, label) {
+        });
+        $('#daterange').on('apply.daterangepicker', function (ev, picker) {
+            console.log(picker.startDate.format('DD/MM/YYYY'));
+            console.log(picker.endDate.format('DD/MM/YYYY'));
+        });
+        $("#datetimeRange").click()
+    });
+</script>

@@ -1,0 +1,65 @@
+﻿@using BookingEnginePMS.Models;
+@model Transition
+<div class="uk-grid" style="padding-top: 10px;">
+    <div class="uk-width-1-1">
+        <h4>
+            <b>@Model.Translate(597, "Reservation Book")</b>
+            <b style="float: right;">
+                @Model.Translate(598, "Total accumulated money") <span style="color:red">(*)</span>:
+                <span style="font-size: 16px;font-weight:bold">{{guest.TotalPaid}} ₫</span>
+            </b>
+        </h4>
+    </div>
+    <div class="uk-width-large-1 uk-margin-small-bottom" style="padding-top: 10px;">
+        <div class="uk-overflow-container">
+            <div class=" box-reservation">
+                <table class="uk-table uk-table-bordered" style="border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: linear-gradient(rgb(246, 247, 248), rgb(215, 215, 215));">
+                            <th class="uk-text-center">@Model.Translate(599, "ResCode")</th>
+                            <th style="min-width: 70px;">@Model.Translate(600, "Date Booked")</th>
+                            <th>@Model.Translate(601, "Accommodation")</th>
+                            <th style="min-width: 70px;">@Model.Translate(602, "Check in")</th>
+                            <th style="min-width: 70px;">@Model.Translate(603, "Check out")</th>
+                            <th class="uk-text-center" style="min-width: 70px;">@Model.Translate(604, "Total")</th>
+                            <th class="uk-text-center" style="min-width: 70px;">@Model.Translate(605, "Paid")</th>
+                            <th class="uk-text-center" style="min-width: 70px;">@Model.Translate(606, "Balance")</th>
+                            <th class="uk-text-center">@Model.Translate(607, "Source")</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-cloak>
+                        <tr ng-repeat="item in history">
+                            <td class="uk-text-center numeric">
+                                <a target="_blank" href="/Admin/Reservation/Edit?id={{item.ReservationId}}">{{item.ReservationId}}</a>
+                            </td>
+                            <td>{{item.CreateDate | date:"dd-MM-yyyy HH:mm"}}</td>
+                            <td>{{item.RoomTypeName_s}}</td>
+                            <td>{{item.CheckIn | date:"dd-MM-yyyy HH:mm"}}</td>
+                            <td>{{item.CheckOut | date:"dd-MM-yyyy HH:mm"}}</td>
+                            <td class="uk-text-right">{{item.TotalPrice | currency:'':'0'}} ₫</td>
+                            <td class="uk-text-right">{{item.Paid | currency:'':'0'}} ₫</td>
+                            <td class="uk-text-right">{{(item.TotalPrice - item.Paid) | currency:'':'0'}} ₫</td>
+                            <td>{{getSource(item.BookingSource)}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr style="background: linear-gradient(rgb(246, 247, 248), rgb(215, 215, 215));">
+                            <th colspan="3"></th>
+                            <th class="uk-text-right" colspan="2">
+                                @Model.Translate(608, "Total price") <span style="color:red">(**)</span>
+                            </th>
+                            <th class="uk-text-right">{{totalPrice | currency:'':'0'}} ₫</th>
+                            <th class="uk-text-right">{{totalPaid | currency:'':'0'}} ₫</th>
+                            <th class="uk-text-right">{{(totalPrice - totalPaid) | currency:'':'0'}} ₫</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-1">
+        <p><span style="color:red">(*)</span> @Model.Translate(609, "Total price include total price of booking new or check in")</p>
+        <p><span style="color:red">(**)</span> @Model.Translate(610, "Total accumulated money include booking has been check out")</p>
+    </div>
+</div>

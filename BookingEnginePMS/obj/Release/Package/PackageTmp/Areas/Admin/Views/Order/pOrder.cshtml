@@ -1,0 +1,62 @@
+﻿@using BookingEnginePMS.Models;
+@model Transition
+<div class="uk-grid">
+    <div class="uk-width-1 uk-margin-bottom">
+        <div class="md-input-wrapper">
+            <label><b>@Model.Translate(306, "Voucher")</b></label>
+            <input ng-click="RefreshValidate()" type="text" ng-model="Voucher" class="md-input" />
+            <span class="md-input-bar "></span>
+        </div>
+    </div>
+    <div class="uk-width-1 uk-margin-bottom">
+        <h5 class="title-box-small-accomodation" style="margin-bottom: 0;"><b>@Model.Translate(307, "Service chosen") </b></h5>
+        <div class="uk-overflow-container box-select-room" ng-cloak>
+            <div ng-if="serviceChoose.length == 0" class="uk-text-center box-not-available" style="padding: 0 20px;">
+                <p style="margin-top: 20px;">
+                    <i class="uk-icon-random" style="font-size: 23px;padding: 12px 12px 11px 12px;"></i>
+                </p>
+                <p style="font-size: 14px;">
+                    @Model.Translate(308, "Add service to your order")
+                </p>
+            </div>
+            <table ng-if="serviceChoose.length > 0" class="uk-table uk-table-bordered" style="border: 1px solid #f0f0f0;border-top:none">
+                <thead>
+                    <tr style="background: #EEEEEE !important;">
+                        <th>@Model.Translate(309, "Name")</th>
+                        <th class="uk-text-center" style="width: 60px;">@Model.Translate(310, "Price") (₫)</th>
+                        <th class="uk-text-center" style="width: 50px;">@Model.Translate(311, "Quantity")</th>
+                        <th style="width: 40px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in serviceChoose track by $index">
+                        <td>{{item.ServiceName}}</td>
+                        <td class="uk-text-center">
+                            <div class="box-input-default item-paid">
+                                <input ng-if="!status" type="text" class="md-input uk-text-center" ng-model="item.Price" />
+                                <span ng-if="status">{{item.Price}}</span>
+                            </div>
+                        </td>
+                        <td class="uk-text-center">
+                            <div class="box-input-default item-paid">
+                                <input ng-if="!status" ng-model="item.Number" type="number" min="1" class="md-input uk-text-center" />
+                                <span ng-if="status">{{item.Number}}</span>
+                            </div>
+                        </td>
+                        <td class="uk-text-center item-paid">
+                            <i ng-if="!status" class="uk-icon-close close-service" ng-click="removeService($index)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr style="background: #EEEEEE;">
+                        <th style="border:none">@Model.Translate(312, "Total")</th>
+                        <th style="border:none" attrCal="{{calService_footer()}}" colspan="3">
+                            {{ServicePrice | currency:'':'0'}} ₫
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutSetting.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+}
+<script>
+    $("#PaymentOptions").addClass("menu-clicked")
+</script>
+<script>
+    $(function () {
+        var e = $("#kUI_window")
+            , t = $("#kUI_undo");
+        if (e.length) {
+            var a = e
+                , n = t.bind("click", function () {
+                    a.data("kendoWindow").open(),
+                        n.hide()
+                });
+            a.data("kendoWindow") || a.kendoWindow({
+                width: "600px",
+                title: "Information",
+                actions: ["Pin", "Minimize", "Maximize", "Close"],
+                close: function () {
+                    n.show()
+                }
+            })
+        }
+    })
+</script>
+<style>
+    th, td {
+        border: 1px solid #dcdcdc
+    }
+</style>
+<script src="~/Areas/Admin/Content/js/ConfigPayment/config-payment.js"></script>
+<script src="~/ckeditor/ckeditor.js"></script>
+
+<div id="kUI_window" style="display:none">
+    <div>
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-1 box-not-render-span uk-margin-bottom">
+                <select ng-change="ChangeLanguage()" ng-model="languageChoose" class="md-input" convert-to-number style="width:200px;float:right">
+                    <option value="{{item.LanguageId}}" ng-repeat="item in languages">
+                        <text>{{item.Title}}</text>
+                    </option>
+                </select>
+            </div>
+            <div class="uk-width-1 uk-text-center">
+                <div>
+                    <textarea id="contentPolicy"></textarea>
+                </div>
+            </div>
+            <div class="uk-width-1 box-edit-booking uk-margin-top uk-text-right">
+                <button class="md-btn md-btn-new" ng-click="PutPolicy()">@(transition.Translate(2339, "Update"))</button>
+                <button class="md-btn md-btn-danger" ng-click="CloseWindow()">@(transition.Translate(2340, "Cancel"))</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uk-grid">
+    <div class="uk-width-1-1 uk-margin-bottom">
+        <h3>@(transition.Translate(900, "Payment Options"))</h3>
+    </div>
+    <div class="uk-width-1-1 uk-margin-small-bottom">
+        <div class="uk-grid">
+            <div class="uk-width-1 uk-margin-bottom">
+                <div>
+                    <table class="uk-table uk-table-border" style="border-collapse:collapse">
+                        <thead>
+                            <tr style="background: linear-gradient(rgb(246, 247, 248), rgb(215, 215, 215));">
+                                <th>@(transition.Translate(2341, "Payment Method"))</th>
+                                <th class="uk-text-center" style="width:70px">@(transition.Translate(2342, "Index"))</th>
+                                <th class="uk-text-center">@(transition.Translate(2343, "Require Card"))</th>
+                                <th class="uk-text-center">@(transition.Translate(2344, "Active"))</th>
+                                <th class="uk-text-center">@(transition.Translate(2432, "Active Invoice"))</th>
+                                <th class="uk-text-center" style="width:150px"></th>
+                            </tr>
+                        </thead>
+                        <tbody ng-cloak>
+                            <tr ng-repeat="item in data">
+                                <td>{{item.Name}}</td>
+                                <td>
+                                    <input class="md-input" type="number" ng-model="item.Index" />
+                                </td>
+                                <td class="uk-text-center">
+                                    <input type="checkbox" ng-model="item.RequireCard" />
+                                </td>
+                                <td class="uk-text-center">
+                                    <input type="checkbox" ng-model="item.Active" />
+                                </td>
+                                <td class="uk-text-center">
+                                    <input type="checkbox" ng-model="item.ActiveInvoice" />
+                                </td>
+                                <td class="uk-text-center">
+                                    <button ng-click="EditPolicy(item.ConfigPaymentMethodId)" class="md-btn md-btn-new">@(transition.Translate(2345, "Set policy"))</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="uk-width-1 uk-text-center uk-margin-large-bottom uk-margin-top" ng-cloak>
+                <button class="md-btn md-btn-new" ng-click="Put()">@(transition.Translate(2339, "Update"))</button>
+            </div>
+        </div>
+    </div>
+</div>

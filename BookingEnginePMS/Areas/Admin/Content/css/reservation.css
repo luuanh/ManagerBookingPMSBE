@@ -1,0 +1,104 @@
+﻿.box-table-left tbody td {
+    padding: 8px 5px 8px 15px !important;
+    border-right: 1px solid #d4d4d4;
+}
+
+    .box-table-left tbody td:last-of-type {
+        border-right: none
+    }
+
+.box-footer {
+    min-width: 100px;
+    margin-right: 10px;
+    float: right;
+}
+
+.div-box-footer {
+    background: #f0f0f0;
+}
+
+.box-table-left tbody tr:last-of-type td {
+    /*border: none !important*/
+}
+
+.box-not-available i {
+    font-size: 30px;
+    border: 1px solid #9a9a9a;
+    padding: 15px;
+    border-radius: 50%;
+    background: #9a9a9a;
+    color: white;
+}
+
+.edit {
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+    .edit:hover {
+        color: #1e88e5;
+        text-decoration: underline;
+    }
+
+.disable-item {
+    background-color: #eaeaea;
+    opacity: 0.5;
+    cursor: no-drop;
+}
+
+    .disable-item a, .disable-item button, .disable-item span {
+        cursor: no-drop !important;
+    }
+
+.icon-plus {
+    color: #3abb79;
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.box-autocomplate {
+    margin-top: 2px;
+}
+
+    .box-autocomplate > span {
+        background: no-repeat !important;
+        border: none;
+    }
+
+        .box-autocomplate > span > input {
+            border: 1px solid #f0f0f0 !important;
+        }
+
+.box-guest-booking {
+    position: relative;
+}
+
+    .box-guest-booking span {
+        display: inline-block;
+        margin-right: 20px;
+    }
+
+    .box-guest-booking i {
+        position: absolute;
+        top: 15px;
+        right: 10px;
+    }
+
+
+.box-table-left th, .box-table-left td {
+    vertical-align: middle
+}
+
+.box-deposit > div {
+    padding-top: 0;
+}
+
+.box-deposit input {
+    padding: 2px !important;
+    text-align: right;
+}
+
+.box-input-default input {
+    padding: 4px !important;
+}

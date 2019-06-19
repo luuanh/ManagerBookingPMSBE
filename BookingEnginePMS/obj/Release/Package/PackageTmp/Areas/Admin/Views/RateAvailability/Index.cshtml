@@ -1,0 +1,447 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+}
+<link href="~/Areas/Admin/Content/css/rate-availbality.css" rel="stylesheet" />
+<link href="~/Areas/Admin/Content/css/scroll.css" rel="stylesheet" />
+<script src="~/Areas/Admin/Content/js/RateAvailability/rate-availbality.js"></script>
+<script>
+    $("#menu_6").addClass('click-menu-top')
+</script>
+<div class="uk-grid">
+    <div class="uk-width-1-1 uk-margin-medium-bottom">
+        <h3>@(transition.Translate(640, "Rates & Availability"))</h3>
+        <hr />
+            @(transition.Translate(641, "tipRateAvail"))
+        <hr />
+    </div>
+    <div class="uk-width-1-1 uk-margin-small-bottom" ng-cloak>
+        <div class="uk-grid">
+            <div class="uk-width-large-1-6 uk-width-medium-1-3 uk-width-1-2 uk-margin-bottom">
+                <div class="uk-input-group">
+                    <div class="md-input-wrapper">
+                        <label><b>@(transition.Translate(642, "From"))</b></label>
+                        <input ng-click="RefreshValidate()" id="FromDate" data-uk-datepicker="{format:'DD-MM-YYYY'}" ng-model="FromDate" type="text" class="md-input">
+                        <span class="md-input-bar "></span>
+                    </div>
+                    <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                </div>
+            </div>
+            <div class="uk-width-large-1-6 uk-width-medium-1-3 uk-width-1-2 uk-margin-bottom {{filters.typeSearch != -1?'hide-item':''}}">
+                <div class="uk-input-group">
+                    <div class="md-input-wrapper">
+                        <label><b>@(transition.Translate(643, "To"))</b></label>
+                        <input ng-click="RefreshValidate()" id="ToDate" data-uk-datepicker="{format:'DD-MM-YYYY'}" ng-model="ToDate" type="text" class="md-input">
+                        <span class="md-input-bar "></span>
+                    </div>
+                    <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                </div>
+            </div>
+            <div class="uk-width-large-4-6 uk-width-medium-1-3 uk-width-1 uk-margin-bottom" style="margin-top: -18px;">
+                <label><b>@(transition.Translate(644, "Date Range"))</b></label>
+                <div class="uk-grid">
+                    <div class="uk-width-large-1-3 uk-width-1-2">
+                        <select class="md-input" ng-model="filters.typeSearch" convert-to-number>
+                            <option value="-1">@(transition.Translate(645, "Custom"))</option>
+                            <option value="15">15 Day</option>
+                            <option value="30">30 Day</option>
+                            <option value="60">60 Day</option>
+                            <option value="90">90 Day</option>
+                        </select>
+                        <span class="md-input-bar "></span>
+                    </div>
+                    <div class="uk-width-large-2-6 uk-width-1-2">
+                        <button class="md-btn md-btn-new md-btn-wave-light" ng-click="GetData()">@(transition.Translate(646, "Search"))</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-bottom">
+            <div class="uk-width-medium-1-2">
+                <ul class="ulcondition">
+                    <li>
+                        <span class="spancondition" style="background-color:#64b46c"></span>
+                        <span>@(transition.Translate(647, "Bookable"))</span>
+                    </li>
+                    <li>
+                        <span class="spancondition" style="background-color:#d65c5c"></span>
+                        <span>@(transition.Translate(648, "Closed"))</span>
+                    </li>
+                    <li>
+                        <span class="spancondition" style="background-color:#f9da86"></span>
+                        <span>@(transition.Translate(649, "No Room/Price"))</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="uk-width-medium-1-2 uk-text-right">
+                <button ng-click="showCloseMultiRoom()" class="md-btn md-btn-danger md-btn-wave-light">@(transition.Translate(650, "Close Room"))</button>
+                <button ng-click="showOpenMultiRoom()" class="md-btn md-btn-new md-btn-wave-light">@(transition.Translate(651, "Open Room"))</button>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-large-bottom" ng-repeat="item in data">
+            <div class="uk-width-1-1 uk-margin-bottom">
+                <h3 style="padding-left: 5px;">
+                    <b>{{item.RoomTypeName}} ({{item.RoomTypeCode}})</b>
+                </h3>
+            </div>
+            <div class="uk-width-1-1">
+                <div style="width:200px;float:left">
+                    <table class="table-left">
+                        <thead>
+                            <tr>
+                                <th style="background: #F9F9F9"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="room-status">@(transition.Translate(652, "Room status"))</td>
+                            </tr>
+                            <tr class="tr-item">
+                                <td>
+                                    <span style="margin-top: 5px;float: left;">@(transition.Translate(653, "Rooms to sell"))</span>
+                                    <span style="float: right;"><a class="md-btn" ng-click="ShowChangeNumberRoomSell(item.RoomTypeId)">@(transition.Translate(654, "Edit"))</a></span>
+                                </td>
+                            </tr>
+                            <tr class="tr-item">
+                                <td>
+                                    <span style="margin-top: 5px;float: left;">@(transition.Translate(655, "Set price"))</span>
+                                    <span style="float: right;"><a class="md-btn" ng-click="ShowChangePriceRoomSell(item.RoomTypeId)">@(transition.Translate(654, "Edit"))</a></span>
+                                </td>
+                            </tr>
+                            <tr class="tr-item" ng-repeat="promotion in item.Promotions">
+                                <td>
+                                    <span>
+                                        {{promotion.PromotionName}}
+                                        (@(transition.Translate(655, "Set price")) - {{promotion.Deposit}}%)
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-table-right">
+                    <table class="table-right">
+                        <thead>
+                            <tr>
+                                <th ng-repeat="date in item.RateAvailabilities">
+                                    <p>{{date.DayofWeek}}</p>
+                                    <p>{{date.Date | date: 'dd/MM'}}</p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="tr-item-sample tr-item-status">
+                                <td ng-repeat="status in item.RateAvailabilities">
+                                    <span ng-click="ChangeStatus(item.RoomTypeId,$index,-1)" class="Bookable" ng-if="status.Status == 1"></span>
+                                    <span ng-click="ChangeStatus(item.RoomTypeId,$index,1)" class="Closed" ng-if="status.Status == -1"></span>
+                                    <span ng-click="ChangeStatus(item.RoomTypeId,$index,2)" class="No-Room" ng-if="status.Status == 0"></span>
+                                </td>
+                            </tr>
+                            <tr class="tr-item">
+                                <td ng-repeat="numberSell in item.RateAvailabilities">
+                                    <input ng-keypress="ChangeNumberSingle($event,item.RoomTypeId,$index)" ng-if="numberSell.Init" type="text" name="name" ng-model="numberSell.Number" class="md-input md-input-box" />
+                                    <input ng-if="!numberSell.Init" disabled type="text" name="name" ng-model="numberSell.Number" class="md-input md-input-box" />
+                                </td>
+                            </tr>
+                            <tr class="tr-item">
+                                <td ng-repeat="priceSell in item.RateAvailabilities">
+                                    <input ng-keypress="ChangePriceSingle($event,item.RoomTypeId,$index)" ng-if="priceSell.Init" type="text" name="name" ng-model="priceSell.Price" class="md-input md-input-box" />
+                                    <input ng-if="!priceSell.Init" disabled type="text" name="name" ng-model="priceSell.Price" class="md-input md-input-box" />
+                                </td>
+                            </tr>
+                            <tr class="tr-item" ng-repeat="promotion in item.Promotions">
+                                <td class="uk-text-center" ng-repeat="price in promotion.EndPrices track by $index">
+                                    <span>{{price | currency:"":"0"}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ModalSetNumberRoomSell" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <h2 class="heading_a">@(transition.Translate(656, "Set number of room to sell"))</h2>
+        <div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1 uk-margin-bottom">
+                    <div class="uk-grid">
+                        <div class="uk-width-1-2">
+                            <div class="uk-input-group">
+                                <div class="md-input-wrapper">
+                                    <label><b>@(transition.Translate(642, "From"))</b></label>
+                                    <input id="FromDateChange" data-uk-datepicker="{format:'DD-MM-YYYY'}" ng-model="FromDateChange" type="text" class="md-input">
+                                    <span class="md-input-bar "></span>
+                                </div>
+                                <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2">
+                            <div class="uk-input-group">
+                                <div class="md-input-wrapper">
+                                    <label><b>@(transition.Translate(643, "To"))</b></label>
+                                    <input id="ToDateChange" data-uk-datepicker="{format:'DD-MM-YYYY'}" ng-model="ToDateChange" type="text" class="md-input">
+                                    <span class="md-input-bar "></span>
+                                </div>
+                                <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1 uk-margin-bottom">
+                    <label><b>@(transition.Translate(657, "You want to apply changes to the day of the week"))?</b></label>
+                    <div class="box-day-of-week">
+                        <label style="display: block;">
+                            <input ng-click="CheckAllDayOfWeek()" ng-model="paramsChangeRoomSell.AllDay" type="checkbox" name="name" />
+                            <span>@(transition.Translate(658, "All day"))</span>
+                        </label>
+                        <label>
+                            <input ng-click="CheckSomeDayOfWeek()" ng-model="paramsChangeRoomSell.Monday" type="checkbox" name="name" />
+                            <span>@(transition.Translate(659, "Monday"))</span>
+                        </label>
+                        <label>
+                            <input ng-click="CheckSomeDayOfWeek()" ng-model="paramsChangeRoomSell.Tuesday" type="checkbox" name="name" />
+                            <span>@(transition.Translate(660, "Tuesday"))</span>
+                        </label>
+                        <label>
+                            <input ng-click="CheckSomeDayOfWeek()" ng-model="paramsChangeRoomSell.Wednesday" type="checkbox" name="name" />
+                            <span>@(transition.Translate(661, "Wednesday"))</span>
+                        </label>
+                        <label>
+                            <input ng-click="CheckSomeDayOfWeek()" ng-model="paramsChangeRoomSell.Thursday" type="checkbox" name="name" />
+                            <span>@(transition.Translate(662, "Thursday"))</span>
+                        </label>
+                        <label>
+                            <input ng-click="CheckSomeDayOfWeek()" ng-model="paramsChangeRoomSell.Friday" type="checkbox" name="name" />
+                            <span>@(transition.Translate(663, "Friday"))</span>
+                        </label>
+                        <label>
+                            <input ng-click="CheckSomeDayOfWeek()" ng-model="paramsChangeRoomSell.Saturday" type="checkbox" name="name" />
+                            <span>@(transition.Translate(664, "Saturday"))</span>
+                        </label>
+                        <label>
+                            <input ng-click="CheckSomeDayOfWeek()" ng-model="paramsChangeRoomSell.Sunday" type="checkbox" name="name" />
+                            <span>@(transition.Translate(665, "Sunday"))</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@(transition.Translate(666, "Number room to sell"))</b></label>
+                    <input ng-model="paramsChangeRoomSell.Number" type="number" min="0" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1 uk-text-right">
+                    <button class="md-btn md-btn-new md-btn-wave-light" ng-click="PostNumberRoomSell()">@(transition.Translate(667, "Update"))</button>
+                    <button class="md-btn uk-modal-close uk-close">@(transition.Translate(668, "Cancel"))</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ModalSetPriceRoomSell" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <h2 class="heading_a">@(transition.Translate(669, "Set price of room to sell"))</h2>
+        <div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1 uk-margin-bottom">
+                    <div class="uk-grid">
+                        <div class="uk-width-1-2">
+                            <div class="uk-input-group">
+                                <div class="md-input-wrapper">
+                                    <label><b>@(transition.Translate(642, "From"))</b></label>
+                                    <input id="FromDateChange2" data-uk-datepicker="{format:'DD-MM-YYYY'}" ng-model="FromDateChange" type="text" class="md-input">
+                                    <span class="md-input-bar "></span>
+                                </div>
+                                <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2">
+                            <div class="uk-input-group">
+                                <div class="md-input-wrapper">
+                                    <label><b>@(transition.Translate(643, "To"))</b></label>
+                                    <input id="ToDateChange2" data-uk-datepicker="{format:'DD-MM-YYYY'}" ng-model="ToDateChange" type="text" class="md-input">
+                                    <span class="md-input-bar "></span>
+                                </div>
+                                <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1 uk-margin-bottom">
+                    <label><b>@(transition.Translate(657, "You want to apply changes to the day of the week"))?</b></label>
+                    <div class="box-day-of-week">
+                        <label style="display: block;">
+                            <input ng-click="CheckAllDayOfWeek()" ng-model="paramsChangeRoomSell.AllDay" type="checkbox" name="name" />
+                            <span>@(transition.Translate(658, "All day"))</span>
+                        </label>
+                        <label>
+                            <input ng-click="CheckSomeDayOfWeek()" ng-model="paramsChangeRoomSell.Monday" type="checkbox" name="name" />
+                            <span>@(transition.Translate(659, "Monday"))</span>
+                        </label>
+                        <label>
+                            <input ng-click="CheckSomeDayOfWeek()" ng-model="paramsChangeRoomSell.Tuesday" type="checkbox" name="name" />
+                            <span>@(transition.Translate(660, "Tuesday"))</span>
+                        </label>
+                        <label>
+                            <input ng-click="CheckSomeDayOfWeek()" ng-model="paramsChangeRoomSell.Wednesday" type="checkbox" name="name" />
+                            <span>@(transition.Translate(661, "Wednesday"))</span>
+                        </label>
+                        <label>
+                            <input ng-click="CheckSomeDayOfWeek()" ng-model="paramsChangeRoomSell.Thursday" type="checkbox" name="name" />
+                            <span>@(transition.Translate(662, "Thursday"))</span>
+                        </label>
+                        <label>
+                            <input ng-click="CheckSomeDayOfWeek()" ng-model="paramsChangeRoomSell.Friday" type="checkbox" name="name" />
+                            <span>@(transition.Translate(663, "Friday"))</span>
+                        </label>
+                        <label>
+                            <input ng-click="CheckSomeDayOfWeek()" ng-model="paramsChangeRoomSell.Saturday" type="checkbox" name="name" />
+                            <span>@(transition.Translate(664, "Saturday"))</span>
+                        </label>
+                        <label>
+                            <input ng-click="CheckSomeDayOfWeek()" ng-model="paramsChangeRoomSell.Sunday" type="checkbox" name="name" />
+                            <span>@(transition.Translate(665, "Sunday"))</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <div class="uk-input-group">
+                        <div class="md-input-wrapper">
+                            <label><b>@(transition.Translate(670, "Price of room to sell"))</b></label>
+                            <input ng-model="paramsChangeRoomSell.Price" type="text" min="0" class="md-input">
+                            <span class="md-input-bar "></span>
+                        </div>
+                        <span class="uk-input-group-addon">
+                            <a style="color:black !important">₫</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1 uk-text-right">
+                    <button class="md-btn md-btn-new md-btn-wave-light" ng-click="PostPriceRoomSell()">@(transition.Translate(667, "Update"))</button>
+                    <button class="md-btn uk-modal-close uk-close">@(transition.Translate(668, "Cancel"))</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ModalCloseMultiRoom" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <h2 class="heading_a">@(transition.Translate(650, "Close Room"))</h2>
+        <div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2">
+                    <div class="uk-input-group">
+                        <div class="md-input-wrapper">
+                            <label><b>@(transition.Translate(642, "From"))</b></label>
+                            <input data-uk-datepicker="{format:'DD-MM-YYYY'}" ng-model="FromRangeDate" type="text" class="md-input FromRangeDate">
+                            <span class="md-input-bar "></span>
+                        </div>
+                        <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                    </div>
+                </div>
+                <div class="uk-width-1-2">
+                    <div class="uk-input-group">
+                        <div class="md-input-wrapper">
+                            <label><b>@(transition.Translate(643, "To"))</b></label>
+                            <input data-uk-datepicker="{format:'DD-MM-YYYY'}" ng-model="ToRangeDate" type="text" class="md-input ToRangeDate">
+                            <span class="md-input-bar "></span>
+                        </div>
+                        <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                    </div>
+                </div>
+                <div class="uk-width-1 uk-margin-bottom uk-margin-top">
+                    <div>
+                        <table class="uk-table uk-table-boder" style="border-collapse:collapse;border: 1px solid #dcdcdc;">
+                            <thead>
+                                <tr style="background: #F9F9F9;">
+                                    <th colspan="2">@(transition.Translate(671, "Accommodation"))</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in data">
+                                    <td>{{item.RoomTypeName}}</td>
+                                    <td class="uk-text-center">
+                                        <input ng-model="item.checkClose" type="checkbox" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1 uk-text-right">
+                    <button class="md-btn md-btn-new md-btn-wave-light" ng-click="CloseMultiRoom()">@(transition.Translate(672, "Confirm"))</button>
+                    <button class="md-btn uk-modal-close uk-close">@(transition.Translate(668, "Cancel"))</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalOpenMultiRoom" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <h2 class="heading_a">@(transition.Translate(651, "Open Room"))</h2>
+        <div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2">
+                    <div class="uk-input-group">
+                        <div class="md-input-wrapper">
+                            <label><b>@(transition.Translate(642, "From"))</b></label>
+                            <input data-uk-datepicker="{format:'DD-MM-YYYY'}" ng-model="FromRangeDate2" type="text" class="md-input FromRangeDate2">
+                            <span class="md-input-bar "></span>
+                        </div>
+                        <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                    </div>
+                </div>
+                <div class="uk-width-1-2">
+                    <div class="uk-input-group">
+                        <div class="md-input-wrapper">
+                            <label><b>@(transition.Translate(643, "To"))</b></label>
+                            <input data-uk-datepicker="{format:'DD-MM-YYYY'}" ng-model="ToRangeDate2" type="text" class="md-input ToRangeDate2">
+                            <span class="md-input-bar "></span>
+                        </div>
+                        <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                    </div>
+                </div>
+                <div class="uk-width-1 uk-margin-bottom uk-margin-top">
+                    <div>
+                        <table class="uk-table uk-table-boder" style="border-collapse:collapse;border: 1px solid #dcdcdc;">
+                            <thead>
+                                <tr style="background: #F9F9F9;">
+                                    <th colspan="2">@(transition.Translate(671, "Accommodation"))</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in data">
+                                    <td>{{item.RoomTypeName}}</td>
+                                    <td class="uk-text-center">
+                                        <input ng-model="item.checkClose" type="checkbox" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1 uk-text-right">
+                    <button class="md-btn md-btn-new md-btn-wave-light" ng-click="OpenMultiRoom()">@(transition.Translate(672, "Confirm"))</button>
+                    <button class="md-btn uk-modal-close uk-close">@(transition.Translate(668, "Cancel"))</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,235 @@
+﻿.note-for-calendar {
+    float: right
+}
+
+    .note-for-calendar span {
+        margin-left: 5px
+    }
+
+.scroll {
+    border-collapse: collapse;
+}
+
+    .scroll th {
+        padding: 5px 0;
+        color: #717171;
+    }
+
+    .scroll td {
+        padding: 2px 0;
+        height: 25px;
+    }
+
+    .scroll th, .scroll td {
+        vertical-align: middle;
+        border: 1px solid #DDD;
+        text-align: center;
+    }
+
+.highlight {
+    background-color: #f9f9f9;
+    cursor:pointer
+}
+
+.number-overbooking {
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1), 0 1px 2px rgba(0,0,0,.18);
+    font-size: 12px;
+    padding: 0 15px;
+    background: #f9f9f9;
+}
+
+.number-overbooking-active {
+    background: #56b5f5;
+    color: white;
+}
+
+.percent-booking {
+    display: block;
+    margin-top: 2px;
+}
+
+.click-book-active {
+    padding: 0 2px 0 0 !important;
+}
+
+    .click-book-active div {
+        border: 1px solid #ffb75f;
+        width: 100%;
+        height: 100%;
+    }
+
+.scroll tbody tr {
+    position: relative
+}
+
+.cell-booking, .cell-booking-exist {
+    border-radius: 5px;
+    position: absolute;
+    background: #f1ea8b;
+    height: 24px !important;
+    color: white;
+    line-height: 22px;
+    cursor: pointer
+}
+
+#box-add-new-booking {
+    display: block;
+    position: absolute;
+    background: white;
+    width: 280px;
+    height: 110px;
+    border-radius: 5px;
+    border: 1px solid #bbbbbb;
+    box-shadow: 0 0px 3px rgba(99, 91, 91, 0.16), 0 2px 3px rgba(60, 56, 56, 0.22);
+}
+
+#box-info-booking {
+    display: block;
+    position: absolute;
+    background: white;
+    width: 400px;
+    height: 280px;
+    border-radius: 5px;
+    border: 1px solid #bbbbbb;
+    box-shadow: 0 0px 3px rgba(99, 91, 91, 0.16), 0 2px 3px rgba(60, 56, 56, 0.22);
+}
+
+.calendar-header-box {
+    padding: 8px 10px;
+    border-bottom: 1px solid #d4d4d4;
+    background: #3abb79;
+    color: white;
+}
+
+.calendar-header-box-inhouse {
+    padding: 8px 10px;
+    border-bottom: 1px solid #d4d4d4;
+    background: #358ec9;
+    color: white;
+}
+
+.calendar-header-box-checkout {
+    padding: 8px 10px;
+    border-bottom: 1px solid #d4d4d4;
+    background: #9f9f9f;
+    color: white;
+}
+
+.calendar-content-box {
+    padding: 0 10px;
+}
+
+    .calendar-content-box p {
+        margin: 0;
+    }
+
+        .calendar-content-box p a {
+            color: black;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+
+.hiden-box-add-new-reservation {
+    color: white;
+    float: right;
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+.note-in-cell {
+    color: white
+}
+
+.box-square {
+    display: inline-flex;
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+}
+
+.box-quick-view-calender {
+    padding-left: 0
+}
+
+    .box-quick-view-calender li {
+        padding-bottom: 5px;
+        font-size: 14px;
+    }
+
+        .box-quick-view-calender li .uk-icon-chevron-right {
+            font-size: 10px;
+            color: #1d804d;
+        }
+
+        .box-quick-view-calender li a {
+            color: black;
+            text-decoration: underline;
+        }
+
+.mark-note {
+    position: absolute;
+    top: -5px;
+    width: 12px;
+    height: 12px;
+    background: red;
+    border-radius: 50%;
+    right: -5px;
+}
+
+.mark-clock {
+    position: absolute;
+    top: -7px;
+    width: 14px;
+    height: 15px;
+    border-radius: 50%;
+    right: 8px;
+    font-size: 16px;
+    color: #000000;
+    background: white;
+}
+
+.point-bottom-left {
+    border: 1px solid #bbbbbb;
+    right: auto;
+    left: -8px;
+    margin-left: 0;
+    top: 90px;
+    border-right: none;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    transform: rotate(45deg);
+    background: #fff;
+    border-top: none;
+    bottom: -8px;
+}
+
+.point-bottom-right {
+    right: -8px;
+    left: auto;
+    border: 1px solid #bbb;
+    border-left: none;
+    border-bottom: none;
+    margin-left: 0;
+    top: 90px;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    transform: rotate(45deg);
+    background: #fff;
+    bottom: -8px;
+}
+
+.point-bottom {
+    position: absolute;
+    bottom: -8px;
+    margin-left: 10px;
+    width: 12px;
+    height: 12px;
+    transform: rotate(45deg);
+    border: 1px solid #bbbbbb;
+    background: #fff;
+    border-left: none;
+    border-top: none;
+}

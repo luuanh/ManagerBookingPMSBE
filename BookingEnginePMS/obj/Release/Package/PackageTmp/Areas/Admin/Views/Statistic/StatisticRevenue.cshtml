@@ -1,0 +1,95 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+}
+<script>
+    $("#menu_10").addClass('click-menu-top')
+</script>
+<script src="~/Areas/Admin/Content/js/Statistic/statistic-revenue.js"></script>
+<script src="http://www.chartjs.org/dist/2.7.2/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<div class="uk-grid">
+    <div id="button-print" class="uk-width-1-1 uk-margin-bottom uk-text-right">
+        <button class="md-btn md-btn-new" onclick="window.print()">Print</button>
+    </div>
+    <div class="uk-width-1-1" ng-cloak>
+        <div class="uk-grid">
+            <div class="uk-width-1-1 uk-text-center uk-margin-bottom">
+                <h3>@(transition.Translate(2453, "Overview"))</h3>
+            </div>
+            <div class="uk-width-medium-1-2">
+                <div class="uk-grid">
+                    <div class="uk-width-1-3">
+                    </div>
+                    <div class="uk-width-1-3">
+                        <label>Tháng</label>
+                        <select ng-change="getStatisticRevenue()" ng-model="paramSituation.month" class="md-input" convert-to-number>
+                            @for (int i = 1; i < 13; i++)
+                            {
+                                <option value="@i">Tháng @i</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="uk-width-1-3">
+                        <label>Năm</label>
+                        <select ng-change="getStatisticRevenue()" ng-model="paramSituation.year" class="md-input" convert-to-number>
+                            @for (int i = 2016; i < 2021; i++)
+                            {
+                                <option value="@i">Năm @i</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="uk-width-1-1 uk-margin-bottom">
+                        <div class="chart" style="margin-top:10px">
+                            <canvas id="chartStatisticRevenue" width="597" height="298" style="display: block;"></canvas>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-1">
+                        <div class="uk-width-1-1">
+                            <div class="chart" style="margin-top:10px">
+                                <canvas id="chartStatisticRevenueAll" width="597" height="298" style="display: block;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-medium-1-2">
+                <div class="uk-grid">
+                    <div class="uk-width-1-3">
+                    </div>
+                    <div class="uk-width-1-3">
+                        <label>Tháng</label>
+                        <select ng-change="getStatisticRevenue2()" ng-model="paramSituation2.month" class="md-input" convert-to-number>
+                            @for (int i = 1; i < 13; i++)
+                            {
+                                <option value="@i">Tháng @i</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="uk-width-1-3">
+                        <label>Năm</label>
+                        <select ng-change="getStatisticRevenue2()" ng-model="paramSituation2.year" class="md-input" convert-to-number>
+                            @for (int i = 2016; i < 2021; i++)
+                            {
+                                <option value="@i">Năm @i</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="uk-width-1-1 uk-margin-bottom">
+                        <div class="chart" style="margin-top:10px">
+                            <canvas id="chartStatisticRevenue2" width="597" height="298" style="display: block;"></canvas>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-1">
+                        <div class="chart" style="margin-top:10px">
+                            <canvas id="chartStatisticRevenue2All" width="597" height="298" style="display: block;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

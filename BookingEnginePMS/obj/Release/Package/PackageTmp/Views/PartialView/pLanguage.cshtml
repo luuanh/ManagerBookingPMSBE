@@ -1,0 +1,20 @@
+﻿<style>
+    .sublist-lang li {
+        cursor: pointer
+    }
+</style>
+<ul class="list-language">
+    <li>
+        <div class="language-current">
+            <div ng-repeat="item in languages">
+                <div ng-if="lang==item.Key">
+                    <img class="LangImg" ng-src="{{item.Ensign}}" style="border-width: 0px;">
+                    <span ng-cloak>{{item.Title}}</span>
+                </div>
+            </div>
+        </div>
+        <ul class="sublist-lang">
+            <li ng-click="changeLanguage(item.Key)" ng-repeat="item in languages"><img ng-src="{{item.Ensign}}" />{{item.Title}}</li>
+        </ul>
+    </li>
+</ul>

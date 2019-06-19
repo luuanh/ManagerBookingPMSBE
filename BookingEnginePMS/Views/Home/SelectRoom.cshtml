@@ -1,0 +1,603 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    ViewBag.Title = "Select Room";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+    Hotel hotel = (Hotel)Session["HotelForBooking"];
+    string currency = (string)Session["currency"];
+}
+<script src="~/Content/js/jquery-1.10.2.min.js"></script>
+<script src="~/Content/js/jquery-ui.js"></script>
+<script src="~/Content/js/owl.carousel.js"></script>
+<script src="~/Content/js/booking.js"></script>
+<script src="~/Content/js/JavaScriptSelectRoom.js"></script>
+<link href="~/Content/css/owl.carousel.css" rel="stylesheet" />
+<link href="~/Content/css/owl.theme.css" rel="stylesheet" />
+<script src="~/Content/js/Home/selectroom.js"></script>
+@*<link data-require="bootstrap@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />*@
+<link href="~/Content/css/Home/selectroom.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+@*<link data-require="bootstrap@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />*@
+
+<style>
+    .ui-button-icon-only .ui-icon {
+        margin-left: -24px !important;
+    }
+
+
+    input {
+        position: absolute;
+        opacity: 0;
+        z-index: -1;
+    }
+
+    .row {
+        display: flex;
+    }
+
+        .row .col {
+            flex: 1;
+        }
+
+            .row .col:last-child {
+                margin-left: 1em;
+            }
+
+    /* Accordion styles */
+    .tabs {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);
+    }
+
+    .tab {
+        width: 100%;
+        color: white;
+        overflow: hidden;
+    }
+
+    .tab-label {
+        display: flex;
+        justify-content: space-between;
+        padding: 1em;
+        background: #2c3e50;
+        font-weight: bold;
+        cursor: pointer;
+        /* Icon */
+    }
+
+        .tab-label:hover {
+            background: #1a252f;
+        }
+
+        .tab-label::after {
+            content: "\276F";
+            width: 1em;
+            height: 1em;
+            text-align: center;
+            transition: all 0.35s;
+        }
+
+    .tab-content {
+        max-height: 0;
+        padding: 0 1em;
+        color: #2c3e50;
+        background: white;
+        transition: all 0.35s;
+    }
+
+    .tab-close {
+        display: flex;
+        justify-content: flex-end;
+        padding: 1em;
+        font-size: 0.75em;
+        background: #2c3e50;
+        cursor: pointer;
+    }
+
+        .tab-close:hover {
+            background: #1a252f;
+        }
+
+    input:checked + .tab-label {
+        background: #1a252f;
+    }
+
+        input:checked + .tab-label::after {
+            -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+
+    input:checked ~ .tab-content {
+        max-height: 100vh;
+        padding: 1em;
+    }
+</style>
+<div>
+    <div class="mainindex">
+        <header>
+            @Html.Partial("~/Views/PartialView/pTimeLine.cshtml", transition)
+        </header>
+        <div class="content-checkavail">
+            <div id="header-avail">
+                <div id="left-header-avail">
+                    @Html.Partial("~/Views/PartialView/pInfoCompany.cshtml", transition)
+                </div>
+                <div id="right-header-avail">
+                    @Html.Partial("~/Views/PartialView/pCurrency.cshtml")
+                    @Html.Partial("~/Views/PartialView/pLanguage.cshtml")
+                    <div class="change-search">
+                        <a ng-click="changeSearch()" style="cursor:pointer">@(transition.Translate(2290, "Change Search"))</a>
+                    </div>
+                </div>
+            </div>
+            <div class="full-width wrap-selectdate">
+                <div class="wrap-list-rate-offer">
+                    <div class="w-item-rate-offer">
+                        <div class="w-list-room">
+                            <div class="wrap-table-title">
+                                <div class="header-title">
+                                    <h3 class="title-room">@(transition.Translate(2291, "Room Type"))</h3>
+                                    <h3 class="title-option">@(transition.Translate(2292, "Options"))</h3>
+                                    <h3 class="title-price">@(transition.Translate(2293, "Today's price"))</h3>
+                                    <h3 class="title-select">@(transition.Translate(2294, "Select Rooms"))</h3>
+                                </div>
+                            </div>
+
+
+                            <div ng-repeat="data11 in data1 track by $index">
+                                <div ng-if="data11 != null">
+                                    <div class="item-room">
+                                        <div class="row-item-room">
+                                            <div class="img-room">
+                                                <img ng-click="showDetailRoom(data11.RoomTypeId)" ng-src="{{data11.Image}}" />
+                                            </div>
+                                            <div class="facility-room">
+                                                <p>
+                                                    <h3>{{data11.RoomTypeName}}</h3>
+                                                    <strong class="block-left">@(transition.Translate(2295, "Max people")): </strong>
+                                                    <div class="number-adult">
+                                                        <span class="icon adult" ng-repeat="i in rangeArr(data11.MaxPeople) track by $index"></span>
+                                                    </div>
+                                                    <span>
+                                                        <strong>@(transition.Translate(2296, "Bed")): </strong> {{data11.DescriptionBed}}
+                                                    </span>
+                                                    <span>
+                                                        <strong>@(transition.Translate(2297, "View")): </strong> {{data11.DescriptionView}}
+                                                    </span>
+                                                    <span>
+                                                        <strong>@(transition.Translate(2298, "Extrabed option")): </strong> {{data11.ExtrabedOption}}
+                                                    </span>
+                                                    <span>
+                                                        <strong>@(transition.Translate(2299, "Room Size")): </strong> {{data11.Size}} m<sup>2</sup>
+                                                    </span>
+                                                </p>
+                                                <p class="wrap-view-detail">
+                                                    <img src="~/FileDefault/image/icon-info.png" />
+                                                    <a href="javascript:void(0)" ng-click="showDetailRoom(data11.RoomTypeId)">@(transition.Translate(2300, "View detail room"))</a>
+                                                </p>
+                                            </div>
+                                            <div class="promotion_room">
+                                                <div class="typeroom-item bd" style="min-height: 80px;">
+                                                    <div class="typeroom-item-a">
+                                                        <p ng-bind-html="data11.PromotionHome.Description"></p>
+                                                        <p style="font-size: 12px;">
+                                                            <span style="font-size: 14px;">&diams; </span> {{data11.PromotionHome.Name}} - <span style="color: #0ab21b;">@(transition.Translate(2306, "Very good"))</span>
+                                                        </p>
+                                                        <p ng-if="data11.PromotionHome.Breakfast">&emsp; <img src="~/FileDefault/image/check.jpg" width="12" height="9"> @(transition.Translate(2307, "Breakfast"))</p>
+                                                        <p ng-if="data11.PromotionHome.Lunch">&emsp; <img src="~/FileDefault/image/check.jpg" width="12" height="9"> @(transition.Translate(2308, "Lunch"))</p>
+                                                        <p ng-if="data11.PromotionHome.Dinner">&emsp; <img src="~/FileDefault/image/check.jpg" width="12" height="9"> @(transition.Translate(2309, "Dinner"))</p>
+                                                        <div class="box-policy">
+                                                            <span>&diams;</span>
+                                                            <div class="content-policy" ng-bind-html="data11.PromotionHome.PolicyContent"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="price-item-room">
+                                                <div style="min-height: 80px">
+                                                    <div class="info-detail-sale" ng-if="data11.TotalPrice != data11.PromotionHome.TotalPriceAfterPromotion">
+                                                        @if (currency == "VND")
+                                                        {
+                                                            <span> {{data11.TotalPrice | currency: '':'0'}} </span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span> {{data11.TotalPriceExchangeRate | currency: '':'2'}}</span>
+                                                        }
+                                                        <span class="unit-price">{{::currency}}</span>
+                                                    </div>
+                                                    <div class="info-detail-price">
+
+                                                        @if (currency == "VND")
+                                                        {
+                                                            <span> {{data11.PromotionHome.TotalPriceAfterPromotion | currency: '':'0'}} </span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span> {{data11.PromotionHome.TotalPriceAfterPromotionExchangeRate | currency: '':'2'}}</span>
+                                                        }
+                                                        <span class="unit-price">{{::currency}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="bt-item-room">
+                                                <div style="min-height: 80px;">
+                                                    <select ng-model="data11.PromotionHome.ChooseRoom" name="NumberRoom" class="be-number-room" convert-to-number>
+                                                        <option ng-repeat="i in rangeArr2(data11.NumberAvailable) track by $index" value="{{i}}">{{i}}</option>
+                                                    </select>
+                                                    <span ng-if="data11.NumberAvailable == 1" class="only-left">@(transition.Translate(2301, "Only 1 room left"))</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="wrap-main-content">
+                                            <div class="main-test">
+                                                <div class="width-container">
+                                                    <div class="content-checkavail">
+                                                        <div class="full-width wrap-selectdate">
+                                                            <div class="wrap-list-rate-offer">
+                                                                <div class="w-item-rate-offer">
+                                                                    <div class="item-rate-offer">
+                                                                        <div class="show-room">
+                                                                            <div class="bt-show-room">
+                                                                                <button class="buttom-show-room" onclick="ShowRoom(this)" id="{{data11.RoomTypeId}}">
+                                                                                    See ALL
+                                                                                    Rooms
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="w-list-room" id="list-room-{{data11.RoomTypeId}}" style="display: none ; width: 82%">
+                                                                        <div class="item-room">
+                                                                            <div class="name-room">
+                                                                                <h3>{{data11.RoomTypeName}}</h3>
+                                                                            </div>
+                                                                            <div class="info-item-room">
+                                                                                <div ng-repeat="data22 in data2 track by $index">
+                                                                                    <div ng-if="data11.RoomTypeId == data22.RoomTypeId">
+
+                                                                                        <div class="item-room">
+                                                                                            <div class="row-item-room">
+                                                                                                @*<div class="img-room">
+                                                                                                        <img ng-click="showDetailRoom(data11.RoomTypeId)" ng-src="{{data11.Image}}" />
+                                                                                                    </div>*@
+                                                                                                <div class="facility-room facility-room1">
+                                                                                                    <p>
+                                                                                                        <h3>{{data11.RoomTypeName}}</h3>
+                                                                                                        <strong class="block-left">@(transition.Translate(2295, "Max people")): </strong>
+                                                                                                        <div class="number-adult">
+                                                                                                            <span class="icon adult" ng-repeat="i in rangeArr(data11.MaxPeople) track by $index"></span>
+
+                                                                                                        </div>
+                                                                                                        <span>
+                                                                                                            <strong>@(transition.Translate(2296, "Bed")): </strong> {{data11.DescriptionBed}}
+                                                                                                        </span>
+                                                                                                        <span>
+                                                                                                            <strong>@(transition.Translate(2297, "View")): </strong> {{data11.DescriptionView}}
+                                                                                                        </span>
+                                                                                                        <span>
+                                                                                                            <strong>@(transition.Translate(2298, "Extrabed option")): </strong> {{data11.ExtrabedOption}}
+                                                                                                        </span>
+                                                                                                        <span>
+                                                                                                            <strong>@(transition.Translate(2299, "Room Size")): </strong> {{data11.Size}} m<sup>2</sup>
+                                                                                                        </span>
+                                                                                                    </p>
+                                                                                                    <p class="wrap-view-detail">
+                                                                                                        <img src="~/FileDefault/image/icon-info.png" />
+                                                                                                        <a href="javascript:void(0)" ng-click="showDetailRoom(data11.RoomTypeId)">@(transition.Translate(2300, "View detail room"))</a>
+                                                                                                    </p>
+                                                                                                </div>
+
+                                                                                                <div class="promotion_room" style="width: 37.5%">
+                                                                                                    <div class="typeroom-item bd" style="min-height: 80px;">
+                                                                                                        <div class="typeroom-item-a">
+                                                                                                            <p ng-bind-html="data22.PromotionHome.Description"></p>
+                                                                                                            <p style="font-size: 12px;">
+                                                                                                                <span style="font-size: 14px;">&diams; </span> {{data22.PromotionHome.Name}} - <span style="color: #0ab21b;">@(transition.Translate(2306, "Very good"))</span>
+                                                                                                            </p>
+                                                                                                            <p ng-if="data22.PromotionHome.Breakfast">&emsp; <img src="~/FileDefault/image/check.jpg" width="12" height="9"> @(transition.Translate(2307, "Breakfast"))</p>
+                                                                                                            <p ng-if="data22.PromotionHome.Lunch">&emsp; <img src="~/FileDefault/image/check.jpg" width="12" height="9"> @(transition.Translate(2308, "Lunch"))</p>
+                                                                                                            <p ng-if="data22.PromotionHome.Dinner">&emsp; <img src="~/FileDefault/image/check.jpg" width="12" height="9"> @(transition.Translate(2309, "Dinner"))</p>
+                                                                                                            <div class="box-policy">
+                                                                                                                <span>&diams;</span>
+                                                                                                                <div class="content-policy" ng-bind-html="data22.PromotionHome.PolicyContent"></div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="price-item-room">
+                                                                                                    <div style="min-height: 80px">
+                                                                                                        <div class="info-detail-sale" ng-if="data22.TotalPrice != data22.PromotionHome.TotalPriceAfterPromotion">
+                                                                                                            @if (currency == "VND")
+                                                                                                            {
+                                                                                                                <span> {{data22.TotalPrice | currency: '':'0'}} </span>
+                                                                                                            }
+                                                                                                            else
+                                                                                                            {
+                                                                                                                <span> {{data22.TotalPriceExchangeRate | currency: '':'2'}}</span>
+                                                                                                            }
+                                                                                                            <span class="unit-price">{{::currency}}</span>
+                                                                                                        </div>
+                                                                                                        <div class="info-detail-price">
+
+                                                                                                            @if (currency == "VND")
+                                                                                                            {
+                                                                                                                <span> {{data22.PromotionHome.TotalPriceAfterPromotion | currency: '':'0'}} </span>
+                                                                                                            }
+                                                                                                            else
+                                                                                                            {
+                                                                                                                <span> {{data22.PromotionHome.TotalPriceAfterPromotionExchangeRate | currency: '':'2'}}</span>
+                                                                                                            }
+                                                                                                            <span class="unit-price">{{::currency}}</span>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="bt-item-room">
+                                                                                                    <div style="min-height: 80px;">
+                                                                                                        <select ng-model="data22.PromotionHome.ChooseRoom" name="NumberRoom" class="be-number-room" convert-to-number>
+                                                                                                            <option ng-repeat="i in rangeArr2(data22.NumberAvailable) track by $index" value="{{i}}">{{i}}</option>
+                                                                                                        </select>
+                                                                                                        <span ng-if="data22.NumberAvailable == 1" class="only-left">@(transition.Translate(2301, "Only 1 room left"))</span>
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <script>
+                                                        function ShowRoom(param) {
+                                                            var code = $(param).attr("id");
+                                                            var listRoom = $("#list-room-" + code);
+                                                            if (listRoom.css('display') == 'none') {
+                                                                listRoom.show(400);
+                                                                $(param).text("Hide Rooms");
+                                                            } else {
+                                                                listRoom.hide(400);
+                                                                $(param).text("See ALL Rooms");
+                                                            }
+                                                        }
+                                                    </script>
+
+                                                    <div class="clearfix"></div>
+                                                </div><!-- close .width-container -->
+                                            </div><!-- close #main -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            @*<div ng-cloak>
+                                    <div class="item-room " ng-repeat="item in data | orderBy:'+Index'">
+                                        <div class="row-item-room">
+                                            <div class="img-room">
+                                                <img ng-click="showDetailRoom(item.RoomTypeId)" ng-src="{{item.Image}}" />
+                                            </div>
+                                            <div class="facility-room">
+                                                <p>
+                                                    <h3>{{item.RoomTypeName}}</h3>
+                                                    <strong class="block-left">@(transition.Translate(2295, "Max people")): </strong>
+                                                    <div class="number-adult">
+                                                        <span class="icon adult" ng-repeat="i in rangeArr(item.MaxPeople) track by $index"></span>
+                                                    </div>
+                                                    <span>
+                                                        <strong>@(transition.Translate(2296, "Bed")): </strong> {{item.DescriptionBed}}
+                                                    </span>
+                                                    <span>
+                                                        <strong>@(transition.Translate(2297, "View")): </strong> {{item.DescriptionView}}
+                                                    </span>
+                                                    <span>
+                                                        <strong>@(transition.Translate(2298, "Extrabed option")): </strong> {{item.ExtrabedOption}}
+                                                    </span>
+                                                    <span>
+                                                        <strong>@(transition.Translate(2299, "Room Size")): </strong> {{item.Size}} m<sup>2</sup>
+                                                    </span>
+                                                </p>
+                                                <p class="wrap-view-detail">
+                                                    <img src="~/FileDefault/image/icon-info.png" />
+                                                    <a href="javascript:void(0)" ng-click="showDetailRoom(item.RoomTypeId)">@(transition.Translate(2300, "View detail room"))</a>
+                                                </p>
+                                            </div>
+                                            <div class="promotion_room">
+                                                <div class="typeroom-item bd" style="min-height: 80px;">
+                                                    <div class="typeroom-item-a">
+                                                        <p ng-bind-html="item.PromotionHome.Description"></p>
+                                                        <p style="font-size: 12px;">
+                                                            <span style="font-size: 14px;">&diams; </span> {{item.PromotionHome.Name}} - <span style="color: #0ab21b;">@(transition.Translate(2306, "Very good"))</span>
+                                                        </p>
+                                                        <p ng-if="item.PromotionHome.Breakfast">&emsp; <img src="~/FileDefault/image/check.jpg" width="12" height="9"> @(transition.Translate(2307, "Breakfast"))</p>
+                                                        <p ng-if="item.PromotionHome.Lunch">&emsp; <img src="~/FileDefault/image/check.jpg" width="12" height="9"> @(transition.Translate(2308, "Lunch"))</p>
+                                                        <p ng-if="item.PromotionHome.Dinner">&emsp; <img src="~/FileDefault/image/check.jpg" width="12" height="9"> @(transition.Translate(2309, "Dinner"))</p>
+                                                        <div class="box-policy">
+                                                            <span>&diams;</span>
+                                                            <div class="content-policy" ng-bind-html="item.PromotionHome.PolicyContent"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="price-item-room">
+                                                <div style="min-height: 80px">
+                                                    <div class="info-detail-sale" ng-if="item.TotalPrice != item.PromotionHome.TotalPriceAfterPromotion">
+                                                        @if (currency == "VND")
+                                                        {
+                                                            <span> {{item.TotalPrice | currency: '':'0'}} </span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span> {{item.TotalPriceExchangeRate | currency: '':'2'}}</span>
+                                                        }
+                                                        <span class="unit-price">{{::currency}}</span>
+                                                    </div>
+                                                    <div class="info-detail-price">
+
+                                                        @if (currency == "VND")
+                                                        {
+                                                            <span> {{item.PromotionHome.TotalPriceAfterPromotion | currency: '':'0'}} </span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span> {{item.PromotionHome.TotalPriceAfterPromotionExchangeRate | currency: '':'2'}}</span>
+                                                        }
+                                                        <span class="unit-price">{{::currency}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="bt-item-room">
+                                                <div style="min-height: 80px;">
+                                                    <select ng-model="item.PromotionHome.ChooseRoom" name="NumberRoom" class="be-number-room" convert-to-number>
+                                                        <option ng-repeat="i in rangeArr2(item.NumberAvailable) track by $index" value="{{i}}">{{i}}</option>
+                                                    </select>
+                                                    <span ng-if="item.NumberAvailable == 1" class="only-left">@(transition.Translate(2301, "Only 1 room left"))</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>*@
+                        </div>
+                        <div class="btn-select">
+                            <div class="fixed-wrapper">
+                                <div class="fixed-detail" attCal="{{calRoomChoose()}}">
+                                    <button ng-click="Confirm()" type="button" name="Book-now" value="Select" class="buton-Check-availability bt-booknow"> @(transition.Translate(2302, "Reserve"))</button>
+                                    <div style="color:red" ng-if="dataRoomBook.length <= 0">
+                                        @(transition.Translate(2455, "Room not selected"))
+                                    </div>
+                                    <div id="text" style="font-size: 14px;" ng-cloak ng-if="dataRoomBook.length > 0">
+                                        <p class="none-mobile">
+                                            {{totalRoomBook}} @(transition.Translate(2303, "rooms"))
+                                            (
+                                            <span ng-repeat="item in detailRoomChosen track by $index">{{item.TotalRoomChoose}} &times; {{item.RoomTypeName}}, </span>
+                                            )
+                                        </p>
+                                        <p class="total-price">
+                                            @if (currency == "VND")
+                                            {
+                                                <span> {{totalPriceRoom | currency:'':'0'}} </span>
+                                            }
+                                            else
+                                            {
+                                                <span>{{totalPriceRoomExchangeRate | currency:'':'2'}}</span>
+                                            }
+                                            <span class="unit-price">{{::currency}}</span>
+                                        </p>
+                                        <strong class="color-red">@(transition.Translate(2304, "Jackpot! You got a great rate"))</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="detail-info-room" ng-cloak>
+    <div class="owl-demo wrap-gallery">
+        <div class="slideshow-container">
+            <div class="mySlides fade" ng-repeat="item in detailRoom.gallary">
+                <div class="numbertext">{{$index + 1}} / {{detailRoom.gallary.length}}</div>
+                <img ng-src="{{item}}" style="width:100%">
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+        </div>
+    </div>
+    <div class="w-info-detail-room">
+        <div class="detail-room-diaolog">
+            <p>
+                <strong>@(transition.Translate(2295, "Max people")): </strong> {{detailRoom.roomType.MaxPeople}}
+            </p>
+            <p>
+                <strong>@(transition.Translate(2296, "Bed")): </strong> {{detailRoom.roomType.DescriptionBed}}
+            </p>
+            <p>
+                <strong>@(transition.Translate(2297, "View")): </strong>{{detailRoom.roomType.DescriptionView}}
+            </p>
+            <p>
+                <strong>@(transition.Translate(2299, "Room Size")): </strong> {{detailRoom.roomType.Size}}  m<sup>2</sup>
+            </p>
+            <h3>@(transition.Translate(2305, "Room Facilities")):</h3>
+
+            <ul class="hprt-lightbox-list row" data-nr-of-facilities="28">
+                <li style="margin-left: 30px;" class="hprt-lightbox-list__item col-md-3 col-sm-4 col-xs-6" ng-repeat="item in detailRoom.amenity track by $index">
+                    {{item}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<style>
+    .typeroom-item .btn-detail:hover .detail-a {
+        display: block !important;
+    }
+</style>
+
+
+<script>
+    $(document).ready(function () {
+        $(window).scroll(function (event) {
+            if ($(window).scrollTop() >= 238) {
+                $(".btn-select").addClass("btn-select-fixed");
+            }
+            else {
+                $(".btn-select").removeClass("btn-select-fixed");
+            }
+        });
+        $(".detail-info-room").dialog(
+            {
+                autoOpen: false,
+                modal: true,
+                overflow: 'auto',
+                width: "100%",
+                title: 'ROOM DESCRIPTION & INCLUSIONS'
+            });
+
+        if ($(window).height() < 767) {
+            $(function () {
+                $("#accordion").accordion({
+                    icons: { "header": "ui-icon-circle-triangle-n", "activeHeader": "ui-icon-circle-triangle-s" },
+                    collapsible: true,
+                    active: true
+                });
+            });
+        }
+    });
+</script>
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex - 1].style.display = "block";
+    }
+</script>

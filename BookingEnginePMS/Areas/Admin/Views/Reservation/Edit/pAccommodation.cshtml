@@ -1,0 +1,378 @@
+﻿@using BookingEnginePMS.Models;
+@model Transition
+@{
+
+    int typeSoftware = -1;
+    if (Session["typeSoftware"] != null)
+    {
+        typeSoftware = (int)Session["typeSoftware"];
+    }
+}
+<style>
+    .box-booking-status label {
+        margin-right: 5px;
+    }
+</style>
+<div style="margin-top: 10px;min-height: 400px;">
+    <div class="uk-grid">
+        @if (typeSoftware == 1 || typeSoftware == 3)
+        {
+            <div class="uk-width-medium-2-3 uk-margin-bottom">
+                <div class="uk-input-group">
+                    <div class="md-input-wrapper">
+                        <label class="lable-config"><b>@Model.Translate(406, "Status")</b></label>
+                        <div style="margin-top: 8px;" class="box-booking-status">
+                            <label>
+                                <input ng-change="GetBooking()" ng-model="filters.status" type="radio" name="statusBooking" value="-1" convert-to-number />
+                                <span style="font-weight:bold">Tất cả (<span ng-cloak>{{::numberBookingAll}}</span>)</span>
+                            </label>
+                            <label>
+                                <input ng-change="GetBooking()" ng-model="filters.status" type="radio" name="statusBooking" value="1" convert-to-number />
+                                <span class="title-booking-new">Mới (<span ng-cloak>{{::numberBookingNew}}</span>)</span>
+                            </label>
+                            <label>
+                                <input ng-change="GetBooking()" ng-model="filters.status" type="radio" name="statusBooking" value="2" convert-to-number />
+                                <span class="title-booking-inhouse">Đã Checkin (<span ng-cloak>{{::numberBookingInHouse}}</span>)</span>
+                            </label>
+                            <label>
+                                <input ng-change="GetBooking()" ng-model="filters.status" type="radio" name="statusBooking" value="3" convert-to-number />
+                                <span class="title-booking-checkout">Đã CheckOut (<span ng-cloak>{{::numberBookingCheckOut}}</span>)</span>
+                            </label>
+                            <label>
+                                <input ng-change="GetBooking()" ng-model="filters.status" type="radio" name="statusBooking" value="4" convert-to-number />
+                                <span class="title-booking-noshow">Không đến (<span ng-cloak>{{::numberBookingNoShow}}</span>)</span>
+                            </label>
+                            <label>
+                                <input ng-change="GetBooking()" ng-model="filters.status" type="radio" name="statusBooking" value="5" convert-to-number />
+                                <span class="title-booking-cancel">Đã hủy (<span ng-cloak>{{::numberBookingCancel}}</span>)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-medium-1-3 uk-margin-bottom uk-text-right">
+                <div style="padding: 10px 20px;">
+                    <button class="md-btn md-btn-new md-btn-wave-light" ng-click="ShowAddBooking()">@Model.Translate(360, "Add Booking")</button>
+                    <div class="uk-button-dropdown uk-text-left" data-uk-dropdown="{pos:'bottom-right',mode:'click'}" style="z-index: 9999;">
+                        <button class="md-btn md-btn-wave-light">@Model.Translate(407, "Option") <i class="material-icons">&#xE313;</i></button>
+                        <div class="uk-dropdown">
+                            <ul class="uk-nav uk-nav-dropdown">
+                                <li class="uk-nav-header">@Model.Translate(408, "Assign room")</li>
+                                <li><a ng-click="AutoAssignRoom()">@Model.Translate(409, "Auto Assign Group")</a></li>
+                                <li class="uk-nav-header">@Model.Translate(410, "Action Group")</li>
+                                <li><a ng-click="ShowGroupCheckIn()">@Model.Translate(369, "Check in")</a></li>
+                                <li><a ng-click="ShowGroupCheckOut()">@Model.Translate(371, "Check out")</a></li>
+                                <li class="uk-nav-header">@Model.Translate(411, "Group Clusters")</li>
+                                <li><a ng-click="ShowGroupClusters()">@Model.Translate(411, "Group Clusters")</a></li>
+                                <li class="uk-nav-header">@Model.Translate(412, "Print")</li>
+                                <li><a href="/Admin/Print/InvoiceReservaton/{{ReservationId}}" target="_blank">@Model.Translate(413, "Invoice Booking")</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="uk-width-1">
+            <div class="uk-overflow-container">
+                <div class=" box-reservation">
+                    <table class="uk-table uk-table-bordered" style="border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: linear-gradient(rgb(246, 247, 248), rgb(215, 215, 215));">
+                                <th class="uk-text-center">@Model.Translate(414, "Folio")</th>
+                                <th>@Model.Translate(382, "Accommodation")</th>
+                                <th class="uk-text-center">@Model.Translate(415, "Room")</th>
+                                <th class="uk-text-center">@Model.Translate(416, "Type")</th>
+                                <th>@Model.Translate(417, "Guest's Name")</th>
+                                <th class="uk-text-center" style="min-width: 70px;">@Model.Translate(369, "Check in")</th>
+                                <th class="uk-text-center" style="min-width: 70px;">@Model.Translate(371, "Check out")</th>
+                                <th class="uk-text-center">@Model.Translate(418, "Total")</th>
+                                <th class="uk-text-center">@Model.Translate(402, "Paid")</th>
+                                <th class="uk-text-center">@Model.Translate(419, "Balance")</th>
+                                <th class="uk-text-center">@Model.Translate(406, "Status")</th>
+                                <th class="uk-text-center">@Model.Translate(380, "Edit")</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-cloak>
+                            <tr ng-repeat="item in bookings track by $index">
+                                <td class="uk-text-center">
+                                    <a ng-click="EditBooking(item.BookingId)">{{item.BookingId}}</a>
+                                </td>
+                                <td>{{item.RoomTypeName}}</td>
+                                <td class="uk-text-center">
+                                    <span ng-if="item.RoomId > 0">{{item.RoomCode}}</span>
+                                    <span ng-if="item.RoomId < 0">N/A</span>
+                                </td>
+                                <td class="uk-text-center">{{getTypeReservation(item.TypeBooking)}}</td>
+                                <td>{{item.GuestName}}</td>
+                                <td class="uk-text-center">{{item.ArrivalDate | date:'dd/MM/yyyy HH:mm'}}</td>
+                                <td class="uk-text-center">
+                                    <span ng-if="item.TypeBooking == 1 && item.Status != 3 && item.Status != 6">________</span>
+                                    <span ng-if="item.TypeBooking == 0 || item.Status == 3 || item.Status == 6">{{item.DepartureDate | date:'dd/MM/yyyy HH:mm'}}</span>
+                                </td>
+                                <td class="uk-text-right">{{item.Total | currency:'':'0'}} ₫</td>
+                                <td class="uk-text-right">{{item.Paid + item.PrePaid | currency:'':'0'}} ₫</td>
+                                <td class="uk-text-right">{{(item.Total - item.Paid - item.PrePaid) | currency:'':'0'}} ₫</td>
+                                <td class="uk-text-center">
+                                    <span ng-bind-html="getStatus(item.Status)"></span>
+                                </td>
+                                <td class="uk-text-center">
+                                    <button class="md-btn md-btn-new md-btn-wave-light md-btn-small" ng-click="EditBooking(item.BookingId)">@Model.Translate(380, "Edit")</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (typeSoftware == 1 || typeSoftware == 3)
+{
+    <div id="ModalGroupCheckIn" class="uk-modal">
+        <div class="uk-modal-dialog uk-modal-dialog-large ">
+            <button type="button" class="uk-modal-close uk-close"></button>
+            <h2 class="heading_a">@Model.Translate(420, "Group Check In")</h2>
+            <div style="padding-top: 2px;">
+                <div class="uk-grid uk-margin-bottom">
+                    <div class="uk-width-1">
+                        <div class="uk-overflow-container box-schedule-price">
+                            <table class="uk-table uk-table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>@Model.Translate(414, "Folio")</th>
+                                        <th>@Model.Translate(382, "Accommodation")</th>
+                                        <th>@Model.Translate(415, "Room")</th>
+                                        <th>@Model.Translate(416, "Type")</th>
+                                        <th>@Model.Translate(369, "Check in")</th>
+                                        <th>@Model.Translate(371, "Check out")</th>
+                                        <th>@Model.Translate(406, "Status")</th>
+                                        <th class="uk-text-center">
+                                            <input ng-change="ChangeCheckAllCheckIn()" ng-model="checkAllCheckIn" type="checkbox" />
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in bookingNeedToCheckIn track by $index">
+                                        <td>
+                                            <span>{{item.BookingId}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{item.RoomTypeName}}</span>
+                                        </td>
+                                        <td>
+                                            <span ng-if="item.RoomId < 0">N/A</span>
+                                            <span ng-if="item.RoomId > 0">{{item.RoomCode}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{getTypeReservation(item.TypeBooking)}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{item.ArrivalDate | date:'dd/MM/yyyy HH:mm'}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{item.DepartureDate | date:'dd/MM/yyyy HH:mm'}}</span>
+                                        </td>
+                                        <td>
+                                            <span ng-bind-html="getStatus(item.Status)"></span>
+                                        </td>
+                                        <td class="uk-text-center">
+                                            <input ng-model="item.Check" type="checkbox" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-grid">
+                    <div class="uk-width-1 uk-text-right">
+                        <button class="md-btn md-btn-new" ng-click="PostBookingNeedToCheckIn()">@Model.Translate(385, "Confirm")</button>
+                        <button class="md-btn uk-modal-close uk-close md-btn-wave-light">@Model.Translate(386, "Close")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ModalGroupCheckOut" class="uk-modal">
+        <div class="uk-modal-dialog uk-modal-dialog-large ">
+            <button type="button" class="uk-modal-close uk-close"></button>
+            <h2 class="heading_a">@Model.Translate(421, "Group Check Out")</h2>
+            <div style="padding-top: 2px;">
+                <div class="uk-grid uk-margin-bottom">
+                    <div class="uk-width-1">
+                        <div class="uk-overflow-container box-schedule-price">
+                            <table class="uk-table uk-table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>@Model.Translate(414, "Folio")</th>
+                                        <th>@Model.Translate(382, "Accommodation")</th>
+                                        <th>@Model.Translate(415, "Room")</th>
+                                        <th>@Model.Translate(416, "Type")</th>
+                                        <th>@Model.Translate(369, "Check in")</th>
+                                        <th>@Model.Translate(371, "Check out")</th>
+                                        <th>@Model.Translate(419, "Balance")</th>
+                                        <th class="uk-text-center">
+                                            <input ng-change="ChangeCheckAllCheckOut()" ng-model="checkAllCheckOut" type="checkbox" />
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in bookingNeedToCheckOut track by $index">
+                                        <td>
+                                            <span>{{item.BookingId}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{item.RoomTypeName}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{item.RoomCode}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{getTypeReservation(item.TypeBooking)}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{item.ArrivalDate | date:'dd/MM/yyyy HH:mm'}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{item.DepartureDate | date:'dd/MM/yyyy HH:mm'}}</span>
+                                        </td>
+                                        <td>
+                                            <b>{{(item.TotalAmount) | currency:'':'0'}} ₫</b>
+                                        </td>
+                                        <td class="uk-text-center">
+                                            <input ng-model="item.Check" type="checkbox" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-grid">
+                    <div class="uk-width-1 uk-text-right">
+                        <button class="md-btn md-btn-new" ng-click="PostBookingNeedToCheckOut()">@Model.Translate(385, "Confirm")</button>
+                        <button class="md-btn uk-modal-close uk-close md-btn-wave-light">@Model.Translate(386, "Close")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ModalClustersReservation" class="uk-modal">
+        <div class="uk-modal-dialog uk-modal-dialog-large ">
+            <button type="button" class="uk-modal-close uk-close"></button>
+            <h2 class="heading_a">@Model.Translate(422, "Clusters Reservation")</h2>
+            <div>
+                <div class="uk-grid uk-margin-bottom">
+                    <div class="uk-width-medium-1-3 uk-margin-bottom">
+                        <div class="uk-input-group">
+                            <div class="md-input-wrapper">
+                                <label><b>@Model.Translate(423, "Key Search")</b></label>
+                                <input ng-model="findReservationId" type="text" class="md-input" placeholder="Reservation Code">
+                                <span class="md-input-bar "></span>
+                            </div>
+                            <span class="uk-input-group-addon" ng-click="FindReservation()">
+                                <a class="md-btn md-btn-new">@Model.Translate(354, "Search")</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="uk-width-1 uk-margin-bottom">
+                        <h5 class="title-box-small-accomodation" style="margin-bottom:0">
+                            <b>@Model.Translate(424, "Reservation Information")</b>
+                        </h5>
+                        <div class="uk-overflow-container box-schedule-price" style="margin: 0px !important;">
+                            <table class="uk-table uk-table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>@Model.Translate(425, "Reservation Code")</th>
+                                        <th>@Model.Translate(426, "Name")</th>
+                                        <th>@Model.Translate(427, "SurName")</th>
+                                        <th>@Model.Translate(394, "Booked Date")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <span>{{ClustersReservation.reservation.ReservationId}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ClustersReservation.reservation.FirstName}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ClustersReservation.reservation.SurName}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{ClustersReservation.reservation.CreateDate | date:'dd/MM/yyyy HH:mm'}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="uk-width-1">
+                        <h5 class="title-box-small-accomodation" style="margin-bottom:0">
+                            <b>@Model.Translate(424, "Reservation Information")</b>
+                        </h5>
+                        <div class="uk-overflow-container box-schedule-price" style="margin: 0px !important;">
+                            <table class="uk-table uk-table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>@Model.Translate(414, "Folio")</th>
+                                        <th>@Model.Translate(382, "Accommodation")</th>
+                                        <th>@Model.Translate(415, "Room")</th>
+                                        <th>@Model.Translate(416, "Type")</th>
+                                        <th>@Model.Translate(369, "Check in")</th>
+                                        <th>@Model.Translate(371, "Check out")</th>
+                                        <th>@Model.Translate(419, "Balance")</th>
+                                        <th>@Model.Translate(406, "Status")</th>
+                                        <th class="uk-text-center">
+                                            <input ng-change="ChangeClustersAllReservation()" ng-model="clustersAllReservation" type="checkbox" />
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in ClustersReservation.bookings track by $index">
+                                        <td>
+                                            <span>{{item.BookingId}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{item.RoomTypeName}}</span>
+                                        </td>
+                                        <td>
+                                            <span ng-if="item.RoomId < 0">N/A</span>
+                                            <span ng-if="item.RoomId > 0">{{item.RoomCode}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{getTypeReservation(item.TypeBooking)}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{item.ArrivalDate | date:'dd/MM/yyyy HH:mm'}}</span>
+                                        </td>
+                                        <td>
+                                            <span ng-if="item.TypeBooking == 1 && item.Status != 3 && item.Status != 6">_______</span>
+                                            <span ng-if="item.TypeBooking == 0 || item.Status == 3 || item.Status == 6">{{item.DepartureDate | date:'dd/MM/yyyy HH:mm'}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{(item.Total - item.Paid - item.PrePaid) | currency:'':'0'}} ₫</span>
+                                        </td>
+                                        <td>
+                                            <span ng-bind-html="getStatus(item.Status)"></span>
+                                        </td>
+                                        <td class="uk-text-center">
+                                            <input ng-model="item.Check" type="checkbox" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-grid">
+                    <div class="uk-width-1 uk-text-right">
+                        <button class="md-btn md-btn-new" ng-click="PostGroupClusters()">@Model.Translate(385, "Confirm")</button>
+                        <button class="md-btn uk-modal-close uk-close md-btn-wave-light">@Model.Translate(386, "Close")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

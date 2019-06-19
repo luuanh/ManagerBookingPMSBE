@@ -1,0 +1,407 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    ViewBag.Title = "Calendar";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+}
+<link href="~/Areas/Admin/Content/css/calendar.css" rel="stylesheet" />
+<script src="~/Areas/Admin/Content/js/Calendar/calendar.js"></script>
+<script>
+    $("#menu_2").addClass('click-menu-top')
+</script>
+<div class="uk-grid">
+    <div class="uk-width-large-1-3 uk-margin-bottom title-header">
+        <h3>@(transition.Translate(36, "Calendar"))</h3>
+        <a href="/Admin/Reservation/New" class="md-btn md-btn-new">@(transition.Translate(37, "Add New Reservation"))</a>
+    </div>
+    <div class="uk-width-large-1-3 uk-margin-bottom uk-text-center">
+        <div class="md-btn-group">
+            <a class="md-btn md-btn-small md-btn-new md-btn-wave-light" ng-click="ChangeRangeDay(-1)"> ◄ </a>
+            <a class="md-btn md-btn-small md-btn-new md-btn-wave-light" ng-click="GetDataToday()">
+                <span style="font-size: 14px;">@(transition.Translate(38, "Today"))</span>
+            </a>
+            <a class="md-btn md-btn-small md-btn-new md-btn-wave-light" ng-click="ChangeRangeDay(1)"> ► </a>
+        </div>
+    </div>
+    <div class="uk-width-large-1-3 uk-margin-bottom" style="margin-top: 2px;">
+        <div class="uk-grid">
+            <div class="uk-width-2-5">
+                <div class="md-input-wrapper">
+                    <label><b>@(transition.Translate(39, "Number Day"))</b></label>
+                    <select class="md-input" ng-model="filters.numberDay" convert-to-number>
+                        <option value="7">7</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                    </select>
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-width-2-5">
+                <div class="uk-input-group">
+                    <div class="md-input-wrapper">
+                        <label><b>@(transition.Translate(40, "Start Date"))</b></label>
+                        <input id="FromDate" data-uk-datepicker="{format:'DD-MM-YYYY'}" ng-model="FromDate" type="text" class="md-input">
+                        <span class="md-input-bar "></span>
+                    </div>
+                    <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                </div>
+            </div>
+            <div class="uk-width-1-5">
+                <button class="md-btn md-btn-new md-btn-wave-light" ng-click="GetData()">@(transition.Translate(41, "Search"))</button>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-1 uk-margin-small-bottom">
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-1-1">
+                <label>
+                    <input ng-change="ChangeColorBooking()" ng-model="typeColorBooking" value="1" type="radio" name="typeColor" convert-to-number />
+                    <span>@(transition.Translate(42, "Color default"))</span>
+                </label>
+                <label>
+                    <input ng-change="ChangeColorBooking()" ng-model="typeColorBooking" value="0" type="radio" name="typeColor" convert-to-number />
+                    <span>@(transition.Translate(43, "Color of booking"))</span>
+                </label>
+                <label class="note-for-calendar">
+                    <span>
+                        <i style="color: #000000;font-size: 18px;" class="uk-icon-clock-o"></i>
+                        @(transition.Translate(44, "Book Hour"))
+                    </span>
+                    <span>
+                        <span class="box-square" style="background: #ff0000;border-radius: 50%;"></span>
+                        @(transition.Translate(45, "Note"))
+                    </span>
+                    <span ng-if="typeColorBooking == 1">
+                        <span class="box-square" style="background: #3abb79;"></span>
+                        @(transition.Translate(46, "New"))
+                    </span>
+                    <span ng-if="typeColorBooking == 1">
+                        <span class="box-square" style="background: #358ec9;"></span>
+                        @(transition.Translate(47, "In house"))
+                    </span>
+                    <span ng-if="typeColorBooking == 1">
+                        <span class="box-square" style="background: #9f9f9f;"></span>
+                        @(transition.Translate(48, "Check out"))
+                    </span>
+                </label>
+            </div>
+            <div class="uk-width-1 uk-margin-top">
+                <p style="padding-left: 5px;font-weight: 600;">
+                    * @(transition.Translate(49, "Tip"))
+                </p>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-large-bottom">
+            <div class="uk-width-1-1">
+                <div style="position: relative;">
+                    <div style="overflow-x: auto;position: relative;" on-size-changed="autoRawWhenResponesive()">
+                        <table class="scroll uk-table" ng-cloak>
+                            <thead>
+                                <tr style="background: linear-gradient(rgb(246, 247, 248), rgb(215, 215, 215));">
+                                    <th style="min-width: 120px;">@(transition.Translate(50, "Room"))</th>
+                                    <th id="column_{{$index}}" ng-repeat="item in data.ratioOverBookings">
+                                        <span ng-click="showOverBooking($index,item.numberOver)" class="number-overbooking {{item.numberOver > 0? 'number-overbooking-active':''}}">{{item.numberOver}}</span>
+                                        <span class="percent-booking">{{item.ratio}}%</span>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="rowOfRoomType_{{item.typeTitle}}_{{item.roomType.RoomTypeId}}" id="row_{{item.room.RoomId}}" ng-repeat="item in data.modelDataCalendars track by $index">
+                                    <td ng-if="item.typeTitle == 1" class="highlight">
+                                        <span>###</span>
+                                    </td>
+                                    <th class="highlight" ng-if="item.typeTitle == 1" ng-repeat="d in item.dateTimes">
+                                        <span style="display:block">{{d | date:'dd/MM'}}</span>
+                                        <span style="display:block">{{d | date:'EEE'}}</span>
+                                    </th>
+                                    <td ng-click="showHideGroupRoom(item)" class="highlight" ng-if="item.typeTitle == 2">
+                                        <b>
+                                            <i ng-if="item.show" class="uk-icon-chevron-down"></i>
+                                            <i ng-if="!item.show" class="uk-icon-chevron-right"></i>
+                                            {{item.roomType.RoomTypeName}}
+                                        </b>
+                                    </td>
+                                    <td class="highlight" ng-if="item.typeTitle == 3" style="width: 50px;">
+                                        <span>{{item.room.RoomCode}}</span>
+                                    </td>
+                                    <td ng-if="item.typeTitle == 2" ng-repeat="rate in item.roomType.rateRoomTypes" class="uk-text-center highlight">
+                                        <span style="display:block">{{rate.Number}}</span>
+                                        <span style="display:block;font-size: 12px;padding-top: 2px;">{{rate.Price | currency:'':'0'}} ₫</span>
+                                    </td>
+                                    <td ng-click="clickBook(item.room.RoomId,$index,item.room.RoomCode)"
+                                        roomId="{{item.room.RoomId}}"
+                                        index="{{$index}}"
+                                        id="{{item.room.RoomId}}_{{$index}}"
+                                        ng-if="item.typeTitle == 3"
+                                        ng-repeat="r in totalDay"
+                                        class="cell-room">
+                                        <div></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr style="background: linear-gradient(rgb(246, 247, 248), rgb(215, 215, 215));">
+                                    <th>@(transition.Translate(50, "Room"))</th>
+                                    <th ng-repeat="item in data.ratioOverBookings">
+                                        <span>{{item.ratio}}%</span>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div id="box-add-new-booking" style="display:none">
+                        <div class="calendar-header-box">
+                            <span>{{arrivalDateBook | date:'dd/MM/yyyy'}} - {{departurDateBook | date:'dd/MM/yyyy'}} | #{{roomCodeChooseBook}}</span>
+                            <i ng-click="hidenBoxAddNewReservation()" class="uk-icon-close hiden-box-add-new-reservation"></i>
+                        </div>
+                        <div class="calendar-content-box" style="padding-top:10px">
+                            <p ng-if="acceptBookByHour == 1">
+                                <i class="uk-icon-chevron-right" style="font-size: 11px;"></i>
+                                <a ng-click="CreateReservationHour()">@(transition.Translate(51, "Create New Reservaion")) (@(transition.Translate(53, "Hour")))</a>
+                            </p>
+                            <p style="margin-bottom:5px" ng-if="acceptBookByHour == 0">
+                                <i class="uk-icon-chevron-right" style="font-size: 11px;"></i>
+                                <a ng-click="CreateReservationDay()">@(transition.Translate(51, "Create New Reservaion")) (@(transition.Translate(52, "Day")))</a>
+                            </p>
+                        </div>
+                        <div class="point-bottom">
+
+                        </div>
+                        <div style="position: absolute;bottom: -10px;width: 100%;height: 15px;">
+                        </div>
+                    </div>
+                    <div id="box-info-booking" style="display:none">
+                        <div class="{{booking.Status == 1?'calendar-header-box':''}} {{booking.Status == 2?'calendar-header-box-inhouse':''}} {{booking.Status == 3?'calendar-header-box-checkout':''}}">
+                            <span style="width: 90%;display: inline-block;">
+                                {{booking.ArrivalDate | date:'dd/MM/yyyy HH:mm'}} -
+                                <span ng-if="booking.TypeBooking == 1 && booking.Status != 3">______</span>
+                                <span ng-if="booking.TypeBooking != 1 || booking.Status == 3">{{booking.DepartureDate | date:'dd/MM/yyyy HH:mm'}}</span>
+                                | {{booking.GuestName}}
+                            </span>
+                            <i ng-click="hidenBoxInfoReservation()" class="uk-icon-close hiden-box-add-new-reservation"></i>
+                        </div>
+                        <div class="calendar-content-box">
+                            <div class="uk-grid">
+                                <div class="uk-width-2-5" style="padding-top: 10px;border-right: 1px solid #e8e8e8;">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-1" style="margin-bottom:5px">
+                                            <b style="font-size: 12px;">@(transition.Translate(54, "Folio"))</b>
+                                            <p>{{booking.BookingId}}</p>
+                                        </div>
+                                        <div class="uk-width-1-1" style="margin-bottom:5px">
+                                            <b style="font-size: 12px;">@(transition.Translate(55, "Total"))</b>
+                                            <p>{{booking.Total | currency:'':'0'}} ₫</p>
+                                        </div>
+                                        <div class="uk-width-1-1" style="margin-bottom:5px">
+                                            <b style="font-size: 12px;">@(transition.Translate(56, "Paid"))</b>
+                                            <p>{{booking.Paid + booking.PrePaid | currency:'':'0'}} ₫</p>
+                                        </div>
+                                        <div class="uk-width-1-1" style="margin-bottom:5px">
+                                            <b style="font-size: 12px;">@(transition.Translate(57, "Balance due"))</b>
+                                            <p>{{(booking.Total - booking.Paid - booking.PrePaid) | currency:'':'0'}} ₫</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="uk-width-3-5" style="padding-top: 10px;padding-left: 10px;">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-2" style="margin-bottom:5px">
+                                            <b style="font-size: 12px;">@(transition.Translate(58, "Adult/ Child"))</b>
+                                            <p>{{booking.Adult}}/ {{booking.Children}}</p>
+                                        </div>
+                                        <div class="uk-width-1-2" style="margin-bottom:5px">
+                                            <b style="font-size: 12px;">@(transition.Translate(73, "Type booking"))</b>
+                                            <p ng-if="booking.TypeBooking == 0" style="color: #10a0ce;font-weight: bold;">@(transition.Translate(52, "Day"))</p>
+                                            <p ng-if="booking.TypeBooking == 1" style="color: #10a0ce;font-weight: bold;">@(transition.Translate(53, "Hour"))</p>
+                                        </div>
+                                        <div class="uk-width-1-1" style="margin-bottom:5px">
+                                            <b style="font-size: 12px;">@(transition.Translate(59, "Arival/ Departure flight"))</b>
+                                            <p>{{booking.Flight}}</p>
+                                        </div>
+                                        <div class="uk-width-1-1" style="margin-bottom:5px">
+                                            <hr style="margin: 0;" />
+                                        </div>
+                                        <div class="uk-width-1-1" style="margin-bottom:5px">
+                                            <ul class="uk-tab" data-uk-tab="{connect:'#tabs_active',swiping: false}">
+                                                <li class="genenral-tab uk-active"><a href="#" style="font-size: 12px;">@(transition.Translate(60, "Action"))</a></li>
+                                                <li><a href="#" style="font-size: 12px;">@(transition.Translate(45, "Note"))</a></li>
+                                            </ul>
+                                            <ul id="tabs_active" class="uk-switcher uk-margin" style="overflow: unset;padding-top: 1px;">
+                                                <li class="genenral-tab">
+                                                    <ul class="box-quick-view-calender">
+                                                        <li ng-if="booking.Status == 1">
+                                                            <i class="uk-icon-chevron-right"></i>
+                                                            <a ng-click="QuickCheckInBooking(booking.BookingId)">@(transition.Translate(61, "Check in"))</a>
+                                                        </li>
+                                                        <li ng-if="booking.Status == 2">
+                                                            <i class="uk-icon-chevron-right"></i>
+                                                            <a ng-click="confirmCheckOut(booking.BookingId)">@(transition.Translate(48, "Check out"))</a>
+                                                        </li>
+                                                        <li>
+                                                            <i class="uk-icon-chevron-right"></i>
+                                                            <a href="/Admin/Reservation/Edit?id={{booking.ReservationId}}">@(transition.Translate(62, "Reservation detail"))</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <div class="uk-overflow-container" style="height: 60px;">
+                                                        <div class="uk-grid">
+                                                            <div class="uk-width-1-1" style="margin-bottom:5px">
+                                                                <b style="font-size: 12px;">@(transition.Translate(63, "Note Booking"))</b>
+                                                                <p>{{booking.Note}}</p>
+                                                            </div>
+                                                            <div class="uk-width-1-1" style="margin-bottom:5px">
+                                                                <b style="font-size: 12px;">@(transition.Translate(64, "Note Reservation"))</b>
+                                                                <p ng-repeat="item in booking.reservationNotes">
+                                                                    {{item.Note}}
+                                                                    <span style="float:right;font-size:12px">
+                                                                        {{item.CreateDate | date:'dd/MM/yyyy HH:mm'}} - {{item.UserName}}
+                                                                    </span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="point_bottom" class="point-bottom">
+
+                        </div>
+                        <div style="position: absolute;bottom: -10px;width: 100%;height: 15px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ModalOverBooking" class="uk-modal">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <h2 class="heading_a">@(transition.Translate(65, "Assignment"))</h2>
+        <div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1">
+                    <div class="uk-overflow-container">
+                        <table class="uk-table uk-table-bordered" style="border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: linear-gradient(rgb(246, 247, 248), rgb(215, 215, 215));">
+                                    <th>@(transition.Translate(66, "ResCode"))</th>
+                                    <th class="uk-text-center">@(transition.Translate(54, "Folio"))</th>
+                                    <th>@(transition.Translate(67, "Guest's Name"))</th>
+                                    <th class="uk-text-center">@(transition.Translate(61, "Check in"))</th>
+                                    <th class="uk-text-center">@(transition.Translate(48, "Check out"))</th>
+                                    <th class="uk-text-center">@(transition.Translate(68, "Accommodation"))</th>
+                                    <th class="uk-text-center">@(transition.Translate(50, "Room")) #</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in dataOverBooking">
+                                    <td class="uk-text-center">{{item.ReservationId}}</td>
+                                    <td class="uk-text-center">{{item.BookingId}}</td>
+                                    <td>{{item.GuestName}}</td>
+                                    <td class="uk-text-center">{{item.ArrivalDate | date:'dd/MM/yyyy HH:mm'}}</td>
+                                    <td class="uk-text-center">
+                                        <span ng-if="item.TypeBooking == 1">__________</span>
+                                        <span ng-if="item.TypeBooking == 0">{{item.DepartureDate | date:'dd/MM/yyyy HH:mm'}}</span>
+                                    </td>
+                                    <td class="uk-text-center">
+                                        <select ng-change="changeRoomTypeForAssign(item)"
+                                                ng-model="item.RoomTypeId" class="md-input" convert-to-number>
+                                            <option value="{{rt.RoomTypeId}}" ng-repeat="rt in item.roomTypeCalendars">{{rt.RoomTypeName}}</option>
+                                        </select>
+                                    </td>
+                                    <td class="uk-text-center">
+                                        <select ng-change="changeAssignRoom()" ng-model="item.RoomId" class="md-input" convert-to-number>
+                                            <option value="-1">N/A</option>
+                                            <option value="{{r.RoomId}}" ng-repeat="r in item.roomCalendars">{{r.RoomCode}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1 uk-text-right">
+                    <button class="md-btn md-btn-new md-btn-wave-light" ng-click="AssignRoom()">@(transition.Translate(69, "Confirm Assign Room"))</button>
+                    <button class="md-btn uk-modal-close uk-close md-btn-wave-light">@(transition.Translate(70, "Cancel"))</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ModalConfirmCheckOut" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <h2 class="heading_a">@(transition.Translate(71, "Warning"))!</h2>
+        <div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1">
+                    <h4>@(transition.Translate(72, "Are you sure want to check the guest out"))?</h4>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1 uk-text-right">
+                    <button class="md-btn md-btn-danger" ng-click="QuickCheckOutBooking()">@(transition.Translate(48, "Check out"))</button>
+                    <button class="md-btn uk-modal-close uk-close">@(transition.Translate(70, "Cancel"))</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="locationShowBoxInfor" />
+<input type="hidden" id="locationTop" value="0" />
+<button style="display:none" id="btnshowBoxDetail" ng-click="showBoxDetail()"></button>
+<script>
+    var bookingIdOld = -1;
+    var fixedItem = false;
+    function overCellBooking(item) {
+        var left = item.offsetLeft
+        var width = item.offsetWidth
+        var top = item.offsetTop
+        var bookingId = $(item).attr("bookingid")
+        if (bookingIdOld == bookingId && $("#box-info-booking").css("display") != "none")
+            return;
+        bookingIdOld = bookingId
+        $("#locationShowBoxInfor").val(bookingId)
+        $("#locationShowBoxInfor").attr("attWidth", width)
+        $("#locationShowBoxInfor").attr("attLeft", left)
+        $("#point_bottom").removeClass("point-bottom-right")
+        if (top > 140) {
+            $("#box-info-booking").css("left", left + width / 2 - 20)
+            $("#box-info-booking").css("top", top - 290)
+            $("#point_bottom").addClass("point-bottom")
+            $("#point_bottom").removeClass("point-bottom-left")
+            $("#locationTop").val(0)
+        }
+        else {
+            $("#box-info-booking").css("left", left + width + 10)
+            $("#box-info-booking").css("top", top - 80)
+            $("#point_bottom").addClass("point-bottom-left")
+            $("#point_bottom").removeClass("point-bottom")
+            $("#locationTop").val(1)
+        }
+        $("#btnshowBoxDetail").click()
+        $('#box-info-booking').css("box-shadow", "none")
+        fixedItem = false
+    }
+    function outCellBooking() {
+        if (fixedItem)
+            return;
+        $("#box-info-booking").css("display", "none")
+    }
+    function fixedItemLocation() {
+        fixedItem = !fixedItem
+        $('#box-info-booking').css("box-shadow", "0 0px 3px rgba(99, 91, 91, 0.16), 0 2px 3px rgba(60, 56, 56, 0.22)")
+        if (!fixedItem)
+            $("#box-info-booking").css("display", "none")
+    }
+</script>

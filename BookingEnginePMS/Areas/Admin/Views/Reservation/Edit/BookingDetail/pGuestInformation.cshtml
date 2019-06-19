@@ -1,0 +1,161 @@
+﻿@model List<string>
+@using BookingEnginePMS.Models;
+@{
+    Transition transition = this.ViewData.ContainsKey("transition") ? (Transition)this.ViewData["transition"] : null;
+}
+<div>
+    <div class="uk-grid">
+        <div class="uk-width-1 uk-margin-bottom">
+            <h4 style="padding-left: 5px;">
+                <b><u>@transition.Translate(443, "Guest Information")</u></b>
+            </h4>
+        </div>
+        <div class="uk-width-large-1-2" style="padding-top: 10px;">
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@transition.Translate(426, "Name") <span class="star-red">*</span></b></label>
+                    <input ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.FirstName" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                    <span id="err_FirstName_D" class="error">@transition.Translate(370, "Value is invalid")!</span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@transition.Translate(427, "SurName") <span class="star-red">*</span></b></label>
+                    <input ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.SurName" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                    <span id="err_SurName_D" class="error">@transition.Translate(370, "Value is invalid")!</span>
+                </div>
+            </div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@transition.Translate(444, "Email")</b></label>
+                    <input ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.Email" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@transition.Translate(445, "Phone") <span class="star-red">*</span></b></label>
+                    <input ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.Phone" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                    <span id="err_Phone_D" class="error">@transition.Translate(370, "Value is invalid")!</span>
+                </div>
+            </div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@transition.Translate(446, "Fax")</b></label>
+                    <input ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.Fax" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@transition.Translate(447, "Country")</b></label>
+                    <select class="md-input" ng-model="bookingdetail.Guest.Country" style="width:100%">
+                        <option value="N/A">N/A</option>
+                        @foreach (string item in Model)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <div class="uk-input-group">
+                        <div class="md-input-wrapper">
+                            <label><b>@transition.Translate(450, "Date of Birth")</b></label>
+                            <input ng-click="RefreshValidate()" id="DobBookingDetail" data-uk-datepicker="{format:'DD-MM-YYYY'}" ng-model="Dob" type="text" class="md-input">
+                            <span class="md-input-bar "></span>
+                        </div>
+                        <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                    </div>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@transition.Translate(451, "Gender")</b></label>
+                    <select class="md-input" ng-model="bookingdetail.Guest.Gender" convert-to-number style="width:100%;">
+                        <option value="-1">N/A</option>
+                        <option value="1">@transition.Translate(452, "Male")</option>
+                        <option value="0">@transition.Translate(453, "Female")</option>
+                    </select>
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label class="lable-config">
+                        <b>@transition.Translate(454, "Type Guest")</b>:
+                    </label>
+                    <span class="type-guest">{{bookingdetail.Guest.TypeGuestName}}</span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@transition.Translate(455, "Company")</b></label>
+                    <input ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.Company" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@transition.Translate(456, "Address") </b></label>
+                    <input ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.Address" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@transition.Translate(457, "Region")</b></label>
+                    <input ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.Region" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+        </div>
+        <div class="uk-width-large-1-2" style="padding-top: 10px;">
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>ZIP Code </b></label>
+                    <input ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.ZIPCode" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>CVC</b></label>
+                    <input ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.CVC" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@transition.Translate(458, "IdentityCart")</b></label>
+                    <input ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.IdentityCart" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@transition.Translate(459, "Passport")</b></label>
+                    <input ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.Passport" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@transition.Translate(460, "CreditCard")</b></label>
+                    <input ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.CreditCard" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@transition.Translate(461, "Date of Issue CreditCard")</b></label>
+                    <input ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.DoIssueCreditCard" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1 uk-margin-bottom">
+                    <label><b>@transition.Translate(462, "Note for Guest")</b></label>
+                    <textarea ng-click="RefreshValidate()" ng-model="bookingdetail.Guest.Note" rows="3" class="md-input"></textarea>
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box-edit-booking">
+    <div class="uk-grid">
+        <div class="uk-width-1 uk-text-right" style="padding-right:80px">
+            <button class="md-btn md-btn-new md-btn-wave-light" ng-click="PutGuestBooking()">@transition.Translate(432, "Update")</button>
+            <button class="md-btn md-btn-wave-light" ng-click="CloseWindow()">@transition.Translate(386, "Close")</button>
+        </div>
+    </div>
+</div>

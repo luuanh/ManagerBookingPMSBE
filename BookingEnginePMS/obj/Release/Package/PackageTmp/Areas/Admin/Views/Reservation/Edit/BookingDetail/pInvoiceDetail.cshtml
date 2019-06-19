@@ -1,0 +1,160 @@
+﻿@using BookingEnginePMS.Models;
+@model Transition
+<style>
+
+    #Invoice th {
+        color: white !important;
+        text-align: center !important;
+        color: black !important;
+    }
+
+    #Invoice th, #Invoice td {
+        border: 1px solid #e0e0e0;
+        font-size: 13px
+    }
+
+    #Invoice table {
+        border-collapse: collapse;
+    }
+</style>
+<div class="uk-grid">
+    <div class="uk-width-1 uk-margin-bottom">
+        <div class="uk-grid">
+            <div class="uk-width-2-5 uk-margin-small-bottom">
+                <img ng-src="{{invoice.Hotel.Logo}}" />
+            </div>
+            <div class="uk-width-3-5 uk-text-center">
+                <p style="margin: 5px;font-size: 14px;font-weight: bold;text-transform: uppercase;" class="ng-binding">{{invoice.Hotel.Name}}</p>
+                <p style="margin: 5px;font-size: 13px;font-weight: 600" class="ng-binding">{{invoice.Hotel.Address}}</p>
+                <p style="margin: 5px;font-size: 13px;" class="ng-binding">@Model.Translate(556, "Hotline"): {{invoice.Hotel.Hotline}} | @Model.Translate(445, "Phone"): {{invoice.Hotel.Phone}} </p>
+                <p style="margin: 5px;font-size: 13px;" class="ng-binding">@Model.Translate(444, "Email"): {{invoice.Hotel.Email}}</p>
+                <p style="margin: 5px;font-size: 13px;" class="ng-binding">@Model.Translate(557, "Website"): {{invoice.Hotel.Website}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1">
+        <div class="uk-grid">
+            <div class="uk-width-1 uk-text-right uk-margin-bottom">
+                <p style="font-weight: 500;font-size: 12px" class="ng-binding">@Model.Translate(558, "Printing date"): {{invoice.CreateDate | date:'dd/MM/yyyy HH:mm:ss'}} </p>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1 uk-margin-small-bottom">
+        <div class="uk-grid">
+            <div class="uk-width-1 uk-text-center uk-margin-bottom">
+                <h3 style="margin-bottom: 0;"><b>@Model.Translate(359, "Invoice")</b></h3>
+                <h6 style="margin-top: 0;">@Model.Translate(559, "Code"): I{{invoice.Hotel.Code}}{{invoice.InvoiceBookingId}}</h6>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-2">
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-1-2">
+                <span>@Model.Translate(414, "Folio") </span>
+            </div>
+            <div class="uk-width-1-2">
+                <b>{{invoice.BookingId}}</b>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-1-2">
+                <span>@Model.Translate(560, "Guest") </span>
+            </div>
+            <div class="uk-width-1-2">
+                <b>{{invoice.Guest.SurName}} {{invoice.Guest.FirstName}} </b>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-2">
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-1-2">
+                <span>@Model.Translate(415, "Room")</span>
+            </div>
+            <div class="uk-width-1-2">
+                <b>{{invoice.Booking.RoomCode}} </b>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-1-2">
+                <span>@Model.Translate(445, "Phone")</span>
+            </div>
+            <div class="uk-width-1-2">
+                <b>{{invoice.Guest.Phone}}</b>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1 uk-margin-top uk-margin-small-bottom">
+        <div>
+            <table class="uk-table uk-table-nowrap table-lst table-infoBill">
+                <thead>
+                    <tr>
+                        <th class="th-header2">@Model.Translate(561, "Service name")</th>
+                        <th class="th-header3" style="">@Model.Translate(488, "Number")</th>
+                        <th class="th-header4">@Model.Translate(562, "Unit price")</th>
+                        <th class="th-header5">@Model.Translate(418, "Total")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in dataVoice.bookingServices">
+                        <td>{{item.ServiceName}}</td>
+                        <td class="uk-text-center">{{item.Number}}</td>
+                        <td class="uk-text-right">{{item.Price | currency:'':'0'}}</td>
+                        <td class="uk-text-right" style="font-weight:600">{{(item.Number * item.Price)| currency:'':'0'}} ₫</td>
+                    </tr>
+                    <tr ng-repeat="item in dataVoice.bookingExtrabeds">
+                        <td>{{item.ExtrabedName}}</td>
+                        <td class="uk-text-center">{{item.Number}}</td>
+                        <td class="uk-text-right">{{item.Price | currency:'':'0'}}</td>
+                        <td class="uk-text-right" style="font-weight:600">{{(item.Number * item.Price)| currency:'':'0'}} ₫</td>
+                    </tr>
+                    <tr ng-if="dataVoice.roomCharge">
+                        <td colspan="3">@Model.Translate(563, "Total room charges")</td>
+                        <td class="item-value uk-text-right ng-binding">
+                            <b style="font-weight:bold;font-size: 14px;">{{dataVoice.totalRooms| currency:'':'0'}} ₫</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">@Model.Translate(9999, "Discount")</td>
+                        <td class="item-value uk-text-right ng-binding">
+                            <b style="font-weight:bold;font-size: 14px;">- {{dataVoice.totalDiscount | currency:'':'0'}} ₫</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">@Model.Translate(397, "Fees")</td>
+                        <td class="item-value uk-text-right ng-binding">
+                            <b style="font-weight:bold;font-size: 14px;">+ {{dataVoice.totalFees| currency:'':'0'}} ₫</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">@Model.Translate(400, "Total Amount")</td>
+                        <td class="item-value uk-text-right ng-binding">
+                            <b style="font-weight:bold;font-size: 14px;">{{dataVoice.totalAmount| currency:'':'0'}} ₫</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">@Model.Translate(402, "Paid")</td>
+                        <td class="uk-text-right">
+                            <b style="font-weight:bold;font-size: 14px;">{{dataVoice.totalAmount| currency:'':'0'}} ₫</b>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="uk-width-1 sign-user">
+        <div class="uk-grid uk-margin-bottom">
+            <div class="uk-width-2-5 uk-text-center">
+                <p>
+                    <b>@Model.Translate(560, "Guest")</b>
+                </p>
+            </div>
+            <div class="uk-width-1-5">
+            </div>
+            <div class="uk-width-2-5 uk-text-center">
+                <p>
+                    <b>@Model.Translate(564, "Confirm by")</b>
+                </p><br>
+            </div>
+        </div>
+    </div>
+</div>

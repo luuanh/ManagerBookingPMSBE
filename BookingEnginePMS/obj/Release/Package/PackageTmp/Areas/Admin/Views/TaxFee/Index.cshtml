@@ -1,0 +1,120 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutSetting.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+}
+<script>
+    $("#TaxFee").addClass("menu-clicked")
+</script>
+<script>
+    $(function () {
+        var e = $("#kUI_window")
+            , t = $("#kUI_undo");
+        if (e.length) {
+            var a = e
+                , n = t.bind("click", function () {
+                    a.data("kendoWindow").open(),
+                        n.hide()
+                });
+            a.data("kendoWindow") || a.kendoWindow({
+                width: "600px",
+                title: "Information",
+                actions: ["Pin", "Minimize", "Maximize", "Close"],
+                close: function () {
+                    n.show()
+                }
+            })
+        }
+    })
+</script>
+<style>
+    .uk-comment .uk-comment-body > div {
+        padding: 0px 55px;
+    }
+</style>
+<script src="~/Areas/Admin/Content/js/TaxFee/tax-fee.js"></script>
+<div id="kUI_window" style="display:none;padding-top: 24px !IMPORTANT;">
+    <div>
+        <div class="uk-grid uk-margin-bottom">
+            <div class="uk-width-1 uk-margin-medium-bottom">
+                <h3>@(transition.Translate(1034, "TaxFee Information"))</h3>
+                <hr />
+            </div>
+            <div class="uk-width-1-3 uk-margin-medium-bottom">
+                <div class="md-input-wrapper">
+                    <label><b>@(transition.Translate(1035, "Is this a VAT or a Service charge?")) </b></label>
+                    <select boolean ng-model="taxfee.TypeTaxFee" class="md-input" style="margin-top: 15px;">
+                        <option value="true">VAT</option>
+                        <option value="false">@(transition.Translate(1048, "Service charge"))</option>
+                    </select>
+                </div>
+            </div>
+            <div class="uk-width-1 uk-margin-medium-bottom">
+                <div class="uk-grid">
+                    <div class="uk-width-large-1-4">
+                        <div class="uk-input-group">
+                            <div class="md-input-wrapper md-input-filled">
+                                <label><b>@(transition.Translate(1036, "Amount"))</b></label>
+                                <input ng-click="RefreshValidate()" class="md-input" ng-model="taxfee.Amount" type="text">
+                                <span id="err_Amount" class="error">@(transition.Translate(1037, "Value is invalid!"))</span>
+                            </div>
+                            <span class="uk-input-group-addon">
+                                <span>%</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1 uk-margin-medium-bottom">
+                <div style="position: relative;">
+                    <label><b>@(transition.Translate(1038, "Description"))</b></label>
+                    <textarea ng-click="RefreshValidate()" class="md-input" rows="3" ng-model="taxfee.Description"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="uk-grid">
+            <div class="uk-width-1 uk-text-right">
+                <button class="md-btn md-btn-new" ng-click="Post()" ng-if="isAdd">@(transition.Translate(1039, "Add"))</button>
+                <button class="md-btn md-btn-new" ng-click="Put()" ng-if="!isAdd">@(transition.Translate(1040, "Update"))</button>
+                <button class="md-btn" ng-click="CloseWindow()">@(transition.Translate(1041, "Cancel"))</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="uk-grid">
+    <div class="uk-width-1-1 uk-margin-bottom">
+        <h3>@(transition.Translate(1042, "Tax Fee"))</h3>
+        <hr />
+        <p style="font-size: 12px;">
+            @(transition.Translate(1043, "tipTaxFee"))
+        </p>
+        <hr />
+    </div>
+    <div class="uk-width-1-1 uk-margin-bottom uk-text-right">
+        <button class="md-btn md-btn-new md-btn-wave-light" ng-click="ShowAdd()">@(transition.Translate(1044, "Add New"))</button>
+    </div>
+    <div class="uk-width-1-1">
+        <div ui-grid="gridOptions" ui-grid-selection ui-grid-resize-columns ui-grid-move-columns
+             ui-grid-pinning ui-grid-pagination ui-grid-exporter class="grid box-grid"></div>
+    </div>
+</div>
+<div id="ModalConfirm" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <h2 class="heading_a">@(transition.Translate(1045, "Warning!"))</h2>
+        <div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1">
+                    <h4>@(transition.Translate(1046, "Are you sure you want to delete this taxfee?"))</h4>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1 uk-text-right">
+                    <button class="md-btn md-btn-danger" ng-click="Delete()">@(transition.Translate(1047, "Delete"))</button>
+                    <button class="md-btn uk-modal-close uk-close">@(transition.Translate(1041, "Cancel"))</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

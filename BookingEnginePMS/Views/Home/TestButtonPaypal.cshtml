@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "TestButtonPaypal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<button >Click</button>
+<div id="paypal-button" onclick="defaultButton(event)">
+    <span id="spanFill"></span>
+</div>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script>
+    paypal.Button.render({
+        style: {
+            layout: 'vertical', // horizontal | vertical
+            size: 'medium', // medium | large | responsive
+            shape: 'rect', // pill | rect
+            color: 'gold' // gold | blue | silver | black
+        },
+        funding: {},
+        commit: false,
+        payment: function () { },
+        onAuthorize: function (data, actions) { },
+        onCancel: function (data) { },
+        onError: function (err) { }
+    }, '#paypal-button');
+</script>

@@ -1,0 +1,19 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+}
+<script>
+    $("#menu_10").addClass('click-menu-top')
+</script>
+<script src="~/Areas/Admin/Content/js/Statistic/available-accommodations.js"></script>
+<div class="uk-grid">
+    <div class="uk-width-1-1 uk-margin-medium-bottom">
+        <h3>@(transition.Translate(870, "Available Accommodations"))</h3>
+        <hr />
+    </div>
+    <div class="uk-width-1-1" ng-cloak>
+        @Html.Partial("~/Areas/Admin/Views/PartialView/pRoomFuture.cshtml", transition)
+    </div>
+</div>

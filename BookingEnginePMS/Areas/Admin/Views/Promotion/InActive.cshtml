@@ -1,0 +1,230 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+}
+<script>
+    $("#menu_7").addClass('click-menu-top')
+</script>
+<style>
+    .box-content {
+        height: 45px;
+        line-height: 45px;
+    }
+
+        .box-content > strong {
+            white-space: nowrap;
+        }
+
+    @@media (max-width: 500px) {
+        .title-header > button:last-of-type {
+            margin: 10px 0 0 0;
+            display: block
+        }
+    }
+
+    .uk-comment-meta > a {
+        margin-right: 15px
+    }
+
+        .uk-comment-meta > a > i {
+            margin-right: 6px
+        }
+
+    .uk-comment-title {
+        color: #00347E;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .uk-comment-header > strong {
+        color: #00347E
+    }
+
+    .box-body .uk-comment-header > strong {
+        font-size: 14px;
+        display: block;
+    }
+
+    .box-body .uk-comment-header > p {
+        font-size: 12px;
+        margin: 5px 0 0 20px;
+        color: #00347E;
+    }
+
+    .box-body .uk-comment-header > strong i {
+        font-size: 20px;
+        color: #00347E;
+        margin-right: 5px
+    }
+
+    .box-body .uk-comment-header > strong .mini {
+        font-size: 12px;
+    }
+
+    .uk-comment-meta a, .uk-comment-meta i {
+        color: #299bfe
+    }
+
+    .background-promotion {
+        background: #F5F5F5;
+        border: 1px solid hsla(44, 84%, 43%, 0.58)
+    }
+
+    .non-background-promotion {
+        background: #ffffff;
+        border: 1px solid hsla(44, 84%, 43%, 0.58)
+    }
+
+    li > .uk-grid {
+        margin-left: -30px;
+        padding: 5px 0px;
+    }
+</style>
+<script src="~/Areas/Admin/Content/js/Promotion/promotion-inactive.js"></script>
+<div class="uk-grid">
+    <div class="uk-width-1-1 uk-margin-medium-bottom title-header">
+        <h3>@(transition.Translate(739, "Inactive promotions"))</h3>
+        <a href="/Admin/Promotion/New" class="md-btn md-btn-new">@(transition.Translate(674, "Add New"))</a>
+        <a href="/Admin/Promotion/Index" class="md-btn">@(transition.Translate(740, "Go to Active Promotions"))</a>
+        <hr />
+        <p style="font-size: 12px;">
+            @(transition.Translate(741, "We collect all your inactive and previously deleted promotions on this page."))
+        </p>
+        <hr />
+    </div>
+    <div class="uk-width-1-1">
+        <ul style="background:#DEE9F7">
+            <li>
+                <div class="uk-grid">
+                    <div class="uk-width-medium-1-4">
+                        <div class="box-content">
+                            <strong>@(transition.Translate(677, "Name"))</strong>
+                        </div>
+                    </div>
+                    <div class="uk-width-medium-3-4">
+                        <div class="uk-grid">
+                            <div class="uk-width-large-1-4 uk-width-medium-1-2">
+                                <div class="box-content">
+                                    <strong>@(transition.Translate(678, "Discount"))</strong>
+                                </div>
+                            </div>
+                            <div class="uk-width-large-1-4 uk-width-medium-1-2">
+                                <div class="box-content">
+                                    <strong>@(transition.Translate(679, "Details"))</strong>
+                                </div>
+                            </div>
+                            <div class="uk-width-large-1-4 uk-width-medium-1-2">
+                                <div class="box-content">
+                                    <strong>@(transition.Translate(680, "Accommodation Types"))</strong>
+                                </div>
+                            </div>
+                            <div class="uk-width-large-1-4 uk-width-medium-1-2">
+                                <div class="box-content">
+                                    <strong>@(transition.Translate(681, "Dates"))</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <ul>
+            <li ng-repeat="item in data" ng-cloak>
+                <div class="uk-grid {{$index %2 ==0?'background-promotion':'non-background-promotion'}} uk-margin-bottom">
+                    <div class="uk-width-medium-1-4">
+                        <div>
+                            <article class="uk-comment">
+                                <header class="uk-comment-header">
+                                    <span class="icon-left-list">
+                                        <i class="uk-icon-th-list"></i>
+                                    </span>
+                                    <h4 class="uk-comment-title">{{item.PromotionName}}</h4>
+                                    <div class="uk-comment-meta">
+                                        <a ng-click="ConfirmOpen(item.PromotionId)"><i class="uk-icon-refresh"></i>@(transition.Translate(742, "Reactivate"))</a>
+                                        <a ng-click="ConfirmDelete(item.PromotionId)" style="color:red"><i class="uk-icon-close " style="color:red"></i>@(transition.Translate(743, "Delete"))</a>
+                                    </div>
+                                </header>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="uk-width-medium-3-4 box-body">
+                        <div class="uk-grid">
+                            <div class="uk-width-large-1-4 uk-width-medium-1-2">
+                                <div class="uk-comment-header">
+                                    <strong>
+                                        <i class="uk-icon-tag"></i>
+                                        @(transition.Translate(684, "off")) {{item.Deposit}} %
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="uk-width-large-1-4 uk-width-medium-1-2">
+                                <div class="uk-comment-header">
+                                    <strong>
+                                        <i class="uk-icon-flash"></i>
+                                        {{getNameTypePromotion(item.TypePromotion)}}
+                                    </strong>
+                                    <p>@(transition.Translate(685, "Bookable from")) {{item.FromDate | date:'dd/MM/yyyy'}} @(transition.Translate(686, "to")) {{item.ToDate | date:'dd/MM/yyyy'}}</p>
+                                </div>
+                            </div>
+                            <div class="uk-width-large-1-4 uk-width-medium-1-2">
+                                <div class="uk-comment-header">
+                                    <strong ng-repeat="roomtype in item.PromotionRoomTypes">
+                                        <i class="uk-icon-circle mini"></i>
+                                        {{roomtype.RoomTypeName}}
+                                    </strong>
+                                </div>
+                            </div>
+                            <div class="uk-width-large-1-4 uk-width-medium-1-2">
+                                <div class="uk-comment-header">
+                                    <strong>
+                                        {{item.FromDate | date:'dd/MM/yyyy'}} @(transition.Translate(686, "to")) {{item.ToDate | date:'dd/MM/yyyy'}}
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="ModalConfirm" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <h2 class="heading_a">@(transition.Translate(687, "Warning!"))</h2>
+        <div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1">
+                    <h4>@(transition.Translate(744, "Are you sure you want to reactivate this promotion?"))</h4>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1 uk-text-right">
+                    <button class="md-btn md-btn-new md-btn-wave-light" ng-click="Reactivate()">@(transition.Translate(742, "Reactivate"))</button>
+                    <button class="md-btn uk-modal-close uk-close md-btn-wave-light">@(transition.Translate(738, "Cancel"))</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ModalConfirmDelete" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <h2 class="heading_a">@(transition.Translate(687, "Warning!"))</h2>
+        <div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1">
+                    <h4>@(transition.Translate(745, "Are you sure you want to delete this promotion?"))</h4>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1 uk-text-right">
+                    <button class="md-btn md-btn-danger md-btn-wave-light" ng-click="Delete()">@(transition.Translate(743, "Delete"))</button>
+                    <button class="md-btn uk-modal-close uk-close md-btn-wave-light">@(transition.Translate(738, "Cancel"))</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,228 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPrint.cshtml";
+    Hotel hotel = (Hotel)ViewData["hotel"];
+    Booking booking = (Booking)ViewData["booking"];
+    float TotalRoomCharges = (float)ViewData["TotalRoomCharges"];
+    float TotalFees = (float)ViewData["TotalFees"];
+    float TotalServices = (float)ViewData["TotalServices"];
+    float TotalExtrabed = (float)ViewData["TotalExtrabed"];
+    float DiscountForGuest = (float)ViewData["DiscountForGuest"];
+    double TotalBalance = Math.Round(TotalRoomCharges + TotalFees + TotalServices + TotalExtrabed - DiscountForGuest, 0) - Math.Round(booking.PrePaid + booking.Paid, 0);
+
+    List<BookingExtrabed> Extrabeds = (List<BookingExtrabed>)ViewData["Extrabeds"];
+}
+<div class="uk-grid" id="ConfirmRoom">
+    <div class="uk-width-1 uk-margin-bottom">
+        <div class="uk-grid">
+            <div class="uk-width-2-5 uk-margin-small-bottom">
+                <img src="@hotel.Logo" />
+            </div>
+            <div class="uk-width-3-5 uk-text-center">
+                <p style="margin: 5px;font-size: 14px;font-weight: bold;text-transform: uppercase;" class="ng-binding">@hotel.Name</p>
+                <p style="margin: 5px;font-size: 13px;font-weight: 600" class="ng-binding">@hotel.Address</p>
+                <p style="margin: 5px;font-size: 13px;" class="ng-binding">Hotline: @hotel.Hotline | Phone: @hotel.Phone </p>
+                <p style="margin: 5px;font-size: 13px;" class="ng-binding">Email: @hotel.Email</p>
+                @if (hotel.Website != null && hotel.Website != "")
+                {
+                    <p style="margin: 5px;font-size: 13px;" class="ng-binding">Website: @hotel.Website</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1">
+        <div class="uk-grid">
+            <div class="uk-width-1 uk-text-right uk-margin-bottom">
+                <p style="font-weight: 500;font-size: 12px" class="ng-binding">Ngày in/ Printing date: @DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") </p>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1 uk-margin-small-bottom">
+        <div class="uk-grid">
+            <div class="uk-width-1 uk-text-center uk-margin-bottom">
+                <h3><b>XÁC NHẬN ĐẶT PHÒNG/ CONFIRMATION FORM </b></h3>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-2 infoCustomer">
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-1-2">
+                <span>Folio </span>
+            </div>
+            <div class="uk-width-1-2">
+                <b>@booking.BookingId</b>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-1-2">
+                <span>Phòng/ Room </span>
+            </div>
+            <div class="uk-width-1-2">
+                <b>@booking.RoomCode </b>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-1-2">
+                <span>Khách hàng/ Guest </span>
+            </div>
+            <div class="uk-width-1-2">
+                <b>@booking.Guest.SurName @booking.Guest.FirstName </b>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-1-2">
+                <span>Điện thoại/ Phone </span>
+            </div>
+            <div class="uk-width-1-2">
+                <b>@booking.Guest.Phone</b>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-2">
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-3-5">
+                <span>Người lớn/ Adult </span>
+            </div>
+            <div class="uk-width-2-5">
+                <b>@booking.Adult</b>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-3-5">
+                <span>Trẻ em/ Child </span>
+            </div>
+            <div class="uk-width-2-5">
+                <b>@booking.Children</b>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-3-5">
+                <span>Ngày đến/ Check in </span>
+            </div>
+            <div class="uk-width-2-5">
+                <b>@booking.ArrivalDate.ToString("dd/MM/yyyy HH:mm")</b>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-3-5">
+                <span>Dự kiến trả phòng/ Expected Check out</span>
+            </div>
+            <div class="uk-width-2-5">
+                <b>@booking.DepartureDate.ToString("dd/MM/yyyy HH:mm")</b>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1 uk-margin-top uk-margin-small-bottom">
+        <div>
+            <table class="uk-table uk-table-nowrap table-lst table-infoBill">
+                <thead>
+                    <tr>
+                        <th class="th-header2">Tên DV/ Service name</th>
+                        <th class="th-header3" style="">Số lượng/ Number</th>
+                        <th class="th-header4">Đơn giá/ Unit price</th>
+                        <th class="th-header5">Thành tiền/ Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in booking.BookingServices)
+                    {
+                        <tr>
+                            <td>@item.ServiceName</td>
+                            <td class="uk-text-center">@item.Number</td>
+                            <td class="uk-text-right">@(String.Format("{0:#,0} ₫", Math.Round(item.Price, 0)))</td>
+                            <td class="uk-text-right" style="font-weight:600">@(String.Format("{0:#,0} ₫", Math.Round(item.Price * item.Number, 0)))</td>
+                        </tr>
+                    }
+                    @foreach (var item in booking.BookingExtrabeds)
+                    {
+                        <tr>
+                            <td>@item.ExtrabedName</td>
+                            <td class="uk-text-center">@item.Number</td>
+                            <td class="uk-text-right">@(String.Format("{0:#,0} ₫", Math.Round(item.Price, 0)))</td>
+                            <td class="uk-text-right" style="font-weight:600">@(String.Format("{0:#,0} ₫", Math.Round(item.Price * item.Number, 0)))</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td colspan="3">Tổng tiền phòng/ Total room charges (1)</td>
+                        <td class="item-value uk-text-right ng-binding">
+                            <b style="font-weight:bold;font-size: 14px;">@(String.Format("{0:#,0} ₫", Math.Round(TotalRoomCharges, 0)))</b>
+                        </td>
+                    </tr>
+                    @if (TotalServices > 0)
+                    {
+                        <tr>
+                            <td colspan="3">Tổng tiền DV/ Total services charges (2)</td>
+                            <td class="item-value uk-text-right ng-binding">
+                                <b style="font-weight:bold;font-size: 14px;">@(String.Format("{0:#,0} ₫", Math.Round(TotalServices, 0)))</b>
+                            </td>
+                        </tr>
+                    }
+                    @if (TotalExtrabed > 0)
+                    {
+                        <tr>
+                            <td colspan="3">Tổng tiền Extrabed/ Total extrabed charges (3)</td>
+                            <td class="item-value uk-text-right ng-binding">
+                                <b style="font-weight:bold;font-size: 14px;">@(String.Format("{0:#,0} ₫", Math.Round(TotalExtrabed, 0)))</b>
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td colspan="3">Giảm giá cho khách/ Discount for guest (4)</td>
+                        <td class="item-value uk-text-right ng-binding">
+                            <b style="font-weight:bold;font-size: 14px;">@(String.Format("{0:#,0} ₫", Math.Round(DiscountForGuest, 0)))</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            Thành tiền/ Total Amount (5) = (1)@if (TotalServices > 0)
+                            {<span> + (2)</span>} @if (TotalExtrabed > 0)
+                            {<span> + (3)</span>}  - (4)
+                        </td>
+                        <td class="item-value uk-text-right ng-binding">
+                            <b style="font-weight:bold;font-size: 14px;">@(String.Format("{0:#,0} ₫", Math.Round(TotalRoomCharges + TotalServices + TotalExtrabed - DiscountForGuest, 0)))</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Phí/ Fees (6)</td>
+                        <td class="item-value uk-text-right ng-binding">
+                            <b style="font-weight:bold;font-size: 14px;">@(String.Format("{0:#,0} ₫", Math.Round(TotalFees, 0)))</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Đã thanh toán/ Paid (7)</td>
+                        <td class="uk-text-right">
+                            <b style="font-weight:bold;font-size: 14px;">@(String.Format("{0:#,0} ₫", Math.Round(booking.PrePaid + booking.Paid, 0)))</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">Số tiền còn lại/ Money remain (5) + (6) - (7)</td>
+                        <td class="item-value uk-text-right ng-binding">
+                            <b style="font-weight:bold;font-size: 14px;">
+                                @(String.Format("{0:#,0} ₫", TotalBalance, 4))
+                            </b>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="uk-width-1 uk-margin-bottom">
+        @Html.Raw(hotel.Terms)
+    </div>
+    <div class="uk-width-1 sign-user">
+        <div class="uk-grid uk-margin-bottom">
+            <div class="uk-width-2-5 uk-text-center">
+                <p>
+                    <b>Người đặt phòng/ Guest</b>
+                </p>
+            </div>
+            <div class="uk-width-1-5">
+            </div>
+            <div class="uk-width-2-5 uk-text-center">
+                <p>
+                    <b>Người xác nhận/ Confirm by</b>
+                </p><br>
+            </div>
+        </div>
+    </div>
+</div>

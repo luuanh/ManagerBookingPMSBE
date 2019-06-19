@@ -1,0 +1,153 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPrint.cshtml";
+    Hotel hotel = (Hotel)ViewData["hotel"];
+    Booking booking = (Booking)ViewData["booking"];
+    float TotalRoomCharges = (float)ViewData["TotalRoomCharges"];
+    float TotalFees = (float)ViewData["TotalFees"];
+    float DiscountForGuest = (float)ViewData["DiscountForGuest"];
+    double TotalBalance = Math.Round(TotalRoomCharges + TotalFees  - DiscountForGuest, 0);
+
+}
+<div class="uk-grid" id="ConfirmRoom">
+    <div class="uk-width-1 uk-margin-bottom">
+        <div class="uk-grid">
+            <div class="uk-width-2-5 uk-margin-small-bottom">
+                <img src="@hotel.Logo" />
+            </div>
+            <div class="uk-width-3-5 uk-text-center">
+                <p style="margin: 5px;font-size: 14px;font-weight: bold;text-transform: uppercase;" class="ng-binding">@hotel.Name</p>
+                <p style="margin: 5px;font-size: 13px;font-weight: 600" class="ng-binding">@hotel.Address</p>
+                <p style="margin: 5px;font-size: 13px;" class="ng-binding">Hotline: @hotel.Hotline | Phone: @hotel.Phone </p>
+                <p style="margin: 5px;font-size: 13px;" class="ng-binding">Email: @hotel.Email</p>
+                @if (hotel.Website != null && hotel.Website != "")
+                {
+                    <p style="margin: 5px;font-size: 13px;" class="ng-binding">Website: @hotel.Website</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1">
+        <div class="uk-grid">
+            <div class="uk-width-1 uk-text-right uk-margin-bottom">
+                <p style="font-weight: 500;font-size: 12px" class="ng-binding">Ngày in/ Printing date: @DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") </p>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1 uk-margin-small-bottom">
+        <div class="uk-grid">
+            <div class="uk-width-1 uk-text-center uk-margin-bottom">
+                <h3 style="margin-bottom:0"><b>HÓA ĐƠN GIÁ PHÒNG/ ROOM CHARGES BILL </b></h3>
+                <h6 style="margin-top: 0;" class="ng-binding">Mã hóa đơn/ Code: RNGR@(booking.BookingId)</h6>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-2 infoCustomer">
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-1-2">
+                <span>Folio </span>
+            </div>
+            <div class="uk-width-1-2">
+                <b>@booking.BookingId</b>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-1-2">
+                <span>Phòng/ Room </span>
+            </div>
+            <div class="uk-width-1-2">
+                <b>@booking.RoomCode </b>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-1-2">
+                <span>Khách hàng/ Guest </span>
+            </div>
+            <div class="uk-width-1-2">
+                <b>@booking.Guest.SurName @booking.Guest.FirstName </b>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-1-2">
+                <span>Điện thoại/ Phone </span>
+            </div>
+            <div class="uk-width-1-2">
+                <b>@booking.Guest.Phone</b>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-2">
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-3-5">
+                <span>Người lớn/ Adult </span>
+            </div>
+            <div class="uk-width-2-5">
+                <b>@booking.Adult</b>
+            </div>
+        </div>
+        <div class="uk-grid uk-margin-small-bottom">
+            <div class="uk-width-3-5">
+                <span>Trẻ em/ Child </span>
+            </div>
+            <div class="uk-width-2-5">
+                <b>@booking.Children</b>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1 uk-margin-top uk-margin-small-bottom">
+        <div>
+            <table class="uk-table uk-table-nowrap table-lst table-infoBill">
+                <thead>
+                    <tr>
+                        <th class="th-header2">Tên DV/ Service name</th>
+                        <th class="th-header5">Thành tiền/ Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tổng tiền phòng/ Total room charges (1)</td>
+                        <td class="item-value uk-text-right ng-binding">
+                            <b style="font-weight:bold;font-size: 14px;">@(String.Format("{0:#,0} ₫", Math.Round(TotalRoomCharges, 0)))</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Giảm giá cho khách/ Discount for guest (2)</td>
+                        <td class="item-value uk-text-right ng-binding">
+                            <b style="font-weight:bold;font-size: 14px;">@(String.Format("{0:#,0} ₫", Math.Round(DiscountForGuest, 0)))</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Phí/ Fees (3)</td>
+                        <td class="item-value uk-text-right ng-binding">
+                            <b style="font-weight:bold;font-size: 14px;">@(String.Format("{0:#,0} ₫", Math.Round(TotalFees, 0)))</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Thành tiền/ Total Amount (1) + (3) - (2)</td>
+                        <td class="item-value uk-text-right ng-binding">
+                            <b style="font-weight:bold;font-size: 14px;">
+                                @(String.Format("{0:#,0} ₫", TotalBalance, 4))
+                            </b>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="uk-width-1 sign-user">
+        <div class="uk-grid uk-margin-bottom">
+            <div class="uk-width-2-5 uk-text-center">
+                <p>
+                    <b>Khách hàng/ Guest</b>
+                </p>
+            </div>
+            <div class="uk-width-1-5">
+            </div>
+            <div class="uk-width-2-5 uk-text-center">
+                <p>
+                    <b>Thu ngân/ Cashier</b>
+                </p><br>
+            </div>
+        </div>
+    </div>
+</div>

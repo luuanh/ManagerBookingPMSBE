@@ -1,0 +1,184 @@
+﻿@media(max-device-width: 767px) {
+    .wrap-item-sidebar .wrap-info-term-hotel, #wrap-check-one {
+        display: none;
+    }
+
+    #show-all-rate-offer {
+        float: right;
+    }
+
+    div#header-avail div#right-header-avail {
+        margin-top: 5px;
+    }
+
+    #accordion div#wrap-check-one {
+        margin: 20px auto;
+    }
+
+    .wrap-list-rate-offer {
+        width: 100%;
+        padding: 0px;
+        float: none;
+        background: #F6f6f6;
+    }
+
+    div.item-rate-offer div.w-item-img img {
+        width: 100%;
+        height: 100%;
+        padding: 2px;
+        border: 1px solid #dbdbdb;
+    }
+
+    div.item-rate-offer div.w-item-img {
+        width: 30%;
+        height: auto;
+        margin-right: 5%;
+    }
+
+    div.item-rate-offer div.info-item-rate-offer {
+        width: 63%;
+    }
+
+    div.item-rate-offer .show-room {
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    div.item-rate-offer div.show-room div.w-price-rate {
+        width: 50%;
+        float: left;
+        text-align: right;
+        margin-top: 0px;
+    }
+
+    div.w-list-room div.info-item-room {
+        width: 99.7%;
+        height: auto !important;
+    }
+
+    div.w-list-room div.item-room div.name-room h4 {
+        width: 60%;
+    }
+
+    div.item-rate-offer div.w-item-img {
+        width: 20%;
+        border: none;
+    }
+
+    div.w-list-room div.info-item-room div.img-room {
+        width: 50%;
+        margin: 10px 5% 0px 0px;
+    }
+
+        div.w-list-room div.info-item-room div.img-room img {
+            width: 100%;
+            height: auto !important;
+            border: 1px solid #dbdbdb;
+    padding: 3px;
+        }
+        div.img-room div.icon-gallery {
+            bottom: 16px;
+        }
+        div.img-room div.icon-gallery {
+            padding: 2px;
+        }
+
+    div.w-list-room div.info-item-room div.facility-room {
+        width: 45%;
+    }
+
+    div.info-item-room div.price-item-room {
+        width: 50%;
+        padding: 0px 5px;
+        border: none;
+    }
+
+        div.info-item-room div.price-item-room div.info-detail-price {
+            width: 100%;
+            margin: 0px;
+        }
+
+    div.info-item-room div.bt-item-room {
+        width: 45%;
+    }
+
+    .ui-dialog {
+        max-width: 95% !important;
+    }
+
+    div.info-item-room div.price-item-room div.info-detail-price {
+        font-size: 0.62em;
+    }
+
+    div.info-item-room div.facility-room li {
+        list-style: none;
+    }
+
+    div.info-item-room div.price-item-room div.detail-price {
+        margin-left: 0px;
+    }
+    /*service*/
+    .w-info-booking {
+        width: 94%;
+        padding: 10px 3%;
+        border: 1px solid #7f7159;
+        font-size: 0.77em;
+        float: left;
+    }
+
+        .w-info-booking div.item-info-booking {
+            width: 100%;
+            margin: 0px;
+        }
+
+    div.item-info-booking h3.title-cbk {
+        width: 46%;
+        float: left;
+        font-size: 1em;
+    }
+
+    .right-content-b {
+        width: 100%;
+        float: none;
+    }
+        .right-content-b div.header-select-service {
+            width: 100%;
+            float: left;
+            background: #e6e6e6;
+            margin: 10px 0px;
+            height: auto;
+            line-height: 20px;
+        }
+    div.header-select-service div.total-service {
+        margin: 5px 10px;
+        font-weight: bold;
+    }
+
+    div.header-select-service div.ct-book {
+        float: right;
+        width: auto;
+        margin: -2px 10px 0px 10px;
+    }
+    .right-content-b div.wc-content-b {
+        width: 96%;
+        padding: 2%
+    }
+    div.item-list-service div.w-item-img {
+        width: 25%;
+        float: left;
+    }
+    div.item-list-service div.info-item-service {
+    width: 70%;
+    float: left;
+    margin-left: 5%;
+}
+    .item-b-gust-info img {
+        width: 100%;
+    }
+}
+@media (min-width: 550px) and (max-width: 767px) {
+    .w-info-booking div.item-info-booking {
+        width: 45%;
+        margin: 0px 2%;
+    }
+}

@@ -1,0 +1,100 @@
+﻿.md-input-wrapper {
+    padding-top: 0px !important;
+}
+
+.md-input-box {
+    border: 1px solid #CCCCCC !important;
+    border-radius: 5px !important;
+    padding: 5px !important;
+    text-align: center;
+    background: white !important;
+}
+
+.table-right thead tr {
+    background: #F9F9F9
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.table-right th, .table-right td, .table-left th, .table-left td {
+    border: 1px solid #DDDDDD;
+    min-width: 60px;
+    padding: 5px;
+    height: 35px;
+}
+
+th {
+    font-weight: 600;
+    vertical-align: middle;
+    padding: 5px 0;
+}
+
+    th p {
+        margin: 2px;
+        font-size: 12px;
+    }
+
+.tr-item {
+    background: #daeaf6
+}
+
+.table-left {
+    margin-right: 6px;
+}
+
+    .table-left th {
+        width: 150px;
+        display: grid;
+    }
+
+    .table-left th, .table-left td {
+        box-shadow: 3px 0px 0px #e8e8e8;
+    }
+
+.room-status {
+    width: 150px;
+    display: grid;
+    height: 36.5px !important;
+    background: #daeaf6;
+    vertical-align: middle;
+    line-height: 38px;
+}
+
+.box-table-right {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.tr-item-status span {
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    height: 15px;
+}
+
+.Bookable {
+    background: #5bb764
+}
+
+.Closed {
+    background: #D65C5C;
+}
+
+.No-Room {
+    background: #F9DA86
+}
+
+span {
+    cursor: pointer
+}
+.box-day-of-week{
+    margin-top: 8px;
+}
+    .box-day-of-week label {
+        margin-right: 10px;
+        margin-bottom: 10px;
+        display: inline-block;
+    }

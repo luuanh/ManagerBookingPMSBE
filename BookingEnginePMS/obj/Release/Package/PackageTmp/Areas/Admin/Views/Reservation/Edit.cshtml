@@ -1,0 +1,643 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    List<string> countries = (List<string>)ViewData["countries"];
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+    int typeSoftware = -1;
+    if (Session["typeSoftware"] != null)
+    {
+        typeSoftware = (int)Session["typeSoftware"];
+    }
+}
+<link href="~/Areas/Admin/Content/css/email-sent.css" rel="stylesheet" />
+<script>
+    $("#menu_3").addClass('click-menu-top')
+    $(function () {
+        var e = $("#kUI_window")
+            , t = $("#kUI_undo");
+        if (e.length) {
+            var a = e
+                , n = t.bind("click", function () {
+                    a.data("kendoWindow").open(),
+                        n.hide()
+                });
+            a.data("kendoWindow") || a.kendoWindow({
+                width: "600px",
+                title: "Information",
+                actions: ["Pin", "Minimize", "Maximize", "Close"]
+            })
+        }
+        var e2 = $("#kUI_window2")
+        if (e2.length) {
+            var a = e2
+                , n = t.bind("click", function () {
+                    a.data("kendoWindow").open(),
+                        n.hide()
+                });
+            a.data("kendoWindow") || a.kendoWindow({
+                width: "600px",
+                title: "Information",
+                actions: ["Pin", "Minimize", "Maximize", "Close"]
+            })
+        }
+    })
+</script>
+<style>
+    .infor-header {
+        display: inline-block;
+        margin-right: 20px;
+    }
+
+        .infor-header span:first-of-type {
+            color: rgb(117, 116, 116);
+            display: block;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .infor-header span:last-of-type {
+            color: #434343;
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+    .detail-balance {
+        font-size: 20px;
+        color: black;
+        margin-left: 2px;
+        margin-top: 5px;
+        cursor: pointer;
+    }
+
+    .box-infor-price-reservation ul a {
+        background-color: white !important
+    }
+</style>
+<script src="~/Areas/Admin/Content/js/Reservation/reservation-edit.js"></script>
+<div id="kUI_window" style="display:none">
+    <div>
+        <div class="uk-grid uk-margin-bottom">
+            <div class="uk-width-1">
+                <ul class="uk-tab" data-uk-tab="{connect:'#tabs_booking',swiping: false}">
+                    <li class="genenral-tab uk-active"><a href="#">@(transition.Translate(355, "General Information"))</a></li>
+                    @if (typeSoftware == 1 || typeSoftware == 3)
+                    {
+                        <li><a href="#">@(transition.Translate(356, "Guest Detail"))</a></li>
+                    }
+                    <li><a href="#">@(transition.Translate(357, "Card Information"))</a></li>
+                    @if (typeSoftware == 1 || typeSoftware == 3)
+                    {
+                        <li><a href="#">@(transition.Translate(358, "Visa Information"))</a></li>
+                        <li><a href="#">@(transition.Translate(359, "Invoice")) <span ng-if="bookingdetail.InvoiceBookings.length > 0" style="color:red;font-weight:bold">({{bookingdetail.InvoiceBookings.length}})</span></a></li>
+                    }
+                </ul>
+                <ul id="tabs_booking" class="uk-switcher uk-margin" style="overflow: unset;padding-top: 1px;">
+                    <li class="genenral-tab">
+                        @Html.Partial("./Edit/BookingDetail/pGeneralBookingInformation", transition)
+                    </li>
+                    @if (typeSoftware == 1 || typeSoftware == 3)
+                    {
+                        <li>
+                            @Html.Partial("./Edit/BookingDetail/pGuestInformation", countries, new ViewDataDictionary { { "transition", transition } })
+                        </li>
+                    }
+                    <li>
+                        @Html.Partial("./Edit/BookingDetail/pCardInformation", transition)
+                    </li>
+                    @if (typeSoftware == 1 || typeSoftware == 3)
+                    {
+                        <li>
+                            @Html.Partial("./Edit/BookingDetail/pVisaInformation", transition)
+                        </li>
+                        <li>
+                            @Html.Partial("./Edit/BookingDetail/pInvoiceInformation", transition)
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (typeSoftware == 1 || typeSoftware == 3)
+{
+    <div id="kUI_window2" style="display:none">
+        <div style="padding-bottom: 30px;">
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1 uk-margin-medium-bottom">
+                    <h2>@(transition.Translate(360, "Add Booking"))</h2>
+                    <hr>
+                    <p style="font-size: 12px;">
+                        @(transition.Translate(361, "tipAddBooking"))
+                    </p>
+                    <hr>
+                </div>
+                <div class="uk-width-medium-1-4 uk-margin-medium-bottom">
+                    <div class="md-input-wrapper">
+                        <label><b>@(transition.Translate(362, "Booking Type"))</b></label>
+                        <div style="margin-top: 5px;">
+                            <label style="margin-right: 15px;">
+                                <input ng-click="RefreshValidate()" ng-model="data.TypeReservation" value="0" type="radio" class="md-input ng-pristine ng-untouched ng-valid ng-not-empty" convert-to-number="" name="3">
+                                <span>@(transition.Translate(363, "Day"))</span>
+                            </label>
+                            <label>
+                                <input ng-click="RefreshValidate()" ng-model="data.TypeReservation" value="1" type="radio" class="md-input ng-pristine ng-untouched ng-valid ng-not-empty" convert-to-number="" name="4">
+                                <span>@(transition.Translate(364, "Hour"))</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-medium-1-4 uk-margin-medium-bottom">
+                    <div class="uk-grid">
+                        <div class="uk-width-1-2">
+                            <div class="md-input-wrapper">
+                                <label><b>@(transition.Translate(365, "Adult"))</b></label>
+                                <input ng-click="RefreshValidate()" type="number" ng-model="data.Adult" class="md-input ng-pristine ng-untouched ng-valid ng-not-empty">
+                                <span class="md-input-bar "></span>
+                            </div>
+                        </div>
+                        <div class="uk-width-1-2">
+                            <div class="md-input-wrapper">
+                                <label><b>@(transition.Translate(366, "Children")) </b></label>
+                                <input ng-click="RefreshValidate()" type="number" ng-model="data.Children" class="md-input ng-pristine ng-untouched ng-valid ng-not-empty">
+                                <span class="md-input-bar "></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-medium-1-4 uk-margin-medium-bottom">
+                    <div class="md-input-wrapper">
+                        <label><b>@(transition.Translate(367, "Booking Source")) </b></label>
+                        <select ng-model="data.BookingSource" class="md-input ng-pristine ng-untouched ng-valid ng-not-empty" convert-to-number="">
+                            <option value="1" selected="selected">Walk-in / Telephone</option>
+                            <option value="2">Online Booking Engine</option>
+                            <option value="3">Booking.com</option>
+                            <option value="4">Expedia</option>
+                            <option value="5">Agoda</option>
+                            <option value="6">Trip Connect</option>
+                            <option value="7">AirBNB</option>
+                            <option value="8">Hostelworld</option>
+                            <option value="9">Myallocator</option>
+                            <option value="10">Company</option>
+                            <option value="11">Guest Member</option>
+                            <option value="12">Owner</option>
+                            <option value="13">Returning Guest</option>
+                            <option value="14">Apartment</option>
+                            <option value="15">Siteminder</option>
+                            <option value="16">Other Travel Agency</option>
+                        </select>
+                        <span class="md-input-bar "></span>
+                    </div>
+                </div>
+                <div class="uk-width-medium-1-4 uk-margin-medium-bottom">
+                    <div class="md-input-wrapper md-input-filled">
+                        <label><b>@(transition.Translate(368, "Payment Type"))</b></label>
+                        <select ng-model="bookingdetail.PaymentType" class="md-input" convert-to-number>
+                            <option value="1">@transition.Translate(137, "Do not collect payment")</option>
+                            <option value="2">@transition.Translate(138, "Cash")</option>
+                            <option value="4">@transition.Translate(140, "Debit Card")</option>
+                            <option value="6">@transition.Translate(142, "Voucher")</option>
+                            <option value="10">@transition.Translate(146, "Prepago")</option>
+                            <option value="11">@transition.Translate(502, "Cash On Arrival")</option>
+                            <option value="12">@transition.Translate(148, "Third-party payment")</option>
+                            <option value="13">@transition.Translate(2346, "Payment by VTC Pay")</option>
+                            <option value="14">@transition.Translate(2347, "Payment by One Pay")</option>
+                            <option value="15">@transition.Translate(2348, "Payment later")</option>
+                            <option value="16">@transition.Translate(2349, "Transfer")</option>
+                            <option value="17">@transition.Translate(2350, "QR Code")</option>
+                            <option value="18">Paypal</option>
+                        </select>
+                        <span class="md-input-bar "></span>
+                    </div>
+                </div>
+                <div class="uk-width-1 uk-margin-small-bottom">
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-1-2 uk-margin-bottom">
+                            <div class="uk-grid">
+                                <div class="uk-width-large-1-2 uk-width-medium-1-2 uk-width-2-3">
+                                    <div class="uk-input-group">
+                                        <div class="md-input-wrapper">
+                                            <label><b>@(transition.Translate(369, "Check In")) </b></label>
+                                            <input ng-click="RefreshValidate()" autocomplete="off" id="FromDate_Step1" type="text" data-uk-datepicker="{format:'DD-MM-YYYY'}" ng-model="FromDate" class="md-input ng-pristine ng-valid ng-empty ng-touched">
+                                            <span class="md-input-bar "></span>
+                                            <span id="err_fromDate" class="error" style="display: none;">@(transition.Translate(370, "Value is invalid"))!</span>
+                                        </div>
+                                        <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <div class="uk-width-large-1-2 uk-width-medium-1-2 uk-width-1-3">
+                                    <div class="uk-input-group">
+                                        <div class="md-input-wrapper">
+                                            <label><b>@(transition.Translate(364, "Hour"))</b></label>
+                                            <span class="k-widget k-maskedtextbox md-input format_hour" style="height: 30px; padding-left: 0px;"><input ng-click="RefreshValidate()" id="HourCheckin_Step1" type="text" class="md-input format_hour k-textbox" value="14:00" data-role="maskedtextbox" style="height: 30px; padding-left: 0px; width: 100%;" autocomplete="off"><span class="k-icon k-i-warning"></span></span>
+                                            <span id="err_hourFrom" class="error" style="display: none;">@(transition.Translate(370, "Value is invalid"))!</span>
+                                        </div>
+                                        <span class="uk-input-group-addon">
+                                            <i class="uk-input-group-icon uk-icon-clock-o"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-width-medium-1-2 uk-margin-bottom">
+                            <div class="uk-grid  {{data.TypeReservation == 1? 'hide-item':'show-item'}}">
+                                <div class="uk-width-large-1-2 uk-width-medium-1-2 uk-width-2-3">
+                                    <div class="uk-input-group">
+                                        <div class="md-input-wrapper">
+                                            <label><b>@(transition.Translate(371, "Check Out")) </b></label>
+                                            <input ng-click="RefreshValidate()" id="ToDate_Step1" type="text" data-uk-datepicker="{format:'DD-MM-YYYY'}" ng-model="ToDate" class="md-input ng-pristine ng-untouched ng-valid ng-empty">
+                                            <span class="md-input-bar "></span>
+                                            <span id="err_toDate" class="error" style="display: none;">@(transition.Translate(370, "Value is invalid"))!</span>
+                                        </div>
+                                        <span class="uk-input-group-addon">
+                                            <i class="uk-input-group-icon uk-icon-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="uk-width-large-1-2 uk-width-medium-1-2 uk-width-1-3">
+                                    <div class="uk-input-group">
+                                        <div class="md-input-wrapper">
+                                            <label><b>@(transition.Translate(364, "Hour"))</b></label>
+                                            <span class="k-widget k-maskedtextbox md-input format_hour" style="height: 30px; padding-left: 0px;"><input ng-click="RefreshValidate()" id="HourCheckout_Step1" type="text" class="md-input format_hour k-textbox" value="12:00" data-role="maskedtextbox" style="height: 30px; padding-left: 0px; width: 100%;" autocomplete="off"><span class="k-icon k-i-warning"></span></span>
+                                            <span id="err_hourTo" class="error" style="display: none;">@(transition.Translate(370, "Value is invalid"))!</span>
+                                        </div>
+                                        <span class="uk-input-group-addon">
+                                            <i class="uk-input-group-icon uk-icon-clock-o"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-width-medium-1 uk-text-right">
+                            <button class="md-btn md-btn-new  md-btn-wave-light waves-effect waves-button waves-light" ng-click="SearchAvailability()">
+                                <i class="uk-icon-search"></i>
+                                @(transition.Translate(372, "Search"))
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-1">
+                    <div class="uk-grid box-select-room" style="margin-left: -10px;">
+                        <div class="uk-width-large-1 uk-margin-bottom" style="padding-left: 10px;">
+                            <div class="md-input-wrapper" style="padding-top: 0;">
+                                <h4 class="title-box-accomodation"><b>@(transition.Translate(373, "Availability")) </b></h4>
+                                <div class="uk-overflow-container" ng-cloak>
+                                    <div ng-if="roomtypeAvailability.length == 0" class="uk-text-center box-not-available">
+                                        <p style="font-size: 16px;padding-top:20px">
+                                            @(transition.Translate(374, "Check-In and Check-Out dates to search for availability"))
+                                        </p>
+                                    </div>
+                                    <table class="uk-table uk-table-bordered {{roomtypeAvailability.length == 0? 'hide-item':''}}" style="border: 1px solid #f0f0f0;border-top:none">
+                                        <thead>
+                                            <tr>
+                                                <th>@(transition.Translate(375, "Accom"))</th>
+                                                <th class="uk-text-center" style="width: 50px;">@(transition.Translate(376, "Available"))</th>
+                                                <th class="uk-text-center" style="width: 60px;">@(transition.Translate(365, "Adult"))</th>
+                                                <th class="uk-text-center" style="width: 60px;">@(transition.Translate(366, "Children"))</th>
+                                                <th class="uk-text-center" style="width: 80px">@(transition.Translate(377, "Extrabed"))</th>
+                                                <th class="uk-text-center" style="width: 100px;">@(transition.Translate(378, "Price"))</th>
+                                                <th class="uk-text-center" style="width: 60px;">@(transition.Translate(379, "Quantity"))</th>
+                                                <th style="width: 100px;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in roomtypeAvailability" class="{{item.NumberRoomAvailable == 0? 'disable-item':''}}">
+                                                <td>{{item.RoomTypeName}}</td>
+                                                <td class="uk-text-center">
+                                                    <b>{{item.NumberRoomAvailable}}</b>
+                                                </td>
+                                                <td class="uk-text-center">
+                                                    <select class="md-input" ng-model="item.AdultChoose" convert-to-number>
+                                                        <option value="{{adult}}" ng-repeat="adult in GetArrayNumber(1,item.Adult) track by $index">
+                                                            {{adult}}
+                                                        </option>
+                                                    </select>
+                                                </td>
+                                                <td class="uk-text-center" style="width: 60px;">
+                                                    <select class="md-input" ng-model="item.ChildrenChoose" convert-to-number>
+                                                        <option value="{{child}}" ng-repeat="child in GetArrayNumber(0,item.Children) track by $index">
+                                                            {{child}}
+                                                        </option>
+                                                    </select>
+                                                </td>
+                                                <td class="uk-text-center" style="width: 80px;">
+                                                    <span>
+                                                        <b>{{calculatorExtrabed(item.RoomTypeExtrabeds)}}</b>
+                                                    </span>
+                                                    <span><a ng-click="showScheduleExtrabedForAddBooking(item)" class="edit">@(transition.Translate(380, "Edit"))</a></span>
+                                                </td>
+                                                <td class="uk-text-right" style="width: 100px">
+                                                    <div ng-if="item.TypeBooking == 1" class="uk-text-center">
+                                                        <span attrCal="{{calculatorPrice(item)}}">
+                                                            <b>{{item.Total | currency:'':'0'}}</b>
+                                                        </span>
+                                                        <span>₫ </span>
+                                                        <span>
+                                                            <i class="uk-icon-info-circle" title="Số tiền cho những giờ đầu tiên"></i>
+                                                        </span>
+                                                    </div>
+                                                    <span ng-if="item.TypeBooking == 0">
+                                                        <span attrCal="{{calculatorPrice(item)}}">
+                                                            <b>{{item.Total | currency:'':'0'}}</b>
+                                                        </span>
+                                                        <span>₫ </span>
+                                                        <span style="padding-left: 2px;"> <a ng-click="showSchedulePrice(item)" class="edit">@(transition.Translate(380, "Edit"))</a></span>
+                                                    </span>
+                                                </td>
+                                                <td class="uk-text-center">
+                                                    <select class="md-input" style="width: 60px;" ng-model="item.NumberRoomChoose" convert-to-number>
+                                                        <option value="{{quantity}}" ng-repeat="quantity in GetArrayNumber(1,item.NumberRoomAvailable) track by $index">
+                                                            {{quantity}}
+                                                        </option>
+                                                    </select>
+                                                </td>
+                                                <td class="uk-text-center" style="width: 100px;">
+                                                    <button class="md-btn md-btn-new md-btn-wave-light" ng-click="addBooking(item)">@(transition.Translate(381, "Add"))</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-width-large-1 uk-margin-bottom" style="padding-left: 10px;">
+                            <div class="md-input-wrapper" style="background:#F8F8F8;padding-top: 0;">
+                                <h4 class="title-box-accomodation">
+                                    <b>@(transition.Translate(382, "Accommodation")) </b>
+                                    <label style="float: right;margin-right: 10px;">
+                                        <input ng-change="reCalculatorTaxFee()" type="checkbox" id="IncludeVATAndServiceCharge" ng-model="IncludeVATAndServiceCharge" />
+                                        <span style="font-size:14px !important">@transition.Translate(2431, "Includes tax and service charges")</span>
+                                    </label>
+                                </h4>
+                                <div class="uk-overflow-container box-table-left" ng-cloak>
+                                    <div ng-if="bookingChoose.length == 0" class="uk-text-center box-not-available" style="padding: 0 20px;">
+                                        <p style="font-size: 14px;padding-top:20px">
+                                            @(transition.Translate(383, "Add accommodations to start your reservation"))
+                                        </p>
+                                    </div>
+                                    <table class="uk-table uk-table-bordered">
+                                        <tbody ng-cloak>
+                                            <tr ng-repeat="item in bookingChoose track by $index">
+                                                <td style="border-bottom: 1px dotted #b9afaf;">
+                                                    <p style="margin-bottom: 2px;">
+                                                        <b style="text-transform: uppercase;">
+                                                            {{item.RoomTypeName}} <span style="font-size: 18px;">-</span>
+                                                            <span attrCal="{{calculatorPrice(item)}}">{{item.Total | currency:'':'0'}} ₫</span>
+                                                        </b>
+                                                    </p>
+                                                    <p>
+                                                        <b>
+                                                            Type:
+                                                            <span ng-if="item.TypeBooking == 0">@(transition.Translate(363, "Day"))</span>
+                                                            <span ng-if="item.TypeBooking == 1">@(transition.Translate(364, "Hour"))</span>
+                                                        </b>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        {{item.ArrivalDate | date:'dd/MM/yyyy HH:mm'}} -
+                                                        <span ng-if="item.TypeBooking == 1">
+                                                            ___
+                                                        </span>
+                                                        <span ng-if="item.TypeBooking == 0">
+                                                            {{item.DepartureDate | date:'dd/MM/yyyy  HH:mm'}}
+                                                        </span>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p style="margin: 5px 0;">
+                                                        {{calculatorExtrabed(item.RoomTypeExtrabeds)}} @(transition.Translate(377, "Extrabed")),
+                                                        <span ng-if="item.TypeBooking == 1">___</span>
+                                                        <span ng-if="item.TypeBooking == 0">{{item.SpaceDate}}</span> @(transition.Translate(384, "nights"))
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <select ng-model="item.AdultChoose" convert-to-number class="md-input md-input-sm-default" style="background: white;">
+                                                            <option value="{{adult}}" ng-repeat="adult in GetArrayNumber(1,item.Adult) track by $index">
+                                                                {{adult}}
+                                                            </option>
+                                                        </select>
+                                                        @(transition.Translate(365, "Adult")),
+                                                        <select class="md-input md-input-sm-default" ng-model="item.ChildrenChoose" convert-to-number style="background: white;">
+                                                            <option value="{{child}}" ng-repeat="child in GetArrayNumber(0,item.Children) track by $index">
+                                                                {{child}}
+                                                            </option>
+                                                        </select>
+                                                        @(transition.Translate(366, "Children")),
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <i class="uk-icon-close icon-close-accom" title="Remove" ng-click="removeBooking($index)"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-edit-booking">
+            <div class="uk-grid">
+                <div class="uk-width-1-1 uk-text-right" style="padding-right:80px">
+                    <button class="md-btn md-btn-new md-btn-wave-light" ng-click="PostAddBooking()">@(transition.Translate(385, "Confirm"))</button>
+                    <button class="md-btn md-btn-wave-light waves-effect waves-button waves-light" ng-click="CloseWindow()">@(transition.Translate(386, "Close"))</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="ModalSchedulePrice" class="uk-modal">
+            <div class="uk-modal-dialog">
+                <button type="button" class="uk-modal-close uk-close"></button>
+                <h2 class="heading_a">
+                    @(transition.Translate(387, "Price schedule")) - {{schedulePrice.RoomTypeName}}
+                </h2>
+                <div style="padding-top: 2px;">
+                    <div class="uk-grid">
+                        <div class="uk-width-1">
+                            <div class="uk-overflow-container box-schedule-price">
+                                <table class="uk-table uk-table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th ng-repeat="item in schedulePrice.RateAvailabilitys">
+                                                <p>{{item.Date | date:'EEE'}}</p>
+                                                <p>{{item.Date | date:'dd/MM'}}</p>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td ng-repeat="item in schedulePrice.RateAvailabilitys">
+                                                <input ng-model="item.Price" type="text" class="md-input uk-text-center" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="uk-width-1 uk-text-right">
+                            <button class="md-btn md-btn-new uk-modal-close uk-close md-btn-wave-light">@(transition.Translate(388, "Apply"))</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="ModalScheduleExtrabedAddBooking" class="uk-modal">
+            <div class="uk-modal-dialog">
+                <button type="button" class="uk-modal-close uk-close"></button>
+                <h2 class="heading_a">@(transition.Translate(389, "Choose Extrabed")) - {{scheduleExtrabed.RoomTypeName}}</h2>
+                <div style="padding-top: 2px;">
+                    <div class="uk-grid uk-margin-bottom">
+                        <div class="uk-width-1">
+                            <div class="uk-overflow-container box-schedule-price">
+                                <table class="uk-table uk-table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>@(transition.Translate(390, "Type Extrabed"))</th>
+                                            <th>@(transition.Translate(378, "Price"))</th>
+                                            <th>@(transition.Translate(379, "Quantity"))</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in scheduleExtrabed.RoomTypeExtrabeds">
+                                            <td>
+                                                <b>{{item.ExtrabedName}}</b>
+                                            </td>
+                                            <td>
+                                                <input type="text" ng-model="item.Price" class="md-input uk-text-center" />
+                                            </td>
+                                            <td>
+                                                <select ng-model="item.Number" class="md-input" convert-to-number>
+                                                    <option value="0">0</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="uk-width-1 uk-text-right">
+                            <button class="md-btn md-btn-new uk-modal-close uk-close md-btn-wave-light">@(transition.Translate(388, "Apply"))</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<div class="uk-grid">
+    <div class="uk-width-1-1 uk-margin-small-bottom">
+        <h3>@(transition.Translate(391, "Reservation Information"))</h3>
+        <hr />
+        <p style="font-size: 12px;">
+            @(transition.Translate(392, "tipEditReservation"))
+        </p>
+        <div style="background: #F3F3F3;padding: 12px 20px;">
+            <span class="infor-header">
+                <span>@(transition.Translate(369, "Check In"))</span>
+                <span ng-cloak>{{data.CheckIn | date:'dd/MM/yyyy HH:mm'}}</span>
+            </span>
+            <span class="infor-header">
+                <span>@(transition.Translate(371, "Check Out"))</span>
+                <span ng-cloak>{{data.CheckOut | date:'dd/MM/yyyy HH:mm'}}</span>
+            </span>
+            <span class="infor-header">
+                <span>@(transition.Translate(393, "Night"))</span>
+                <span ng-cloak>{{data.Day}}</span>
+            </span>
+            <span class="infor-header">
+                <span>@(transition.Translate(394, "Booked Date"))</span>
+                <span ng-cloak>{{data.CreateDate | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+            </span>
+            <span class="infor-header">
+                <span>@(transition.Translate(395, "Source"))</span>
+                <span ng-cloak>{{getSource(data.BookingSource)}}</span>
+            </span>
+            <div class="uk-button-dropdown uk-text-left box-infor-price-reservation" data-uk-dropdown="{pos:'bottom-right',mode:'click'}" style="float:right;top: 3px;">
+                <i class="uk-icon-info-circle detail-balance"></i>
+                <div class="uk-dropdown uk-dropdown-width-2" style="z-index: 99999;">
+                    <div class="uk-grid uk-dropdown-grid" data-uk-grid-margin>
+                        <div class="uk-width-1-2">
+                            <ul class="uk-nav uk-nav-dropdown">
+                                <li><a>@(transition.Translate(396, "Room Charges")) <span class="support_helper">(1)</span>:</a></li>
+                                <li><a>@(transition.Translate(398, "Services")) <span class="support_helper">(2)</span>:</a></li>
+                                <li><a>@(transition.Translate(377, "Extrabed")) <span class="support_helper">(3)</span>:</a></li>
+                                <li><a>@(transition.Translate(399, "Discount")) <span class="support_helper">(4)</span>:</a></li>
+                                <li><a style="border-top: 1px dotted;margin-top: 10px;">&Sigma; &emsp; <span class="support_helper">(5) = (1) + (2) + (3) - (4)</span></a></li>
+                                <li><a>@(transition.Translate(397, "Fees")) <span class="support_helper">(6)</span>:</a></li>
+                                <li><a>@(transition.Translate(400, "Total Amount")) <span class="support_helper">(7) = (5) + (6)</span> :</a></li>
+                                <li><a>@(transition.Translate(401, "Deposit")) <span class="support_helper">(8)</span> :</a></li>
+                                <li><a>@(transition.Translate(402, "Paid")) <span class="support_helper">(9)</span> :</a></li>
+                                <li><a><b>@(transition.Translate(403, "Balance due on arrival"))</b> <span class="support_helper" style="display: block;">(7) - (8) - (9)</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="uk-width-1-2" style="border:none">
+                            <ul class="uk-nav uk-nav-dropdown uk-text-right">
+                                <li><a>{{superData.TotalRoomCharges | currency:'':'0'}} ₫ </a></li>
+                                <li><a>{{superData.TotalServices | currency:'':'0'}} ₫ </a></li>
+                                <li><a>{{superData.TotalExtrabed | currency:'':'0'}} ₫ </a></li>
+                                <li><a>{{superData.TotalDiscount | currency:'':'0'}} ₫ </a></li>
+                                <li><a style="border-top: 1px dotted;margin-top: 10px;"><b>{{(superData.TotalRoomCharges + superData.TotalServices + superData.TotalExtrabed - superData.TotalDiscount) | currency:'':'0'}} ₫ </b></a></li>
+                                <li><a style="font-weight: 700;color: #f52c2c;">{{superData.TotalFees | currency:'':'0'}} ₫ </a></li>
+                                <li><a><b>{{(superData.TotalRoomCharges + superData.TotalFees + superData.TotalServices + superData.TotalExtrabed - superData.TotalDiscount) | currency:'':'0'}} ₫ </b></a></li>
+                                <li><a>{{superData.reservation.Deposit | currency:'':'0'}} ₫ </a></li>
+                                <li><a>{{superData.TotalAmount | currency:'':'0'}} ₫ </a></li>
+                                <li><a><b>{{(superData.TotalRoomCharges + superData.TotalFees + superData.TotalServices + superData.TotalExtrabed - superData.TotalDiscount - superData.TotalAmount) | currency:'':'0'}} ₫</b> </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="infor-header" style="float:right;margin-right: 5px;">
+                <span></span>
+                <span>
+                    <span style="display: inline-block;font-size: 18px;">@(transition.Translate(404, "Total price"))</span>
+                    <span style="display: inline-block;font-size: 18px;" ng-cloak>{{(superData.TotalRoomCharges + superData.TotalFees + superData.TotalServices + superData.TotalExtrabed - superData.TotalDiscount - superData.TotalAmount) | currency:'':'0'}} ₫</span>
+                </span>
+            </span>
+        </div>
+        <hr />
+    </div>
+    <div class="uk-width-medium-1 uk-margin-medium-bottom">
+        <ul class="uk-tab" data-uk-tab="{connect:'#tabs_anim2',swiping: false}">
+            <li class="genenral-tab uk-active"><a href="#">@(transition.Translate(382, "Accommodation"))</a></li>
+            <li><a href="#">@(transition.Translate(355, "General Information"))</a></li>
+            <li><a href="#">@(transition.Translate(398, "Services"))</a></li>
+            <li><a href="#">@(transition.Translate(405, "Node")) <span ng-cloak ng-if="reservationNote.length > 0" style="color:red;font-weight:bold">({{reservationNote.length}})</span></a></li>
+            <li><a href="#">@(transition.Translate(2379, "Email Sent"))</a></li>
+        </ul>
+        <ul id="tabs_anim2" class="uk-switcher uk-margin" style="overflow: unset;padding-top: 1px;">
+            <li class="genenral-tab">
+                @Html.Partial("./Edit/pAccommodation", transition)
+            </li>
+            <li>
+                @Html.Partial("./Edit/pGeneralInformation", countries, new ViewDataDictionary { { "transition", transition } })
+            </li>
+            @if (typeSoftware == 1 || typeSoftware == 3)
+            {
+                <li>
+                    @Html.Partial("./Edit/pServices", transition)
+                </li>
+            }
+            <li>
+                @Html.Partial("./Edit/pNote", transition)
+            </li>
+            <li>
+                @Html.Partial("./Edit/pEmailSent", transition)
+            </li>
+        </ul>
+    </div>
+</div>

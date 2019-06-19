@@ -1,0 +1,124 @@
+﻿
+    /**********************************/
+    /* Css form datepicker */
+/*#ui-datepicker-div {
+    width: 11em!important;
+    height: 297px;
+}*/
+    #ui-datepicker-div th {
+        font-size: 1.1em;
+        font-weight: normal!important;
+        }
+        #ui-datepicker-div .ui-datepicker-header {
+            margin-top: 8px;
+            margin-bottom: -10px;
+        }
+        #ui-datepicker-div td span, #ui-datepicker-div td a {
+            margin-bottom: 0px;
+            padding: 0px;
+            font-weight: normal;
+        }
+
+.ui-datepicker tr td.specialDate a {
+    border-top: 2px solid #7f7159;
+    border-bottom: 2px solid #7f7159;
+    border-left: none;
+    border-right: none;
+}
+  .ui-datepicker tr td.specialDate:last-child a {
+       border-right: 2px solid #7f7159;
+  }
+    .ui-datepicker tr td.specialDate:first-child a {
+       border-left: 2px solid #7f7159;
+  }
+  .ui-datepicker .first-specialDate a,  .ui-datepicker .first-specialDate span {
+      border-top: 2px solid #7f7159;
+      border-bottom: 2px solid #7f7159;
+
+  }
+  .ui-datepicker .first-specialDate {
+      opacity: 1;
+  }
+  .ui-datepicker .first-specialDate  span, .ui-datepicker .first-specialDate  a{
+      border: 2px solid #7f7159;
+      border-right: none;
+  }
+.ui-datepicker .last-specialDate a {
+    border: 2px solid #7f7159;
+    border-left: none;
+}
+   /* End css for datepicker */
+   
+    #wrap-check-one {
+        width: 242px;
+        padding: 20px;
+        border: 1px solid #7f7159;
+        background: #fff;
+        border-radius: 4px;
+    }
+        #wrap-check-one div.av-check-time {
+            width: 100%;
+            border-bottom: solid 1px #bcbcbc;
+            padding: 12px 0;
+            position: relative;
+            float: left;
+            
+        }
+            #wrap-check-one div.av-check-time input.checkdate {
+                width: 130px;
+                float: right;
+                border: 0;
+                background: url(/FileDefault/image/calendar.png) no-repeat 122px 6px;
+                height: 18px;
+                padding: 6px 5px;
+                color: #222;
+            }
+        #wrap-check-one span {
+            float: left;
+            line-height: 30px;
+            font-weight: bold;
+            color: #333;
+            font-size: 0.93em;
+        }
+        #wrap-check-one div.av-persion {
+            overflow: hidden;
+            padding: 12px 0;
+            width: 100%;
+            float: left;
+        }
+        #wrap-check-one div.av-persion  div.av-item-pertion {
+            width: 46%;float: left;
+        }
+            #wrap-check-one div.av-persion div.av-item-pertion select {
+                width: 80px;
+                height: 28px;
+                border-radius: 3px;
+                -moz-border-radius: 3px;
+                -webkit-border-radius: 3px;
+            }
+     #wrap-check-one select.av-listhotel {
+        border-color: rgb(169, 169, 169);
+        color: #7f7159;
+        height: 28px;
+        position: relative;
+        border: solid 1px #bbb;
+        outline: 0;
+         font-size: 0.7em;
+        width: 100%;
+        background: #fff;
+    }
+     #wrap-check-one #av-wrap-list-hotel {
+        width: 100%;
+        height: 28px;
+        position: relative;
+         margin:3px 0 8px;
+    }
+    #wrap-check-one input#av-buton {
+        width: 100%;
+        margin-top: 10px;
+            font-size: 1.1em;
+    }
+.footer-page {
+    position: fixed;
+    bottom: 0;
+}

@@ -1,0 +1,312 @@
+﻿@using BookingEnginePMS.Models;
+@using BookingEnginePMS.Controllers;
+@using System;
+@using Newtonsoft.Json;
+@{
+    ViewBag.Title = "Invoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+
+    Hotel hotel = new Hotel();
+    Invoice invoice = new Invoice();
+    if (Session["HotelForBooking"] != null)
+    {
+        hotel = (Hotel)Session["HotelForBooking"];
+    }
+    if (Session["invoice"] != null)
+    {
+        invoice = (Invoice)Session["invoice"];
+    }
+    List<PaymentMethod_Home> paymentMethods = (List<PaymentMethod_Home>)Session["paymentMethods"];
+    if (paymentMethods is null)
+    {
+        paymentMethods = new List<PaymentMethod_Home>();
+    }
+    string paymentMethodsJson = JsonConvert.SerializeObject(paymentMethods);
+    string transitionJson = JsonConvert.SerializeObject(transition.transitionLanguages);
+}
+<script src="~/Content/js/Home/invoice.js"></script>
+<input type="hidden" id="firstPaymentMethod" value="@paymentMethodsJson" />
+<input type="hidden" id="transition" value="@transitionJson" />
+<header>
+    @Html.Partial("~/Views/PartialView/pTimeLine.cshtml", transition)
+</header>
+<div class="content-checkavail">
+    <div id="header-avail">
+        <div id="left-header-avail">
+            @Html.Partial("~/Views/PartialView/pInfoCompany.cshtml", transition)
+        </div>
+        <div id="right-header-avail">
+            @Html.Partial("~/Views/PartialView/pLanguage.cshtml")
+        </div>
+    </div>
+    <div class="full-width wrap-selectdate">
+        <div class="wrap-item-sidebar">
+            <div class="wrap-info-term-hotel" style="margin-top: 0;">
+                <div class="ct-info-term-hotel" style="font-size: 13px;">
+                    <h3>@(transition.Translate(2397, "Hotel contact info"))</h3>
+                    <strong>@(transition.Translate(2398, "Phone number"))</strong><br />
+                    <span style="color: #7f7159">@hotel.Phone</span>
+                    <strong>Email</strong><br />
+                    <a href="mailto:@hotel.Email">@hotel.Email</a>
+                </div>
+            </div>
+        </div>
+        <div class="right-content-b">
+            <div class="wc-content-b">
+                <div>
+                    <h4>@(transition.Translate(2399, "PAYMENT INFORMATION"))</h4>
+                    <div class="item-b-gust-info">
+                        <p><span>*</span> @(transition.Translate(2400, "Indicates Required field")).</p>
+                    </div>
+                    <div class="left-b-gust-info" style="width: 100%;">
+                        <ul class="info-payment-invoid">
+                            <li>
+                                <label for="depositAmount"><b>@(transition.Translate(2401, "Invoice No"))</b>:</label>
+                                <span style="font-weight: normal" class="deposit-amount">
+                                    @invoice.InvoiceCode
+                                </span>
+                            </li>
+                            <li>
+                                <label for="depositAmount"><b>@(transition.Translate(2402, "Guest's Name"))</b>:</label>
+                                <span style="font-weight: normal" class="deposit-amount">
+                                    @invoice.CustomerName
+                                </span>
+                            </li>
+                            <li>
+                                <label for="depositAmount"><b>@(transition.Translate(2403, "Arrival date"))</b>:</label>
+                                <span style="font-weight: normal" class="deposit-amount">
+                                    @invoice.ArrivalDate.ToString("dd/MM/yyyy")
+                                </span>
+                            </li>
+                            <li>
+                                <label for="depositAmount"><b>Email</b>:</label>
+                                <span style="font-weight: normal" class="deposit-amount">
+                                    @invoice.Email
+                                </span>
+                            </li>
+                            <li>
+                                <label for="depositAmount"><b>@(transition.Translate(2404, "Deposit amount"))</b>:</label>
+                                <span class="deposit-amount">
+                                    @invoice.TotalAmount @invoice.CurrencyCode
+                                    <span>(@(transition.Translate(2405, "Price includes tax & service charge")))</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                @if (paymentMethods.Count > 1)
+                {
+                    <div class="box-payment-all">
+                        <div style="width: 49%;clear: both;">
+                            <label class="lb-b-gust-info">@(transition.Translate(2325, "Payment method"))</label>
+                            <select ng-change="changePaymentMethod()" class="select-country-gust-b-info" ng-model="guest.TypePaymentMethod" convert-to-number>
+                                @foreach (PaymentMethod_Home item in paymentMethods)
+                                {
+                                    <option id="typePaymentMethod_@item.ConfigPaymentMethodId" value="@item.ConfigPaymentMethodId">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                }
+                <div style="clear:both">
+                    <div>
+                        <div class="info-card" ng-if="paymentMethodChoose.RequireCard">
+                            <h4>@(transition.Translate(2326, "Payment Details")) {{guest}}</h4>
+                            <div class="left-b-gust-info">
+                                <div class="item-b-gust-info">
+                                    <label class="lb-b-gust-info">
+                                        @(transition.Translate(2327, "Name on card"))<span class="required-s">*</span>
+                                    </label>
+                                    <input ng-click="RefreshValidate()" ng-model="guest.Name" type="text" class="input-gust-b-info" />
+                                    <span id="err_Name" class="error">@(transition.Translate(2353, "Value is invalid!"))</span>
+                                </div>
+                                <div class="item-b-gust-info">
+                                    <label class="lb-b-gust-info">
+                                        @(transition.Translate(2328, "Card Number"))<span class="required-s">*</span>
+                                    </label>
+                                    <input ng-click="RefreshValidate()" ng-model="guest.Number" type="text" class="input-gust-b-info" />
+                                    <span id="err_Number" class="error">@(transition.Translate(2353, "Value is invalid!"))</span>
+                                </div>
+                                <div class="item-b-gust-info">
+                                    <label class="lb-b-gust-info">@(transition.Translate(2329, "Expiry Date"))</label>
+                                    <select style="padding: 3px;width: 80px;" ng-model="guest.ExpirationMonth" convert-to-number>
+                                        <option ng-repeat="index in [1,2,3,4,5,6,7,8,9,10,12]">{{index}}</option>
+                                    </select>
+                                    <span>/</span>
+                                    <select style="padding: 3px;width: 80px;" ng-model="guest.ExpirationYear" convert-to-number>
+                                        <option ng-repeat="index in rangeNumber(2018,2040)">{{index}}</option>
+                                    </select>
+                                </div>
+                                <div class="item-b-gust-info">
+                                    <label class="lb-b-gust-info">
+                                        @(transition.Translate(2330, "Security Code")) <span class="required-s">*</span>
+                                    </label>
+                                    <input ng-click="RefreshValidate()" ng-model="guest.Code" type="password" class="input-gust-b-info" />
+                                    <span id="err_Code" class="error">@(transition.Translate(2353, "Value is invalid!"))</span>
+                                </div>
+                            </div>
+                            <div class="right-b-gust-info" style="margin-top: 30px;">
+                                <div class="item-b-gust-info">
+                                    <img src="~/FileDefault/image/icon-card.jpg" />
+                                </div>
+                                <div class="item-b-gust-info">
+                                    <img src="~/FileDefault/image/RapidSSL_SEAL.gif" style="width: 25%; margin-top: 10px;" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="b-submit">
+                            <div style="border: 1px solid #cccccc;padding: 10px;background: #fbfbfb;">
+                                <div style="margin-bottom:20px" ng-bind-html="paymentMethodChoose.Policy">
+                                </div>
+                                <input ng-click="RefreshValidate()" ng-model="acceptPolicy" type="checkbox" name="checkCertify" />
+                                <span id="err_checkCertify">@(transition.Translate(2331, "I have read and agree to the above"))</span>
+                            </div>
+                            <div style="text-align:center">
+                                <button ng-if="guest.TypePaymentMethod != 13 && guest.TypePaymentMethod != 14" class="buton-Check-availability" ng-click="Book()">
+                                    @(transition.Translate(2334, "Pay"))
+                                </button>
+                                <button ng-if="guest.TypePaymentMethod == 13 || guest.TypePaymentMethod == 14" class="buton-Check-availability" ng-click="Book()">
+                                    @(transition.Translate(2334, "Pay"))
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .errorAccept {
+        color: red;
+        text-decoration: underline;
+    }
+
+    .info-payment-invoid {
+        margin-top: 30px;
+        width: 100%;
+        list-style: none;
+        padding: 0px;
+    }
+
+        .info-payment-invoid li {
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+    .deposit-amount {
+        width: 70%;
+        float: left;
+    }
+
+    .info-payment-invoid li label {
+        margin-right: 15px;
+        text-align: right;
+        width: 16%;
+        float: left;
+    }
+
+    .info-card {
+        width: 100%;
+        float: left;
+        margin-top: 40px;
+    }
+
+    .ui-front {
+        z-index: 9999;
+    }
+
+    div.left-b-gust-info {
+        width: 49%;
+        float: left;
+    }
+
+    div.item-b-gust-info p {
+        color: #B90000;
+    }
+
+    div.right-b-gust-info {
+        width: 49%;
+        float: right;
+        margin-top: -1px;
+    }
+
+    div.item-b-gust-info {
+        width: 100%;
+        float: left;
+    }
+
+    span.required-s {
+        color: #B90000;
+    }
+
+    label.lb-b-gust-info {
+        display: block;
+        margin: 5px 0px 3px;
+        height: 20px;
+    }
+
+    input.input-gust-b-info {
+        width: 86%;
+        padding: 0.4em;
+        border: 1px solid #ccc;
+    }
+
+    select.select-gender-gust-b-info, select.select-country-gust-b-info {
+        border: 1px solid;
+        padding: 0.1em;
+        border: 1px solid #ccc;
+    }
+
+    select.select-country-gust-b-info {
+        width: 90%;
+        height: 28px;
+    }
+
+    div.right-b-gust-info input[type=radio]:last-child {
+        margin-left: 10px;
+    }
+
+    div.right-b-gust-info textarea.textarea-gust-b-info {
+        border: 1px solid #ccc;
+        width: 86%;
+        height: 150px;
+        padding: 0.2em;
+    }
+
+
+    div.b-gust-booking div.b-submit input[type=checkbox] {
+        display: block;
+        width: 15px;
+        height: 15px;
+        float: left;
+        margin: 2px 5px 0px 0px;
+    }
+
+    div.b-gust-booking div.b-submit p {
+        color: #333;
+    }
+
+    .typePayment {
+        width: 150px;
+        float: left;
+    }
+
+        .typePayment input {
+            margin-right: 5px;
+        }
+
+    .b-submit {
+        width: 100%;
+        float: left;
+        margin: 22px 0px 50px;
+    }
+
+        .b-submit p {
+            line-height: 25px;
+            height: 25px;
+            margin-bottom: 20px;
+        }
+</style>

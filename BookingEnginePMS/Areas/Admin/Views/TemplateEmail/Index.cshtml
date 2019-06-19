@@ -1,0 +1,93 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutSetting.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+    List<string> keyTemplate = (List<string>)Session["keyTemplate"];
+    if (keyTemplate is null)
+    {
+        keyTemplate = new List<string>();
+    }
+}
+<script>
+    $("#EmailTemplate").addClass("menu-clicked")
+</script>
+<style>
+    th, td {
+        border: 1px solid #dcdcdc
+    }
+    .key-template {
+        font-weight: 600;
+        padding-right: 15px;
+    }
+</style>
+<script src="~/Areas/Admin/Content/js/TemplateEmail/template-email.js"></script>
+<script src="~/ckeditor/ckeditor.js"></script>
+<script src="~/ckeditor/sample.js"></script>
+<div class="uk-grid">
+    <div class="uk-width-1-1 uk-margin-medium-bottom">
+        <h3>@(transition.Translate(1276, "Email Template"))</h3>
+        <hr />
+        <p style="font-size: 12px;">
+            @(transition.Translate(1277, "tipEmailTemplate"))
+        </p>
+        <hr />
+    </div>
+    <div class="uk-width-1-1 uk-margin-small-bottom">
+        <div class="uk-grid">
+            <div class="uk-width-1 uk-margin-medium-bottom">
+                <div class="md-input-wrapper">
+                    <label class="lable-config" style="padding-left: 0;"><b>@(transition.Translate(1278, "Type Email"))</b></label>
+                    <select ng-change="GetData()" class="md-input" ng-model="filter.typeEmailId" convert-to-number ng-cloak>
+                        <option disabled value="-1">@(transition.Translate(1281, "Choose template"))</option>
+                        <option value="{{item.TypeEmailId}}" ng-repeat="item in typeEmails">{{item.Name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="uk-width-1 {{filter.typeEmailId < 0?'hide-item':''}}" ng-cloak>
+                <div class="uk-grid">
+                    <div class="uk-width-1 uk-margin-medium-bottom">
+                        <div class="md-input-wrapper">
+                            <label class="lable-config" style="padding-left: 0;"><b>@(transition.Translate(1279, "Title"))</b></label>
+                            <input type="text" class="md-input" ng-model="data.Subject" />
+                        </div>
+                    </div>
+                    <div class="uk-width-1 uk-margin-medium-bottom">
+                        <div class="md-input-wrapper">
+                            <label class="lable-config" style="padding-left: 0;"><b>CC</b></label>
+                            <input type="text" class="md-input" ng-model="data.CC" />
+                        </div>
+                    </div>
+                    <div class="uk-width-1 uk-margin-medium-bottom">
+                        <div class="md-input-wrapper">
+                            <label class="lable-config" style="padding-left: 0;"><b>BCC</b></label>
+                            <input type="text" class="md-input" ng-model="data.BCC" />
+                        </div>
+                    </div>
+                    <div class="uk-width-1 uk-margin-medium-bottom">
+                        <p style="font-size: 14px;padding-left: 5px;margin-bottom: 5px;color: #7d7d7d;font-weight: 600;">Key</p>
+                        @foreach (string key in keyTemplate)
+                        {
+                            <span class="key-template">@key</span>
+                        }
+                    </div>
+                    <div class="uk-width-1 uk-margin-medium-bottom">
+                        <div class="md-input-wrapper">
+                            <label class="lable-config" style="padding-left: 0;"><b>Content</b></label>
+                            <div id="editor">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-1 uk-text-center uk-margin-large-bottom uk-margin-top" ng-cloak>
+                        <button class="md-btn md-btn-new" ng-click="Put()">@(transition.Translate(1280, "Update"))</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    initSample();
+</script>

@@ -1,0 +1,110 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+}
+<script>
+    $("#menu_10").addClass('click-menu-top')
+</script>
+<script src="~/Areas/Admin/Content/js/Statistic/check-out.js"></script>
+<style>
+    .box-table-list-data th, .box-table-list-data td {
+        border: 1px solid #e0e0e0;
+    }
+</style>
+<div class="uk-grid">
+    <div class="uk-width-1-1 uk-margin-medium-bottom">
+        <h3>@(transition.Translate(864, "Departure Report"))</h3>
+        <hr />
+    </div>
+    <div class="uk-width-1-1" ng-cloak>
+        <div class="uk-grid">
+            <div class="uk-width-large-1-6 uk-width-medium-1-3 uk-margin-medium-bottom">
+                <div class="uk-input-group">
+                    <div class="md-input-wrapper">
+                        <label><b>@(transition.Translate(846, "From date"))</b></label>
+                        <input id="FromDate" data-uk-datepicker="{format:'DD-MM-YYYY'}" autocomplete="off" ng-model="FromDate" type="text" class="md-input">
+                        <span class="md-input-bar "></span>
+                    </div>
+                    <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                </div>
+            </div>
+            <div class="uk-width-large-1-6 uk-width-medium-1-3 uk-margin-medium-bottom">
+                <div class="uk-input-group">
+                    <div class="md-input-wrapper">
+                        <label><b>@(transition.Translate(847, "To date"))</b></label>
+                        <input id="ToDate" data-uk-datepicker="{format:'DD-MM-YYYY'}" autocomplete="off" ng-model="ToDate" type="text" class="md-input">
+                        <span class="md-input-bar "></span>
+                    </div>
+                    <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                </div>
+            </div>
+            <div class="uk-width-large-4-6 uk-width-medium-1-3">
+                <button ng-click="GetData()" class="md-btn md-btn-new md-btn-wave-light">@(transition.Translate(848, "Filter"))</button>
+                <a href="/Admin/Statistic/Download" class="md-btn md-btn-new md-btn-wave-light" style="float:right">@(transition.Translate(849, "Download"))</a>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-1 uk-margin-bottom">
+        <div class="uk-overflow-container">
+            <div class="box-table-list-data">
+                <table class="uk-table" style="border-collapse:collapse">
+                    <thead>
+                        <tr style="background:linear-gradient(rgb(246, 247, 248), rgb(215, 215, 215))">
+                            <th class="uk-text-center">@(transition.Translate(850, "ResCode"))</th>
+                            <th class="uk-text-center">@(transition.Translate(851, "Folio"))</th>
+                            <th class="uk-text-center">@(transition.Translate(852, "Guest's Name"))</th>
+                            <th class="uk-text-center">@(transition.Translate(853, "Type"))</th>
+                            <th class="uk-text-center">@(transition.Translate(854, "Accom"))</th>
+                            <th class="uk-text-center">@(transition.Translate(855, "Room"))</th>
+                            <th class="uk-text-center">@(transition.Translate(2337, "Date Checkin"))</th>
+                            <th class="uk-text-center">@(transition.Translate(2338, "Date Checkout"))</th>
+                            <th class="uk-text-center">@(transition.Translate(858, "Total")) ₫</th>
+                            <th class="uk-text-center">@(transition.Translate(859, "Paid")) ₫</th>
+                            <th class="uk-text-center">@(transition.Translate(860, "Balance")) ₫</th>
+                            <th class="uk-text-center">@(transition.Translate(861, "Status"))</th>
+                            <th class="uk-text-center">@(transition.Translate(862, "Source"))</th>
+                            <th class="uk-text-center">@(transition.Translate(863, "User"))</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-cloak>
+                        <tr ng-repeat="item in data">
+                            <td class="uk-text-center">
+                                <a target="_blank" href="/Admin/Reservation/Edit?id={{item.ReservationId}}">{{item.ReservationId}}</a>
+                            </td>
+                            <td class="uk-text-center">{{item.BookingId}}</td>
+                            <td>{{item.GuestName}}</td>
+                            <td class="uk-text-center">{{getTypeReservation(item.TypeBooking)}}</td>
+                            <td>{{item.RoomTypeName}}</td>
+                            <td class="uk-text-center">
+                                <span ng-if="item.RoomId < 0">N/A</span>
+                                <span ng-if="item.RoomId > 0">{{item.RoomCode}}</span>
+                            </td>
+                            <td class="uk-text-center">{{item.ArrivalDate | date:'dd/MM/yyyy HH:mm'}}</td>
+                            <td class="uk-text-center">
+                                <span ng-if="item.TypeBooking == 1 && item.Status != 3 && item.Status != 6">______</span>
+                                <span ng-if="item.TypeBooking == 0 || item.Status == 3 || item.Status == 6">{{item.DepartureDate | date:'dd/MM/yyyy HH:mm'}}</span>
+                            </td>
+                            <td class="uk-text-right">{{item.Total | currency:'':'0'}}</td>
+                            <td class="uk-text-right">{{item.Paid + item.PrePaid | currency:'':'0'}}</td>
+                            <td class="uk-text-right">{{(item.Total - item.Paid - item.PrePaid) | currency:'':'0'}}</td>
+                            <td class="uk-text-center"><span ng-bind-html="getStatus(item.Status)"></span></td>
+                            <td>{{getSource(item.BookingSource)}}</td>
+                            <td class="uk-text-center">{{item.UserCreate}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot ng-cloak style="border: 1px solid #dcdcdc;">
+                        <tr>
+                            <th colspan="8" class="uk-text-right">@(transition.Translate(858, "Total"))</th>
+                            <th class="uk-text-right">{{totalAmount | currency:'':'0'}}</th>
+                            <th class="uk-text-right">{{totalPaid | currency:'':'0'}}</th>
+                            <th class="uk-text-right">{{(totalAmount - totalPaid) | currency:'':'0'}}</th>
+                            <th colspan="3"></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

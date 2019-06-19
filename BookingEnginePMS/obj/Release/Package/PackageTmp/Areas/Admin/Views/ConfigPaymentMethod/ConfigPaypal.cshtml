@@ -1,0 +1,74 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutSetting.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+    Link link = (Link)ViewData["Link"];
+    ConfigPayPal statusConnectPayPal = (ConfigPayPal)ViewData["statusConnectPayPal"];
+}
+<script>
+    $("#ConfigPayPal").addClass("menu-clicked");
+</script>
+<style>
+    th, td {
+        border: 1px solid #dcdcdc
+    }
+</style>
+<script src="~/Areas/Admin/Content/js/ConfigPayment/config-paypal.js"></script>
+<div class="uk-grid">
+    <div class="uk-width-1-1 uk-margin-medium-bottom">
+        <h3>@(transition.Translate(2437, "Connect PayPal"))</h3>
+    </div>
+    <div class="uk-width-1-1 uk-margin-small-bottom">
+        @if (statusConnectPayPal.HotelId <= 0)
+        {
+            <div dir="ltr" style="text-align: left;" trbidi="on">
+                <script>
+                    (function (d, s, id) {
+                        var js, ref = d.getElementsByTagName(s)[0];
+                        if (!d.getElementById(id)) {
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.async = true;
+                            js.src = "https://www.paypal.com/webapps/merchantboarding/js/lib/lightbox/partner.js";
+                            ref.parentNode.insertBefore(js, ref);
+                        }
+                    }(document, "script", "paypal-js"));
+
+                </script>
+                <a class="md-btn md-btn-new" data-paypal-button="true" href="@link.href&displayMode=minibrowser" target="PPFrame">
+                    @(transition.Translate(2437, "Sign up for PayPal"))
+                </a>
+            </div>
+        }
+        else if (!statusConnectPayPal.EmailConfirm)
+        {
+            <p style="font-size: 16px;color: #3cb50d;">@(transition.Translate(2435, "Connect Successfull"))</p>
+            <p>@(transition.Translate(2442, "The system has received the connection request information. However, your email has not been confirmed. If the confirmation process is complete please press the button")) "@(transition.Translate(2441, "Confirm status connection"))"</p>
+            <button class="md-btn md-btn-new" ng-click="confirmConnection()">@(transition.Translate(2441, "Confirm status connection"))</button>
+            <p>@(transition.Translate(2443, "Or"))</p>
+            <div dir="ltr" style="text-align: left;" trbidi="on">
+                <script>
+                    (function (d, s, id) {
+                        var js, ref = d.getElementsByTagName(s)[0];
+                        if (!d.getElementById(id)) {
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.async = true;
+                            js.src = "https://www.paypal.com/webapps/merchantboarding/js/lib/lightbox/partner.js";
+                            ref.parentNode.insertBefore(js, ref);
+                        }
+                    }(document, "script", "paypal-js"));
+
+                </script>
+                <a class="md-btn md-btn-new" data-paypal-button="true" href="@link.href&displayMode=minibrowser" target="PPFrame">
+                    @(transition.Translate(2444, "New sign up for PayPal"))
+                </a>
+            </div>
+        }
+        else
+        {
+            <p style="font-size: 16px;color: #3cb50d;">@(transition.Translate(2435, "Connect Successfull"))</p>
+        }
+    </div>
+</div>

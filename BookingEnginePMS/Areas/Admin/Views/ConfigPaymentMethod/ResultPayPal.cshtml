@@ -1,0 +1,37 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutSetting.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+    Link link = (Link)ViewData["Link"];
+    int resultConnectPayPal = (int)ViewBag.resultPaypal;
+}
+<script>
+    $("#ConfigPayPal").addClass("menu-clicked");
+</script>
+<style>
+    th, td {
+        border: 1px solid #dcdcdc
+    }
+</style>
+<script src="~/Areas/Admin/Content/js/ConfigPayment/config-paypal.js"></script>
+<div class="uk-grid">
+    <div class="uk-width-1-1 uk-margin-medium-bottom">
+        <h3>@(transition.Translate(2437, "Connect PayPal"))</h3>
+    </div>
+    <div class="uk-width-1-1 uk-margin-small-bottom">
+        @if (resultConnectPayPal == 1)
+        {
+            <p style="font-size: 16px;color: #3cb50d;">@(transition.Translate(2435, "Connect Successfull"))</p>
+        }
+        else if (resultConnectPayPal == -2)
+        {
+            <p style="font-size: 16px;color: #3cb50d;">@(transition.Translate(2435, "Connect Successfull"))</p>
+            <p style="font-size: 16px;color: red;">@(transition.Translate(2440, "Please check the information in your email inbox from PayPal. Activate your account and return to the current page to confirm the connection."))</p>
+        }
+        else
+        {
+            <p style="font-size: 16px;color: red;">@(transition.Translate(2436, "Connect Error"))</p>
+        }
+    </div>
+</div>

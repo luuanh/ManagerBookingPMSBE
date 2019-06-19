@@ -1,0 +1,82 @@
+﻿@using BookingEnginePMS.Models;
+@model Transition
+
+<div>
+    <div class="uk-grid">
+        <div class="uk-width-1 uk-margin-bottom">
+            <h4 style="padding-left: 5px;">
+                <b><u>@Model.Translate(357, "Card Information")</u></b>
+            </h4>
+        </div>
+        <div class="uk-width-large-1-2" style="padding-top: 10px;">
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(426, "Name")</b></label>
+                    <input ng-model="bookingdetail.CardBooking.Name" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(559, "Code") </b></label>
+                    <input ng-model="bookingdetail.CardBooking.Number" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(537, "Code Security")</b></label>
+                    <input ng-model="bookingdetail.CardBooking.Code" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom" style="margin-top: -15px;">
+                    <label class="lable-config"><b>@Model.Translate(538, "Expiration Date")</b></label>
+                    <div>
+                        <div class="uk-grid">
+                            <div class="uk-width-1-2">
+                                <select class="md-input" ng-model="bookingdetail.CardBooking.ExpirationMonth" convert-to-number>
+                                    <option value="{{item}}" ng-repeat="item in [1,2,3,4,5,6,7,8,9,10,11,12]">{{item}}</option>
+                                </select>
+                            </div>
+                            <div class="uk-width-1-2">
+                                <select class="md-input" ng-model="bookingdetail.CardBooking.ExpirationYear" convert-to-number>
+                                    <option value="{{item}}" ng-repeat="item in [2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048]">{{item}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+        </div>
+        <div class="uk-width-large-1-2">
+        </div>
+    </div>
+</div>
+
+<div class="box-edit-booking">
+    <div class="uk-grid">
+        <div class="uk-width-1 uk-text-right" style="padding-right:80px">
+            <button class="md-btn md-btn-new md-btn-wave-light" ng-click="ConfirmDeleteCardBooking()">@Model.Translate(539, "Delete")</button>
+            <button class="md-btn md-btn-new md-btn-wave-light" ng-click="PutCardBooking()">@Model.Translate(432, "Update")</button>
+            <button class="md-btn md-btn-wave-light" ng-click="CloseWindow()">@Model.Translate(386, "Close")</button>
+        </div>
+    </div>
+</div>
+<div id="ModalDeleteInforCard" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close"><span style="color:white">x</span></button>
+        <h2 class="heading_a">@Model.Translate(540, "Warning")</h2>
+        <div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1 uk-margin-bottom">
+                    <span style="font-size: 16px;padding-left: 10px;font-weight: 600;">@Model.Translate(541, "Delete Card Information")</span>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1 uk-text-right">
+                    <button class="md-btn md-btn-new md-btn-wave-light" ng-click="DeleteCardBooking()">@Model.Translate(385, "Confirm")</button>
+                    <button class="md-btn uk-modal-close uk-close md-btn-wave-light">@Model.Translate(386, "Close")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

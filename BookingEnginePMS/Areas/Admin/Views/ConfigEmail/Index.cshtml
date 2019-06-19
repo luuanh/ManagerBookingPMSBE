@@ -1,0 +1,70 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutSetting.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+}
+<script>
+    $("#EmailAccount").addClass("menu-clicked")
+</script>
+<script src="~/Areas/Admin/Content/js/EmailConfig/email-config.js"></script>
+<div class="uk-grid">
+    <div class="uk-width-1-1 uk-margin-bottom">
+        <h3>@(transition.Translate(1200, "Email Account"))</h3>
+    </div>
+    <div class="uk-width-1-1 uk-margin-small-bottom">
+        <div class="uk-grid uk-margin-medium-bottom">
+            <div class="uk-width-large-1-2">
+                <div class="uk-grid">
+                    <div class="uk-width-1-1 uk-margin-bottom">
+                        <h4><b>@(transition.Translate(1201, "Email Config"))</b></h4>
+                    </div>
+                    <div class="uk-width-1-1 uk-margin-medium-bottom">
+                        <div class="md-input-wrapper">
+                            <label><b>@(transition.Translate(1202, "Email")) <span class="star-red">*</span></b></label>
+                            <input ng-click="RefreshValidate()" ng-model="data.EmailReceive" type="text" class="md-input">
+                            <span id="err_EmailReceive" class="error">@(transition.Translate(1203, "Value is invalid!"))</span>
+                            <span class="md-input-bar "></span>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-1 uk-margin-medium-bottom">
+                        <div class="md-input-wrapper">
+                            <label><b>@(transition.Translate(1204, "Subject Offline")) <span class="star-red">*</span></b></label>
+                            <textarea ng-click="RefreshValidate()" ng-model="data.SubjectOffline" class="md-input"></textarea>
+                            <span id="err_SubjectOffline" class="error">@(transition.Translate(1203, "Value is invalid!"))</span>
+                            <span class="md-input-bar "></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uk-grid">
+            <div class="uk-width-large-1-2">
+                <div class="uk-grid">
+                    <div class="uk-width-1-1 uk-margin-bottom">
+                        <h4><b>@(transition.Translate(1205, "Email Send"))</b></h4>
+                    </div>
+                    <div class="uk-width-1-1 uk-margin-medium-bottom">
+                        <div class="md-input-wrapper">
+                            <label><b>@(transition.Translate(1202, "Email")) <span class="star-red">*</span></b></label>
+                            <input ng-click="RefreshValidate()" ng-model="data.Email" type="text" class="md-input">
+                            <span id="err_Email" class="error">@(transition.Translate(1203, "Value is invalid!"))</span>
+                            <span class="md-input-bar "></span>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-1 uk-margin-bottom">
+                        <div class="md-input-wrapper">
+                            <label><b>@(transition.Translate(1206, "Password")) <span class="star-red">*</span></b></label>
+                            <input ng-click="RefreshValidate()" ng-model="data.Password" type="password" class="md-input">
+                            <span id="err_Password" class="error">@(transition.Translate(1203, "Value is invalid!"))</span>
+                            <span class="md-input-bar "></span>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-1 uk-margin-medium-bottom uk-text-right">
+                        <button ng-click="Put()" class="md-btn md-btn-new md-btn-wave-light">@(transition.Translate(1207, "Update"))</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+﻿@using BookingEnginePMS.Models;
+@model Transition
+<div>
+    <div class="uk-grid">
+        <div class="uk-width-1 uk-margin-bottom">
+            <h4 style="padding-left: 5px;">
+                <b><u>@Model.Translate(358, "Visa Information")</u></b>
+            </h4>
+        </div>
+        <div class="uk-width-large-1-2" style="padding-top: 10px;">
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(542, "Serial No")</b></label>
+                    <input ng-model="bookingdetail.VisaBookings.SerialNo" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(543, "Visa No")</b></label>
+                    <input ng-model="bookingdetail.VisaBookings.VisaNo" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(544, "Visa Date")</b></label>
+                    <input ng-model="bookingdetail.VisaBookings.VisaDate" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(545, "Visa Issue Place")</b></label>
+                    <input ng-model="bookingdetail.VisaBookings.VisaIssuePlace" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(546, "Arrival From")</b></label>
+                    <input ng-model="bookingdetail.VisaBookings.ArrivalFrom" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(547, "Arrival Trasportation")</b></label>
+                    <input ng-model="bookingdetail.VisaBookings.ArrivalTrasportation" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(548, "Visa Expiry Date")</b></label>
+                    <input ng-model="bookingdetail.VisaBookings.VisaExpiryDate" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(549, "VisaType")</b></label>
+                    <input ng-model="bookingdetail.VisaBookings.VisaType" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+        </div>
+        <div class="uk-width-large-1-2" style="padding-top: 10px;">
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(550, "Date Of Arrival In")</b></label>
+                    <input ng-model="bookingdetail.VisaBookings.DateOfArrivalIn" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(551, "Time Of Arrival In")</b></label>
+                    <input ng-model="bookingdetail.VisaBookings.TimeOfArrivalIn" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(552, "Purpose Of Visit")</b></label>
+                    <input ng-model="bookingdetail.VisaBookings.PurposeOfVisit" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(553, "Going To")</b></label>
+                    <input ng-model="bookingdetail.VisaBookings.GoingTo" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(554, "Depart Transportation")</b></label>
+                    <input ng-model="bookingdetail.VisaBookings.DepartTransportation" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+                <div class="uk-width-1-2 uk-margin-bottom">
+                    <label><b>@Model.Translate(555, "Proposed Duration")</b></label>
+                    <input ng-model="bookingdetail.VisaBookings.ProposedDuration" ng-click="RefreshValidate()" type="text" class="md-input">
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box-edit-booking">
+    <div class="uk-grid">
+        <div class="uk-width-1 uk-text-right" style="padding-right:80px">
+            <button class="md-btn md-btn-new md-btn-wave-light" ng-click="PutVisaBooking()">@Model.Translate(432, "Update")</button>
+            <button class="md-btn md-btn-wave-light" ng-click="CloseWindow()">@Model.Translate(386, "Close")</button>
+        </div>
+    </div>
+</div>

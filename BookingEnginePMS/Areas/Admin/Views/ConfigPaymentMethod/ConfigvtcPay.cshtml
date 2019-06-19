@@ -1,0 +1,69 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    /**/
+
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutSetting.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+}
+<script>
+    $("#ConfigVTCPay").addClass("menu-clicked")
+</script>
+<style>
+    th, td {
+        border: 1px solid #dcdcdc
+    }
+</style>
+<script src="~/Areas/Admin/Content/js/ConfigPayment/config-vtcpay.js"></script>
+<div class="uk-grid">
+    <div class="uk-width-1-1 uk-margin-medium-bottom">
+        <h3>@(transition.Translate(2375, "Config VTC Pay"))</h3>
+    </div>
+    <div class="uk-width-1-1 uk-margin-small-bottom">
+        <div class="uk-grid">
+            <div class="uk-width-1 uk-margin-bottom">
+                <div class="uk-grid">
+                    <div class="uk-width-medium-1-2">
+                        <div class="uk-grid">
+                            <div class="uk-width-1 uk-margin-medium-bottom">
+                                <div class="md-input-wrapper">
+                                    <label><b>Receiver Account</b></label>
+                                    <input ng-click="RefreshValidate()" type="text" ng-model="data.ReceiverAccount" class="md-input" />
+                                    <span class="md-input-bar "></span>
+                                    <span id="err_ReceiverAccount" class="error">@transition.Translate(2378, "Value is invalid")!</span>
+                                </div>
+                            </div>
+                            <div class="uk-width-1 uk-margin-medium-bottom">
+                                <div class="md-input-wrapper">
+                                    <label><b>WebSite</b></label>
+                                    <input ng-click="RefreshValidate()" type="text" ng-model="data.WebSite" class="md-input" />
+                                    <span class="md-input-bar "></span>
+                                    <span id="err_WebSite" class="error">@transition.Translate(2378, "Value is invalid")!</span>
+                                </div>
+                            </div>
+                            <div class="uk-width-1 uk-margin-medium-bottom">
+                                <div class="md-input-wrapper">
+                                    <label><b>SecurityKey</b></label>
+                                    <input ng-click="RefreshValidate()" type="text" ng-model="data.SecurityKey" class="md-input" />
+                                    <span class="md-input-bar "></span>
+                                    <span id="err_SecurityKey" class="error">@transition.Translate(2378, "Value is invalid")!</span>
+                                </div>
+                            </div>
+                            <div class="uk-width-1 uk-margin-medium-bottom">
+                                <div class="md-input-wrapper">
+                                    <label><b>WebsiteId</b></label>
+                                    <input ng-click="RefreshValidate()" type="text" ng-model="data.WebsiteId" class="md-input" />
+                                    <span class="md-input-bar "></span>
+                                    <span id="err_SecurityKey" class="error">@transition.Translate(2378, "Value is invalid")!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-width-1 uk-text-center uk-margin-large-bottom uk-margin-top" ng-cloak>
+                <button class="md-btn md-btn-new" ng-click="Put()">@(transition.Translate(2377, "Update"))</button>
+            </div>
+        </div>
+    </div>
+</div>

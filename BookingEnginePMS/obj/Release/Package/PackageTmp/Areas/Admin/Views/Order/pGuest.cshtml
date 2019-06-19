@@ -1,0 +1,103 @@
+﻿@using BookingEnginePMS.Areas.Admin.Controllers;
+@using BookingEnginePMS.Models;
+@using Newtonsoft.Json;
+@model List<string>
+@{
+    List<Guest_Sample> guests = this.ViewData.ContainsKey("guests") ? (List<Guest_Sample>)this.ViewData["guests"] : new List<Guest_Sample>();
+    if (guests is null)
+    {
+        guests = new List<Guest_Sample>();
+    }
+    string jsonGuests = JsonConvert.SerializeObject(guests);
+    Transition transition = this.ViewData.ContainsKey("transition") ? (Transition)this.ViewData["transition"] : null;
+}
+<input type="hidden" id="list_guests" name="name" value="@jsonGuests" />
+<script>
+    $(function () {
+        var guests = JSON.parse($("#list_guests").val());
+        var guestKendo = new kendo.data.DataSource({
+            data: guests
+        });
+        var getFilters = function (filter) {
+            var filters = [];
+            filters.push(filter);
+            values = autoComplete.value().split(", ");
+            values.pop();
+            $.each(values, function (index, item) {
+                filters.push({ field: "", ignoreCase: true, operator: "neq", value: item });
+            });
+            return filters;
+        };
+        var autoComplete = $("#kUI_automplete").kendoAutoComplete({
+            filter: "contains",
+            placeholder: "Choose",
+            select: function (e) {
+                $(".k-animation-container").css("display", "none")
+                e.preventDefault()
+                $("#result_SearchAuto_Guest").val(e.dataItem)
+                $("#lable_Name").click();
+            },
+            separator: "",
+            dataSource: {
+                transport: {
+                    read: function (options, operation) {
+                        guestKendo.read();
+                        guestKendo.filter({ logic: "and", filters: getFilters(options.data.filter.filters[0]) });
+                        options.success(guestKendo.view());
+                    }
+                },
+                serverFiltering: true
+            }
+        }).data("kendoAutoComplete");
+    })
+</script>
+<div class="uk-grid">
+    <div class="uk-width-1 uk-margin-medium-bottom" style="margin-top: -15px;">
+        <button ng-if="!status" class="md-btn-new md-btn md-btn-wave-light" ng-click="refreshGuest()">
+            <i class="uk-icon-plus"></i>
+            <span>@transition.Translate(313, "Add new Guest")</span>
+        </button>
+    </div>
+    <div class="uk-width-1 uk-margin-medium-bottom" style="margin-top: -15px;">
+        <span id="lable_Name" ng-click="GetInfoGuest_AfterAutoComplete()" style="display:none"></span>
+        <label class="lable-config"><b>@transition.Translate(309, "Name") <span class="star-red">*</span></b></label>
+        <div class="box-autocomplate">
+            <input ng-click="RefreshValidate()" ng-model="guest.FirstName" id="kUI_automplete" class="uk-width-1-1" />
+        </div>
+        <input id="result_SearchAuto_Guest" type="hidden">
+        <span id="err_FirstName" class="error">@transition.Translate(314, "Value is invalid")!</span>
+    </div>
+    <div class="uk-width-1 uk-margin-medium-bottom">
+        <label><b>@transition.Translate(315, "SurName") <span class="star-red">*</span></b></label>
+        <input ng-click="RefreshValidate()" ng-model="guest.SurName" type="text" class="md-input">
+        <span class="md-input-bar "></span>
+        <span id="err_SurName" class="error">@transition.Translate(314, "Value is invalid")!</span>
+    </div>
+    <div class="uk-width-1 uk-margin-medium-bottom">
+        <label><b>@transition.Translate(317, "Email")</b></label>
+        <input ng-click="RefreshValidate()" ng-model="guest.Email" type="text" class="md-input">
+        <span class="md-input-bar "></span>
+    </div>
+    <div class="uk-width-1 uk-margin-medium-bottom">
+        <label><b>@transition.Translate(316, "Phone") <span class="star-red">*</span></b></label>
+        <input ng-click="RefreshValidate()" ng-model="guest.Phone" type="text" class="md-input">
+        <span class="md-input-bar "></span>
+        <span id="err_Phone" class="error">@transition.Translate(314, "Value is invalid")!</span>
+    </div>
+    <div class="uk-width-1 uk-margin-medium-bottom">
+        <label><b>@transition.Translate(318, "Country")</b></label>
+        <select class="md-input" ng-model="guest.Country">
+            <option value="N/A">N/A</option>
+            @foreach (string item in Model)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+        <span class="md-input-bar "></span>
+    </div>
+    <div class="uk-width-1 uk-margin-bottom">
+        <label><b>@transition.Translate(319, "Note")</b></label>
+        <textarea ng-click="RefreshValidate()" ng-model="guest.Note" rows="3" class="md-input"></textarea>
+        <span class="md-input-bar "></span>
+    </div>
+</div>

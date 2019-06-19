@@ -1,0 +1,157 @@
+﻿@using BookingEnginePMS.Models;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+}
+<script src="~/Areas/Admin/Content/js/Room/clean.js"></script>
+<style>
+    .box-room {
+        min-height: 100px;
+        background: #0ed20e;
+    }
+
+    .room-clean {
+        background: #0ED00D;
+    }
+
+    .room-dirty {
+        background: #D9CE83;
+    }
+
+    .room-repair {
+        background: #FC7E79;
+    }
+
+    .ellip-control {
+        overflow: hidden;
+        height: 25px;
+    }
+
+        .ellip-control > div {
+            float: right;
+            width: 19px;
+            height: 19px;
+            text-align: center;
+            border: 1px solid #f0f0f0;
+            border-radius: 50%;
+            margin: 2px;
+            background: white;
+            cursor: pointer
+        }
+
+        .ellip-control > span i {
+            font-size: 14px;
+            margin-top: 3px;
+            display: block;
+        }
+</style>
+<div class="uk-grid">
+    <div class="uk-width-1-1 uk-margin-bottom">
+        <h3>@(transition.Translate(871, "House Keeping"))</h3>
+    </div>
+    <div class="uk-width-1-1 uk-margin-bottom" ng-cloak>
+        <div class="uk-grid">
+            <div class="uk-width-large-1-6 uk-width-medium-1-3 uk-margin-medium-bottom">
+                <div class="md-input-wrapper">
+                    <label><b>@(transition.Translate(872, "Accommodation"))</b></label>
+                    <select ng-change="GetData()" ng-model="filters.roomTypeId" class="md-input" convert-to-number>
+                        <option value="-1">@(transition.Translate(873, "All"))</option>
+                        <option ng-repeat="item in roomTypes" value="{{item.RoomTypeId}}">{{item.RoomTypeName}} ({{item.RoomTypeCode}})</option>
+                    </select>
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-width-large-1-6 uk-width-medium-1-3 uk-margin-medium-bottom">
+                <div class="md-input-wrapper">
+                    <label><b>@(transition.Translate(874, "Status"))</b></label>
+                    <select ng-change="GetData()" ng-model="filters.status" class="md-input" convert-to-number>
+                        <option value="-1">@(transition.Translate(873, "All"))</option>
+                        <option value="1">@(transition.Translate(875, "Clean"))</option>
+                        <option value="2">@(transition.Translate(876, "Dirty"))</option>
+                        <option value="3">@(transition.Translate(877, "Repair"))</option>
+                    </select>
+                    <span class="md-input-bar "></span>
+                </div>
+            </div>
+            <div class="uk-width-1">
+                <div class="uk-grid">
+                    <div class="uk-width-medium-4-5">
+                        <ul class="ulcondition">
+                            <li>
+                                <span class="spancondition" style="background-color:#0ED00D"></span>
+                                <span>@(transition.Translate(875, "Clean"))</span>
+                            </li>
+                            <li>
+                                <span class="spancondition" style="background-color:#D9CE83"></span>
+                                <span>@(transition.Translate(876, "Dirty"))</span>
+                            </li>
+                            <li>
+                                <span class="spancondition" style="background-color:#FC7E79"></span>
+                                <span>@(transition.Translate(877, "Repair"))</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-medium-1-5 uk-text-right">
+                        <button class="md-btn md-btn-new md-btn-wave-light" ng-click="showCleanAll()">@(transition.Translate(878, "Clean All"))</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-1 uk-margin-small-bottom" ng-cloak>
+        <div class="uk-grid" style="margin-left: -20px;">
+            <div class="uk-width-1 uk-margin-medium-bottom" style="padding-left: 20px;">
+                <hr style="margin:0" />
+            </div>
+            <div class="uk-width-1">
+                <div class="uk-grid">
+                    <div ng-repeat="item in data track by $index" class="uk-width-large-1-10 uk-width-medium-1-6 uk-width-1-3 uk-margin-bottom" style="padding-left: 20px;">
+                        <div class="md-card">
+                            <div class="ellip-control {{item.Status == 1?'room-clean':''}} {{item.Status == 2?'room-dirty':''}} {{item.Status == 3?'room-repair':''}}">
+                                <div data-uk-dropdown="{pos:'right-top',mode:'click'}">
+                                    <span>
+                                        <i class="uk-icon-ellipsis-v"></i>
+                                    </span>
+                                    <div class="uk-dropdown uk-dropdown-small">
+                                        <ul class="uk-nav" style="text-align: left;">
+                                            <li><a ng-click="ChangeStatusRoom(item.RoomId,1)" ng-if="item.Status != 1">@(transition.Translate(875, "Clean"))</a></li>
+                                            <li><a ng-click="ChangeStatusRoom(item.RoomId,2)" ng-if="item.Status != 2">@(transition.Translate(876, "Dirty"))</a></li>
+                                            <li><a ng-click="ChangeStatusRoom(item.RoomId,3)" ng-if="item.Status != 3">@(transition.Translate(877, "Repair"))</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md-card-content">
+                                <div class="uk-text-center">
+                                    <p class="room-name" style="margin-top: 0;">{{item.RoomCode}}</p>
+                                    <p class="room-type">{{item.RoomTypeCode}}</p>
+                                    <p class="floor">@(transition.Translate(879, "Floor")) {{item.Floor}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ModalConfirm" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <h2 class="heading_a">@(transition.Translate(880, "Warning!"))</h2>
+        <div>
+            <div class="uk-grid uk-margin-bottom">
+                <div class="uk-width-1">
+                    <h4>@(transition.Translate(881, "Are you sure you want to clean all room?"))</h4>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1 uk-text-right">
+                    <button class="md-btn md-btn-new md-btn-wave-light" ng-click="CleanAll()">@(transition.Translate(882, "Confirm"))</button>
+                    <button class="md-btn uk-modal-close uk-close">@(transition.Translate(883, "Cancel"))</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

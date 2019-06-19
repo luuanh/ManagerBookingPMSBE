@@ -1,0 +1,796 @@
+﻿
+
+@using BookingEnginePMS.Models;
+@{
+    List<TransitionLanguage> transitions = (List<TransitionLanguage>)Session["transitions"];
+    Transition transition = new Transition(transitions);
+    User user = (User)Session["User"];
+    int typeSoftware = -1;
+    if (Session["typeSoftware"] != null)
+    {
+        typeSoftware = (int)Session["typeSoftware"];
+    }
+}
+<style>
+    .not-read {
+        background: aliceblue;
+    }
+</style>
+
+<audio id="myAudio" controls style="display:none">
+    <source src="~/Areas/Admin/Content/media/ring.mp3" type="audio/mpeg" />
+</audio>
+<script>
+    var audioNotify = document.getElementById("myAudio");
+    audioNotify.loop = true;
+    var otherUpdateNotify = false;
+    function playAudio() {
+        audioNotify.play();
+        setTimeout(function () { pauseAudio() }, 15000);
+    }
+    function pauseAudio() {
+        audioNotify.pause();
+    }
+</script>
+<script src="~/Areas/Admin/Content/js/CashDrawer/cash-advance-new-area.js"></script>
+<header id="header_main">
+    <div class="header_main_content">
+        <nav class="uk-navbar">
+            <div class="main_logo_top">
+                <a href="#">
+                    <img src="~/FileDefault/image/logowebhotel.png" alt="logo IIT" height="15" width="71" />
+                    <span>W E B H O T E L</span>
+                </a>
+            </div>
+            <div class="uk-navbar-flip" ng-controller="messageNotifyController">
+                <ul class="uk-navbar-nav user_actions">
+                    @if (typeSoftware == 1 || typeSoftware == 3)
+                    {
+                        <li title="HouseKeeping">
+                            <a href="/Admin/Room/Clean">
+                                <img src="~/Files/files/bucket.png" />
+                            </a>
+                        </li>
+                        <li data-uk-dropdown="{pos:'bottom-right',mode:'click'}">
+                            <a href="#" class="user_action_icon">
+                                <i class="uk-icon-bell-o uk-icon-small" style="color: #fff;"></i>
+                                <span ng-cloak ng-if="(numberMessageNotRead + numberNotify) > 0" class="uk-badge uk-badge-danger">{{numberMessageNotRead + numberNotify}}</span>
+                            </a>
+                            <div class="notify uk-dropdown uk-dropdown-xlarge">
+                                <div class="md-card-content">
+                                    <ul class="uk-tab uk-tab-grid" data-uk-tab="{connect:'#header_alerts',animation:'slide-horizontal'}">
+                                        <li class="uk-width-1-2 uk-active"><a href="#" class="js-uk-prevent uk-text-small">@transition.Translate(1249, "Messages") ({{numberMessageNotRead}})</a></li>
+                                        <li class="uk-width-1-2"><a href="#" class="js-uk-prevent uk-text-small">@transition.Translate(1250, "Notification") ({{numberNotify}})</a></li>
+                                    </ul>
+                                    <ul id="header_alerts" class="uk-switcher uk-margin">
+                                        <li>
+                                            <ul class="md-list md-list-addon">
+                                                <li ng-click="showMessageBoxByFriend(mess)" ng-repeat="mess in userChats" style="margin-right: 0;margin-bottom: 2px;" class=" {{mess.Read?'':'not-read'}}">
+                                                    <div class="md-list-addon-element {{mess.Read?'':'not-read'}} ">
+                                                        <img ng-src="{{mess.Photo}}" style="width: 40px;height: 40px;border-radius: 50%;border: 1px solid #3d8fc5;" />
+                                                    </div>
+                                                    <div class="md-list-content">
+                                                        <span class="md-list-heading"><a style="font-size: 15px;">{{mess.Friend}}</a></span>
+                                                        <span class="uk-text-small uk-text-muted">
+                                                            {{mess.Content}}
+                                                        </span>
+                                                        <span class="uk-text-small uk-text-muted" style="font-size: 11px !IMPORTANT;">
+                                                            {{mess.Date | date:'dd/MM/yyyy HH:mm:ss'}}
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <ul class="md-list md-list-addon">
+                                                <li style="padding: 0;margin: 0;min-height: 0;overflow: hidden;border: none;margin-bottom: 2px;">
+                                                    <a href="/Admin/Notification/Index" style="float: right;font-size: 14px;text-decoration: underline;margin-right: 12px;">Xem tất cả </a>
+                                                </li>
+                                                <li ng-click="showNotification(notif)" ng-repeat="notif in notifications" class="{{notif.Status == 0?'':'not-read'}}" style="margin-bottom: 2px;">
+                                                    <div class="md-list-addon-element {{notif.Status == 0?'':'not-read'}}">
+                                                        <i class="md-list-addon-icon material-icons uk-text-warning">&#xE8B2;</i>
+                                                    </div>
+                                                    <div class="md-list-content">
+                                                        <span class="md-list-heading" style="font-size: 15px;">{{notif.Title}}</span>
+                                                        <span class="uk-text-small uk-text-muted uk-text-truncate">
+                                                            {{notif.Content}}
+                                                        </span>
+                                                        <span class="uk-text-small uk-text-muted" style="font-size: 11px !IMPORTANT;">
+                                                            <span>{{notif.Date | date:'dd/MM/yyyy HH:mm'}}</span>
+                                                            <span style="float: right;margin-right: 5px;">{{notif.UserCreate}}</span>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li data-uk-dropdown="{pos:'bottom-right'}" title="Chat">
+                            <a href="#" id="sidebar_secondary_toggle" on>
+                                <i class="uk-icon-small  uk-icon-wechat" style="vertical-align: -6px;color: #fff;"></i>
+                            </a>
+                        </li>
+                    }
+                    <li title="Manage">
+                        <a href="/Admin/Manage/index">
+                            <i class="uk-icon-small uk-icon-gears " style="vertical-align: -6px;color: #fff;"></i>
+                        </a>
+                    </li>
+                    <li data-uk-dropdown="{pos:'bottom-right',mode:'click'}" title="Profile">
+                        <a id="UserProfile" username="@user.UserName" href="#" class="user_action_image uk-padding-non">
+                            <img class="md-user-image" src="@user.Photo" alt="" />
+                        </a>
+                        <div class="uk-dropdown uk-dropdown-small">
+                            <ul class="uk-nav js-uk-prevent">
+                                <li><a href="/Admin/Profile/Index">@(transition.Translate(1121, "My Profile"))</a></li>
+                                <li><a href="/Admin/login/Logout">@(transition.Translate(1122, "Logout"))</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+
+
+                <div id="ModalShowNotify" class="uk-modal">
+                    <div class="uk-modal-dialog">
+                        <button type="button" class="uk-modal-close uk-close"></button>
+                        <h2 class="heading_a">{{notifyChosen.Title}} - {{notifyChosen.Date | date:'dd/MM/yyyy HH:mm'}}</h2>
+                        <div>
+                            <div class="uk-grid uk-margin-bottom">
+                                <div class="uk-width-1">
+                                    <textarea ng-model="notifyChosen.Content" class="md-input" style="resize: none !IMPORTANT;line-height: normal !IMPORTANT;height:180px;"></textarea>
+                                    <p class="uk-text-right">___{{notifyChosen.UserCreate}}</p>
+                                </div>
+                            </div>
+                            <div class="uk-grid">
+                                <div class="uk-width-1 uk-text-right">
+                                    <button class="md-btn uk-modal-close uk-close">@(transition.Translate(1270, "Close"))</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<div ng-controller="cashDrawerController">
+
+    <div id="top_bar">
+        <div class="md-top-bar">
+            <ul id="menu_top" class="uk-clearfix">
+                @if (user.Roles.Contains(1))
+                {
+                    <li id="menu_1" class="visible-medium"><a href="/Admin/Home/Index"><i class="uk-icon-small uk-icon-home"></i></a></li>
+                }
+                @if (typeSoftware == 1 || typeSoftware == 3)
+                {
+                    <li id="menu_2" class="visible-medium">
+                        <a href="/Admin/Calendar/Index">
+                            <span>@(transition.Translate(1123, "Calendar"))</span>
+                        </a>
+                    </li>
+                }
+                @if (typeSoftware == 1 || typeSoftware == 3)
+                {
+                    <li id="menu_3" data-uk-dropdown="{mode:'click'}" class="visible-medium">
+                        <a href="#">
+                            <span>@(transition.Translate(1124, "Reservations"))</span>
+                        </a>
+                        <div class="uk-dropdown uk-dropdown-width-3">
+                            <div class="uk-grid uk-dropdown-grid" data-uk-grid-margin>
+                                <div class="uk-width-1-3">
+                                    <ul class="uk-nav uk-nav-dropdown">
+                                        <li class="uk-nav-header">@(transition.Translate(1124, "Reservations"))</li>
+                                        @if (user.Roles.Contains(3))
+                                        {
+                                            <li><a href="/Admin/Reservation/New">@(transition.Translate(1125, "New Reservation"))</a></li>
+                                        }
+                                        @if (user.Roles.Contains(4))
+                                        {
+                                            <li><a href="/Admin/Reservation/Index">@(transition.Translate(1124, "Reservations"))</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                                <div class="uk-width-1-3">
+                                    <ul class="uk-nav uk-nav-dropdown">
+                                        <li class="uk-nav-header">@(transition.Translate(1126, "Stays"))</li>
+                                        @if (user.Roles.Contains(5))
+                                        {
+                                            <li><a href="/Admin/Reservation/StayCheckIn">@(transition.Translate(1127, "Check in"))</a></li>
+                                        }
+                                        @if (user.Roles.Contains(6))
+                                        {
+                                            <li><a href="/Admin/Reservation/StayCheckOut">@(transition.Translate(1128, "Check out"))</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                                <div class="uk-width-1-3">
+                                    <ul class="uk-nav uk-nav-dropdown">
+                                        <li class="uk-nav-header">@(transition.Translate(1129, "Transfer of Deb"))</li>
+                                        @if (user.Roles.Contains(7))
+                                        {
+                                            <li><a href="/Admin/Reservation/DebtTransferReservation">@(transition.Translate(1130, "Show by Reservation"))</a></li>
+                                        }
+                                        @if (user.Roles.Contains(8))
+                                        {
+                                            <li><a href="/Admin/Reservation/DebtTransferAgencies">@(transition.Translate(1131, "Show by Agencies"))</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li id="menu_3" class="visible-medium">
+                        <a href="/Admin/Reservation/Index">
+                            <span>@(transition.Translate(1124, "Reservations"))</span>
+                        </a>
+                    </li>
+                }
+
+                @if (typeSoftware == 1 || typeSoftware == 3)
+                {
+                    <li id="menu_4" data-uk-dropdown="{mode:'click'}" class="visible-medium">
+                        <a href="#">
+                            <span>@(transition.Translate(1132, "Orders"))</span>
+                        </a>
+                        <div class="uk-dropdown uk-dropdown-width-1">
+                            <div class="uk-grid uk-dropdown-grid" data-uk-grid-margin>
+                                <div class="uk-width-1-1">
+                                    <ul class="uk-nav uk-nav-dropdown">
+                                        <li class="uk-nav-header">@(transition.Translate(1132, "Orders"))</li>
+                                        @if (user.Roles.Contains(9))
+                                        {
+                                            <li><a href="/Admin/Order/NewOrder">@(transition.Translate(1133, "New Order"))</a></li>
+                                        }
+                                        @if (user.Roles.Contains(10))
+                                        {
+                                            <li><a href="/Admin/Order/Index">@(transition.Translate(1132, "Orders"))</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+                @if (typeSoftware == 1 || typeSoftware == 3)
+                {
+                    <li id="menu_5" data-uk-dropdown="{mode:'click'}" class="visible-medium">
+                        <a href="#">
+                            <span>@(transition.Translate(1134, "Guest"))</span>
+                        </a>
+                        <div class="uk-dropdown uk-dropdown-width-1">
+                            <div class="uk-grid uk-dropdown-grid" data-uk-grid-margin>
+                                <div class="uk-width-1-1">
+                                    <ul class="uk-nav uk-nav-dropdown">
+                                        <li class="uk-nav-header">@(transition.Translate(1135, "Guest & Agencies"))</li>
+                                        @if (user.Roles.Contains(11))
+                                        {
+                                            <li><a href="/Admin/Guest/Index">@(transition.Translate(1134, "Guest"))</a></li>
+                                        }
+                                        @if (user.Roles.Contains(12))
+                                        {
+                                            <li><a href="/Admin/Company/Index">@(transition.Translate(1136, "Agencies"))</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+
+                @if (user.Roles.Contains(13))
+                {
+                    <li id="menu_6" class="visible-medium">
+                        <a href="/Admin/RateAvailability/Index">
+                            <span>@(transition.Translate(1137, "Rates & Availability"))</span>
+                        </a>
+                    </li>
+                }
+                @if (typeSoftware == 2 || typeSoftware == 3)
+                {
+                    <li id="menu_7" data-uk-dropdown="{mode:'click'}" class="visible-medium">
+                        <a href="#">
+                            <span>@(transition.Translate(1138, "Promotion"))</span>
+                        </a>
+                        <div class="uk-dropdown uk-dropdown-width-2">
+                            <div class="uk-grid uk-dropdown-grid" data-uk-grid-margin>
+                                <div class="uk-width-1-2">
+                                    <ul class="uk-nav uk-nav-dropdown">
+                                        <li class="uk-nav-header">@(transition.Translate(1139, "Promotions"))</li>
+                                        @if (user.Roles.Contains(14))
+                                        {
+                                            <li><a href="/Admin/Promotion/Index">@(transition.Translate(1139, "Promotions"))</a></li>
+                                        }
+                                        @if (user.Roles.Contains(15))
+                                        {
+                                            <li><a href="/Admin/Promotion/New">@(transition.Translate(1140, "Add Promotion"))</a></li>
+                                        }
+                                        @if (user.Roles.Contains(16))
+                                        {
+                                            <li><a href="/Admin/Promotion/InActive">@(transition.Translate(1141, "Inactive Promotions"))</a></li>
+                                        }
+                                        @if (user.Roles.Contains(17))
+                                        {
+                                            <li><a href="/Admin/PlaneRate/Index">@(transition.Translate(1142, "PlaneRate"))</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                                <div class="uk-width-1-2">
+                                    <ul class="uk-nav uk-nav-dropdown">
+                                        <li class="uk-nav-header">@(transition.Translate(1143, "Voucher"))</li>
+                                        @if (user.Roles.Contains(18))
+                                        {
+                                            <li><a href="/Admin/Voucher/Index">@(transition.Translate(1143, "Voucher"))</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+                else
+                {
+                    <li id="menu_7" class="visible-medium">
+                        <a href="/Admin/Voucher/Index">
+                            <span>@(transition.Translate(1143, "Voucher"))</span>
+                        </a>
+                    </li>
+                }
+
+                @if (user.Roles.Contains(19))
+                {
+                    @*<li id="menu_8" class="visible-medium">
+                <a href="#">
+                    <span>@(transition.Translate(1144, "Accounting"))</span>
+                </a>
+            </li>*@
+                }
+                @if (user.Roles.Contains(20))
+                {
+                    <li id="menu_11" class="visible-medium">
+                        <a href="/Admin/Invoice/Index">
+                            <span>@(transition.Translate(1145, "Invoice"))</span>
+                        </a>
+                    </li>
+                }
+                @if (typeSoftware == 1 || typeSoftware == 3)
+                {
+                    <li id="menu_9" data-uk-dropdown="{mode:'click'}" class="visible-medium">
+                        <a href="#" ng-click="getStatusDrawer()">
+                            <span>@(transition.Translate(1146, "Cash Drawer"))</span>
+                        </a>
+                        <div class="uk-dropdown uk-dropdown-width-1">
+                            <div class="uk-grid uk-dropdown-grid" data-uk-grid-margin>
+                                <div class="uk-width-1-1">
+                                    <ul class="uk-nav uk-nav-dropdown">
+                                        <li class="uk-nav-header">@(transition.Translate(1146, "Cash Drawer"))</li>
+                                        @if (user.Roles.Contains(58))
+                                        {
+                                            <li><a ng-if="!statusCashDrawer" ng-click="openCashDrawer()">@(transition.Translate(1147, "Open Cash Drawers"))</a></li>
+                                        }
+                                        @if (user.Roles.Contains(21))
+                                        {
+                                            <li><a ng-if="statusCashDrawer" ng-click="closeCashDrawer()">@(transition.Translate(1148, "Close Cash Drawers"))</a></li>
+                                        }
+                                        @if (user.Roles.Contains(22))
+                                        {
+                                            <li><a href="/Admin/CashDrawer/Index">@(transition.Translate(1149, "Manage Cash Drawers"))</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+
+                <li id="menu_10" data-uk-dropdown="{mode:'click'}" class="visible-medium">
+                    <a href="#">
+                        <span>@(transition.Translate(1150, "Reports"))</span>
+                    </a>
+                    <div class="uk-dropdown uk-dropdown-width-4">
+                        <div class="uk-grid uk-dropdown-grid" data-uk-grid-margin>
+                            <div class="uk-width-1-2">
+                                <ul class="uk-nav uk-nav-dropdown uk-panel">
+                                    <li class="uk-nav-header">@(transition.Translate(1151, "RESERVATION REPORTS"))</li>
+                                    <li>
+                                        <div class="uk-grid uk-margin-non">
+                                            <div class="uk-width-1-2 uk-padding-non">
+                                                <ul class="uk-nav uk-nav-dropdown uk-panel uk-margin-non uk-padding-non">
+                                                    @if (user.Roles.Contains(23))
+                                                    {
+                                                        <li><a href="/Admin/Statistic/CheckIn">@(transition.Translate(1152, "Arrivals Report")) </a></li>
+                                                    }
+                                                    @if (user.Roles.Contains(24))
+                                                    {
+                                                        <li><a href="/Admin/Statistic/CheckOut">@(transition.Translate(1153, "Departures Report")) </a></li>
+                                                    }
+                                                    @if (user.Roles.Contains(25))
+                                                    {
+                                                        <li><a href="/Admin/Statistic/Inhouse">@(transition.Translate(1154, "In-House Report"))</a> </li>
+                                                    }
+                                                    @if (user.Roles.Contains(26))
+                                                    {
+                                                        <li><a href="/Admin/Statistic/NoShow">@(transition.Translate(1155, "No Show Report"))</a> </li>
+                                                    }
+                                                    @if (user.Roles.Contains(27))
+                                                    {
+                                                        <li><a href="/Admin/Statistic/Cancel">@(transition.Translate(1156, "Cancellations Report"))</a> </li>
+                                                    }
+                                                    @if (user.Roles.Contains(28))
+                                                    {
+                                                        <li><a href="/Admin/Statistic/Activity">@(transition.Translate(1157, "Reservation Activity"))</a> </li>
+                                                    }
+
+                                                </ul>
+                                            </div>
+                                            <div class="uk-width-1-2 uk-padding-non">
+                                                <ul class="uk-nav uk-nav-dropdown uk-panel uk-margin-non uk-padding-non">
+                                                    @if (user.Roles.Contains(29))
+                                                    {
+                                                        <li><a href="/Admin/Statistic/GuestCheckIn">@(transition.Translate(1158, "Guest Checked In"))</a></li>
+                                                    }
+                                                    @if (user.Roles.Contains(30))
+                                                    {
+                                                        <li><a href="/Admin/Statistic/GuestCheckOut">@(transition.Translate(1159, "Guest Checked Out"))</a> </li>
+                                                    }
+                                                    @if (user.Roles.Contains(31))
+                                                    {
+                                                        <li><a href="/Admin/Statistic/AvailableAccommodations">@(transition.Translate(1160, "Available Accommodations"))</a> </li>
+                                                    }
+                                                    @if (user.Roles.Contains(32))
+                                                    {
+                                                        <li><a href="/Admin/Statistic/InvoiceBreakDown">@(transition.Translate(1161, "Invoice Breakdown"))</a></li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="uk-width-1-4">
+                                <ul class="uk-nav uk-nav-dropdown uk-panel">
+                                    <li class="uk-nav-header">@(transition.Translate(1162, "AUDIT REPORT"))</li>
+                                    @if (user.Roles.Contains(59))
+                                    {
+                                        <li><a href="/Admin/Statistic/CashDrawerReport">@(transition.Translate(1230, "Cash Drawer Report"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(62))
+                                    {
+                                        <li><a href="/Admin/Statistic/SummaryReport">@(transition.Translate(2406, "Summary Report"))</a></li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="uk-width-1-4">
+                                <ul class="uk-nav uk-nav-dropdown uk-panel">
+                                    <li class="uk-nav-header">@(transition.Translate(2454, "Statistic"))</li>
+                                    @if (user.Roles.Contains(63))
+                                    {
+                                        <li><a href="/Admin/Statistic/ReportByUser">@(transition.Translate(2445, "My Report"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(64))
+                                    {
+                                        <li><a href="/Admin/Statistic/ReportAllUser">@(transition.Translate(2446, "Employee report"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(65))
+                                    {
+                                        <li><a href="/Admin/Statistic/StatisticRevenue">@(transition.Translate(2452, "Statistic Revenue"))</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li data-uk-dropdown="{justify:'#top_bar',mode:'click'}" class="visible-medium-small">
+                    <a href="#"><i class="material-icons">&#xE5D2;</i><span>Menu</span></a>
+                    <div class="uk-dropdown uk-dropdown-width-2">
+                        <div class="uk-grid uk-dropdown-grid" data-uk-grid-margin>
+                            <div class="uk-width-1-1">
+                                <ul class="uk-nav uk-nav-dropdown">
+                                    @if (user.Roles.Contains(1))
+                                    {
+                                        <li><a href="/Admin/Home/Index">@(transition.Translate(1199, "Home"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(2))
+                                    {
+                                        <li><a href="/Admin/Calendar/Index"><span>@(transition.Translate(1123, "Calendar"))</span></a></li>
+                                    }
+                                    <li class="uk-nav-header"> <span>@(transition.Translate(1124, "Reservations"))</span></li>
+                                    @if (user.Roles.Contains(3))
+                                    {
+                                        <li><a href="/Admin/Reservation/New">@(transition.Translate(1125, "New Reservation"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(4))
+                                    {
+                                        <li><a href="/Admin/Reservation/Index">@(transition.Translate(1124, "Reservations"))</a></li>
+                                    }
+                                    <li class="uk-nav-header">@(transition.Translate(1126, "Stays"))</li>
+                                    @if (user.Roles.Contains(5))
+                                    {
+                                        <li><a href="/Admin/Reservation/StayCheckIn">@(transition.Translate(1127, "Check in"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(6))
+                                    {
+                                        <li><a href="/Admin/Reservation/StayCheckOut">@(transition.Translate(1128, "Check out"))</a></li>
+                                    }
+                                    <li class="uk-nav-header">@(transition.Translate(1129, "Transfer of Debt"))</li>
+                                    @if (user.Roles.Contains(7))
+                                    {
+                                        <li><a href="/Admin/Reservation/DebtTransferReservation">@(transition.Translate(1130, "Show by Reservation"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(8))
+                                    {
+                                        <li><a href="/Admin/Reservation/DebtTransferAgencies">@(transition.Translate(1131, "Show by Agencies"))</a></li>
+                                    }
+                                    <li class="uk-nav-header">@(transition.Translate(1132, "Orders"))</li>
+                                    @if (user.Roles.Contains(9))
+                                    {
+                                        <li><a href="/Admin/Order/NewOrder">@(transition.Translate(1133, "New Order"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(10))
+                                    {
+                                        <li><a href="/Admin/Order/Index">@(transition.Translate(1132, "Orders"))</a></li>
+                                    }
+                                    <li class="uk-nav-header">@(transition.Translate(1135, "Guest & Agencies"))</li>
+                                    @if (user.Roles.Contains(11))
+                                    {
+                                        <li><a href="/Admin/Guest/Index">@(transition.Translate(1134, "Guest"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(12))
+                                    {
+                                        <li><a href="/Admin/Company/Index">@(transition.Translate(1136, "Agencies"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(13))
+                                    {
+                                        <li><a href="/Admin/RateAvailability/Index"><span>@(transition.Translate(1137, "Rates & Availability"))</span></a></li>
+                                    }
+                                    <li class="uk-nav-header">@(transition.Translate(1139, "Promotions"))</li>
+                                    @if (user.Roles.Contains(14))
+                                    {
+                                        <li><a href="/Admin/Promotion/Index">@(transition.Translate(1139, "Promotions"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(15))
+                                    {
+                                        <li><a href="/Admin/Promotion/New">@(transition.Translate(1140, "Add Promotion"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(16))
+                                    {
+                                        <li><a href="/Admin/Promotion/InActive">@(transition.Translate(1141, "Inactive Promotions"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(17))
+                                    {
+                                        <li><a href="/Admin/PlaneRate/Index">@(transition.Translate(1142, "PlaneRate"))</a></li>
+                                    }
+                                    <li class="uk-nav-header">@(transition.Translate(1143, "Voucher"))</li>
+                                    @if (user.Roles.Contains(18))
+                                    {
+                                        <li><a href="/Admin/Voucher/Index">@(transition.Translate(1143, "Voucher"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(19))
+                                    {
+                                        @*<li><a href="#"> <span>@(transition.Translate(1144, "Accounting"))</span></a></li>*@
+                                    }
+                                    @if (user.Roles.Contains(20))
+                                    {
+                                        <li><a href="/Admin/Invoice/Index"><span>@(transition.Translate(1145, "Invoice"))</span></a></li>
+                                    }
+                                    <li class="uk-nav-header">@(transition.Translate(1146, "Cash Drawer"))</li>
+                                    @if (user.Roles.Contains(58))
+                                    {
+                                        <li><a ng-if="!statusCashDrawer" ng-click="openCashDrawer()">@(transition.Translate(1147, "Open Cash Drawers"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(21))
+                                    {
+                                        <li><a ng-if="statusCashDrawer" ng-click="closeCashDrawer()">@(transition.Translate(1148, "Close Cash Drawers"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(22))
+                                    {
+                                        <li><a href="/Admin/CashDrawer/Index">@(transition.Translate(1149, "Manage Cash Drawers"))</a></li>
+                                    }
+                                    <li class="uk-nav-header">@(transition.Translate(1151, "RESERVATION REPORTS"))</li>
+                                    @if (user.Roles.Contains(23))
+                                    {
+                                        <li><a href="/Admin/Statistic/CheckIn">@(transition.Translate(1152, "Arrivals Report")) </a></li>
+                                    }
+                                    @if (user.Roles.Contains(24))
+                                    {
+                                        <li><a href="/Admin/Statistic/CheckOut">@(transition.Translate(1153, "Departures Report")) </a></li>
+                                    }
+                                    @if (user.Roles.Contains(25))
+                                    {
+                                        <li><a href="/Admin/Statistic/Inhouse">@(transition.Translate(1154, "In-House Report"))</a> </li>
+                                    }
+                                    @if (user.Roles.Contains(26))
+                                    {
+                                        <li><a href="/Admin/Statistic/NoShow">@(transition.Translate(1155, "No Show Report"))</a> </li>
+                                    }
+                                    @if (user.Roles.Contains(27))
+                                    {
+                                        <li><a href="/Admin/Statistic/Cancel">@(transition.Translate(1156, "Cancellations Report"))</a> </li>
+                                    }
+                                    @if (user.Roles.Contains(28))
+                                    {
+                                        <li><a href="/Admin/Statistic/Activity">@(transition.Translate(1157, "Reservation Activity"))</a> </li>
+                                    }
+                                    @if (user.Roles.Contains(29))
+                                    {
+                                        <li><a href="/Admin/Statistic/GuestCheckIn">@(transition.Translate(1158, "Guest Checked In"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(30))
+                                    {
+                                        <li><a href="/Admin/Statistic/GuestCheckOut">@(transition.Translate(1159, "Guest Checked Out"))</a> </li>
+                                    }
+                                    @if (user.Roles.Contains(31))
+                                    {
+                                        <li><a href="/Admin/Statistic/AvailableAccommodations">@(transition.Translate(1160, "Available Accommodations"))</a> </li>
+                                    }
+                                    @if (user.Roles.Contains(32))
+                                    {
+                                        <li><a href="/Admin/Statistic/InvoiceBreakDown">@(transition.Translate(1161, "Invoice Breakdown"))</a></li>
+                                    }
+                                    @if (user.Roles.Contains(59))
+                                    {
+                                        <li><a href="/Admin/Statistic/CashDrawerReport">@(transition.Translate(1230, "Cash Drawer Report"))</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="ModalOpenCashDrawer" class="uk-modal">
+        <div class="uk-modal-dialog">
+            <button type="button" class="uk-modal-close uk-close"></button>
+            <h2 class="heading_a">@(transition.Translate(1147, "Open Cash Drawer"))</h2>
+            <div>
+                <div class="uk-grid uk-margin-bottom">
+                    <div class="uk-width-1 uk-margin-medium-bottom">
+                        <div class="md-input-wrapper">
+                            <label><b>@(transition.Translate(1167, "Select Drawer"))</b></label>
+                            <select ng-change="selectOtherDrawer()" ng-model="cashDrawerIdChoose" class="md-input" convert-to-number>
+                                <option value="-1">@(transition.Translate(1167, "Select Drawer"))</option>
+                                <option value="{{item.CashDrawerId}}" ng-repeat="item in cashdrawers">{{item.Name}}</option>
+                            </select>
+                            <span class="md-input-bar "></span>
+                        </div>
+                    </div>
+                    <div class="uk-width-1" ng-if="cashDrawerIdChoose > 0">
+                        <div class="uk-grid" ng-cloak>
+                            <div class="uk-width-1-2 uk-margin-bottom">
+                                <div class="md-input-wrapper">
+                                    <label><b>@(transition.Translate(1168, "System Starting Balance"))</b></label>
+                                    <span style="padding-left: 5px;font-weight: 600;font-size: 14px;">{{CashDrawer.LastBalance}} ₫</span>
+                                    <span class="md-input-bar "></span>
+                                </div>
+                            </div>
+                            <div class="uk-width-1-2 uk-margin-bottom">
+                                <div class="uk-input-group">
+                                    <div class="md-input-wrapper">
+                                        <label><b>@(transition.Translate(1169, "Enter Starting Balance"))</b></label>
+                                        <input ng-click="refreshErrDrawer()" ng-blur="warningInputCashDrawer()" id="StartBalance" type="text" class="md-input" />
+                                        <span id="err_StartBalance" class="error">@(transition.Translate(1170, "Value is invalid!"))</span>
+                                        <span class="md-input-bar "></span>
+                                    </div>
+                                    <span class="uk-input-group-addon">
+                                        <span>₫</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="uk-width-1 uk-margin-bottom" id="err_CashDrawer" style="display:none">
+                                <p style="padding: 12px 20px 12px;color: red;background: #f7eff0;">
+                                    @(transition.Translate(1171, "tipCashDrawer"))
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-1">
+                        <div class="md-input-wrapper">
+                            <label><b>@(transition.Translate(1172, "Notes"))</b></label>
+                            <textarea ng-model="NoteOpen" rows="1" class="md-input"></textarea>
+                            <span class="md-input-bar "></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-grid">
+                    <div class="uk-width-1 uk-text-right">
+                        <button class="md-btn md-btn-new" ng-click="OpenDrawer()">@(transition.Translate(1147, "Open Cash Drawer"))</button>
+                        <button class="md-btn uk-modal-close">@(transition.Translate(1173, "Cancel"))</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ModalCloseCashDrawer" class="uk-modal">
+        <div class="uk-modal-dialog uk-modal-dialog-large">
+            <button type="button" class="uk-modal-close uk-close"></button>
+            <h2 class="heading_a">@(transition.Translate(1148, "Close Cash Drawer"))</h2>
+            <div>
+                <div class="uk-grid uk-margin-bottom">
+                    <div class="uk-width-1-3">
+                        <div class="uk-grid">
+                            <div class="uk-width-1">
+                                <h4 class="title-box-small-accomodation uk-text-center"><b>@(transition.Translate(1148, "Close Cash Drawer"))</b></h4>
+                            </div>
+                            <div class="uk-width-1">
+                                <div class="box-div-step">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1">
+                                            <span class="box-step {{stepCloseDrawer > 0? 'box-step-choose':''}}">
+                                                <span>1</span>
+                                                <span>@(transition.Translate(1174, "Balance"))</span>
+                                            </span>
+                                        </div>
+                                        <div class="uk-width-1">
+                                            <span class="box-step {{stepCloseDrawer > 1? 'box-step-choose':''}}">
+                                                <span>2</span>
+                                                <span>@(transition.Translate(1175, "Cash Drop"))</span>
+                                            </span>
+                                        </div>
+                                        <div class="uk-width-1">
+                                            <span class="box-step {{stepCloseDrawer > 2? 'box-step-choose':''}} ">
+                                                <span>3</span>
+                                                <span>@(transition.Translate(1176, "Summary"))</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-2-3" style="padding-top: 15px;min-height: 230px;">
+                        <div ng-if="stepCloseDrawer == 1">
+                            @Html.Partial("~/Areas/Admin/Views/CashDrawer/pCLose_Balance.cshtml", transition)
+                        </div>
+                        <div ng-if="stepCloseDrawer == 2">
+                            @Html.Partial("~/Areas/Admin/Views/CashDrawer/pCLose_CashDrop.cshtml", transition)
+                        </div>
+                        <div ng-if="stepCloseDrawer == 3">
+                            @Html.Partial("~/Areas/Admin/Views/CashDrawer/pCLose_Summary.cshtml", transition)
+                        </div>
+                    </div>
+                    <div class="uk-width-1">
+                        <div class="uk-grid">
+                            <div class="uk-width-1-3">
+                            </div>
+                            <div class="uk-width-2-3 uk-text-right">
+                                <button style="float:left" class="md-btn md-btn-new" ng-if="stepCloseDrawer > 1" ng-click="BackCloseDrawer()">@(transition.Translate(1177, "Back"))</button>
+                                <button ng-if="stepCloseDrawer == 1" class="md-btn md-btn-new" ng-click="StepCashDrop()">@(transition.Translate(1178, "Next"))</button>
+                                <button ng-if="stepCloseDrawer == 2" class="md-btn md-btn-new" ng-click="StepSummary()">@(transition.Translate(1178, "Next"))</button>
+                                <button ng-if="stepCloseDrawer == 3" class="md-btn md-btn-new" ng-click="CloseDrawer()">@(transition.Translate(1179, "Close Drawer"))</button>
+                                <button class="md-btn uk-modal-close">@(transition.Translate(1173, "Cancel"))</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var $win = $(window); // or $box parent container
+        var $box = $("#sidebar_secondary");
+
+        $win.on("click.Bst", function (event) {
+            if (
+                $box.has(event.target).length == 0
+                &&
+                !$box.is(event.target)
+            ) {
+                if ($('body').attr('class').indexOf('sidebar_secondary_active') > 0 && !sidebar_secondary_click)
+                    $('body').removeClass('sidebar_secondary_active')
+                sidebar_secondary_click = false;
+            }
+        });
+
+    });
+</script>
