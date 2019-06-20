@@ -1,0 +1,277 @@
+﻿
+@{
+    ViewBag.Title = "Tổng quan";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
+
+
+<style>
+    .inner h3 {
+    }
+</style>
+<script src="~/Scripts/Dashborad/dashboard.js"></script>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3><span ng-cloak>{{data.totalHotel}}</span></h3>
+                    <p>Tổng số khách sạn</p>
+                </div>
+                <div class="icon">
+                    <ion-icon name="business"></ion-icon>
+                </div>
+                <a href="#hotel" class="small-box-footer " data-toggle="tab">Chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3><span ng-cloak>{{data.totalHotelUsePMS}}</span></h3>
+                    <p>Tổng số khách sạn sử dụng PMS</p>
+                </div>
+                <div class="icon">
+                    <ion-icon name="bookmarks"></ion-icon>
+                </div>
+                <a href="#HotelUsePMS" data-toggle="tab" class="small-box-footer">Chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3><span ng-cloak>{{data.totalHotelUseBE}}</span></h3>
+                    <p>Tổng số khách sạn sử dụng BE</p>
+                </div>
+                <div class="icon">
+                    <ion-icon name="wallet"></ion-icon>
+                </div>
+                <a href="#HotelUseBE" data-toggle="tab" class="small-box-footer">Chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3><span ng-cloak>{{data.totalHotelUseBEPMS}}</span></h3>
+                    <p>Tổng số khách sạn sử dụng BE và PMS</p>
+                </div>
+                <div class="icon">
+                    <ion-icon name="cloud-download"></ion-icon>
+                </div>
+                <a href="#HotelUsePMSBE" data-toggle="tab" class="small-box-footer">Chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content">
+      
+        <div id="hotel" class="tab-pane fade in  ">
+            <div class="row">
+                <div class="col-lg-2 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Ngày gia hạn từ</label>
+                        <input id="FromDate" ng-model="FromDate" type="text" class="form-control" value="1-1-2019">
+                        <span class="fa fa-calendar form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Đến ngày</label>
+                        <input id="ToDate" ng-model="ToDate" type="text" class="form-control" value="1-1-2020">
+                        <span class="fa fa-calendar form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Trạng thái</label>
+                        <select class="form-control" ng-model="filters.status" convert-to-number>
+                            <option value="-1">Tất cả</option>
+                            <option value="1">Dùng thử</option>
+                            <option value="2">Dùng thật</option>
+                            <option value="3">Yêu cầu gia hạn</option>
+                            <option value="4">Đã khóa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Từ khóa</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Tên/ Mã khách sạn">
+                            <span class="input-group-btn">
+                                <button id="Search" ng-click="GetAllHotel()" class="btn btn-info btn-flat" type="button">
+                                    <span class="fa fa-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>Danh sách khách sạn</h3>
+                <div ui-grid="gridOptions" set-grid-height ui-grid-selection ui-grid-resize-columns ui-grid-move-columns
+                     ui-grid-pinning ui-grid-pagination ui-grid-exporter ui-grid-auto-resize class="grid"></div>
+            </div>
+
+        </div>
+        <div id="HotelUsePMS" class="tab-pane fade  ">
+
+            <div class="row">
+                <div class="col-lg-2 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Ngày gia hạn từ</label>
+                        <input id="FromDate" ng-model="FromDate" type="text" class="form-control" value="1-1-2019">
+                        <span class="fa fa-calendar form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Đến ngày</label>
+                        <input id="ToDate" ng-model="ToDate" type="text" class="form-control" value="1-1-2020">
+                        <span class="fa fa-calendar form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Trạng thái</label>
+                        <select class="form-control" ng-model="filters.status" convert-to-number>
+                            <option value="-1">Tất cả</option>
+                            <option value="1">Dùng thử</option>
+                            <option value="2">Dùng thật</option>
+                            <option value="3">Yêu cầu gia hạn</option>
+                            <option value="4">Đã khóa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Từ khóa</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Tên/ Mã khách sạn">
+                            <span class="input-group-btn">
+                                <button id="Search" ng-click="GetAllHotelUsePMS()" class="btn btn-info btn-flat" type="button">
+                                    <span class="fa fa-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>Danh sách khách sạn sử dụng PMS</h3>
+                <div ui-grid="gridOptionsPMS" set-grid-height ui-grid-selection ui-grid-resize-columns ui-grid-move-columns
+                     ui-grid-pinning ui-grid-pagination ui-grid-exporter ui-grid-auto-resize class="grid"></div>
+            </div>
+
+        </div>
+        <div id="HotelUseBE" class="tab-pane fade  ">
+            <div class="row">
+                <div class="col-lg-2 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Ngày gia hạn từ</label>
+                        <input id="FromDate" ng-model="FromDate" type="text" class="form-control" value="1-1-2019">
+                        <span class="fa fa-calendar form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Đến ngày</label>
+                        <input id="ToDate" ng-model="ToDate" type="text" class="form-control" value="1-1-2020">
+                        <span class="fa fa-calendar form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Trạng thái</label>
+                        <select class="form-control" ng-model="filters.status" convert-to-number>
+                            <option value="-1">Tất cả</option>
+                            <option value="1">Dùng thử</option>
+                            <option value="2">Dùng thật</option>
+                            <option value="3">Yêu cầu gia hạn</option>
+                            <option value="4">Đã khóa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Từ khóa</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Tên/ Mã khách sạn">
+                            <span class="input-group-btn">
+                                <button id="Search" ng-click="GetAllHotelUseBE()" class="btn btn-info btn-flat" type="button">
+                                    <span class="fa fa-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>Danh sách khách sạn sử dụng BE</h3>
+                <div ui-grid="gridOptionsBE" set-grid-height ui-grid-selection ui-grid-resize-columns ui-grid-move-columns
+                     ui-grid-pinning ui-grid-pagination ui-grid-exporter ui-grid-auto-resize class="grid"></div>
+            </div>
+            HotelUseBE
+        </div>
+        <div id="HotelUsePMSBE" class="tab-pane fade  ">
+            <div class="row">
+                <div class="col-lg-2 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Ngày gia hạn từ</label>
+                        <input id="FromDate" ng-model="FromDate" type="text" class="form-control" value="1-1-2019">
+                        <span class="fa fa-calendar form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Đến ngày</label>
+                        <input id="ToDate" ng-model="ToDate" type="text" class="form-control" value="1-1-2020">
+                        <span class="fa fa-calendar form-control-feedback"></span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Trạng thái</label>
+                        <select class="form-control" ng-model="filters.status" convert-to-number>
+                            <option value="-1">Tất cả</option>
+                            <option value="1">Dùng thử</option>
+                            <option value="2">Dùng thật</option>
+                            <option value="3">Yêu cầu gia hạn</option>
+                            <option value="4">Đã khóa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-3">
+                    <div class="form-group has-feedback">
+                        <label>Từ khóa</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Tên/ Mã khách sạn">
+                            <span class="input-group-btn">
+                                <button id="Search" ng-click="GetAllHotelUsePMSBE()" class="btn btn-info btn-flat" type="button">
+                                    <span class="fa fa-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>Danh sách khách sạn sử dụng PMS và BE</h3>
+                <div ui-grid="gridOptionsPMSBE" set-grid-height ui-grid-selection ui-grid-resize-columns ui-grid-move-columns
+                     ui-grid-pinning ui-grid-pagination ui-grid-exporter ui-grid-auto-resize class="grid"></div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+@*<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>*@

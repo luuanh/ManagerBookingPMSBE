@@ -1,0 +1,255 @@
+﻿
+@{
+    ViewBag.Title = "Đăng ký sử dụng phần mềm";
+}
+<script src="~/Scripts/Statistic/registration.js"></script>
+<script src="~/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="http://www.chartjs.org/dist/2.7.2/Chart.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        Thống kê
+    </h1>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tình hình khách sạn</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="chart">
+                        <canvas id="chartSituation" width="597" height="298" style="display: block; max-width: 597px;  max-height: 298px;"></canvas>
+                    </div>
+                    <div>
+                        <div class="col-xs-4">
+                            <div class="form-group has-feedback">
+                                <label>Xem theo</label>
+                                <select ng-change="getSituation()" ng-model="paramSituation.type" class="form-control" convert-to-number>
+                                    <option value="0">Tháng</option>
+                                    <option value="1">Năm</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4" ng-if="paramSituation.type == 0" ng-cloak>
+                            <div class="form-group has-feedback">
+                                <label>Tháng</label>
+                                <select ng-change="getSituation()" ng-model="paramSituation.month" class="form-control" convert-to-number>
+                                    @for (int i = 1; i < 13; i++)
+                                    {
+                                        <option value="@i">Tháng @i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group has-feedback" ng-cloak>
+                                <label>Năm</label>
+                                <select ng-change="getSituation()" ng-model="paramSituation.year" class="form-control" convert-to-number>
+                                    @for (int i = 2016; i < 2021; i++)
+                                    {
+                                        <option value="@i">Năm @i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Khách hàng hoạt động thực tế</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="chart">
+                        <canvas id="chartUse" width="597" height="298" style="display: block; max-width: 597px;  max-height: 298px;"></canvas>
+                    </div>
+                    <div>
+                        <div class="col-xs-4">
+                            <div class="form-group has-feedback">
+                                <label>Xem theo</label>
+                                <select ng-change="getUse()" ng-model="paramUse.type" class="form-control" convert-to-number>
+                                    <option value="0">Tháng</option>
+                                    <option value="1">Năm</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4" ng-if="paramUse.type == 0" ng-cloak>
+                            <div class="form-group has-feedback">
+                                <label>Tháng</label>
+                                <select ng-change="getUse()" ng-model="paramUse.month" class="form-control" convert-to-number>
+                                    @for (int i = 1; i < 13; i++)
+                                    {
+                                        <option value="@i">Tháng @i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group has-feedback" ng-cloak>
+                                <label>Năm</label>
+                                <select ng-change="getUse()" ng-model="paramUse.year" class="form-control" convert-to-number>
+                                    @for (int i = 2016; i < 2021; i++)
+                                    {
+                                        <option value="@i">Năm @i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tình hình đăng ký phần mềm</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="chart">
+                        <canvas id="chartRegistration" width="597" height="298" style="display: block; max-width: 597px;  max-height: 298px;"></canvas>
+                    </div>
+                    <div>
+                        <div class="col-xs-4">
+                            <div class="form-group has-feedback">
+                                <label>Xem theo</label>
+                                <select ng-change="getRegistration()" ng-model="paramRegistration.type" class="form-control" convert-to-number>
+                                    <option value="0">Tháng</option>
+                                    <option value="1">Năm</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4" ng-if="paramRegistration.type == 0" ng-cloak>
+                            <div class="form-group has-feedback">
+                                <label>Tháng</label>
+                                <select ng-change="getRegistration()" ng-model="paramRegistration.month" class="form-control" convert-to-number>
+                                    @for (int i = 1; i < 13; i++)
+                                    {
+                                        <option value="@i">Tháng @i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group has-feedback" ng-cloak>
+                                <label>Năm</label>
+                                <select ng-change="getRegistration()" ng-model="paramRegistration.year" class="form-control" convert-to-number>
+                                    @for (int i = 2016; i < 2021; i++)
+                                    {
+                                        <option value="@i">Năm @i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Chi tiết đăng ký phần mềm theo tháng</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="chart">
+                        <canvas id="chartRegistrationSituation" width="597" height="298" style="display: block; max-width: 597px;  max-height: 298px;"></canvas>
+                    </div>
+                    <div>
+                        <div class="col-xs-4">
+                            <div class="form-group has-feedback">
+                                <label>Tháng</label>
+                                <select ng-change="getRegistrationSituation()" ng-model="paramRegistrationSituation.month" class="form-control" convert-to-number>
+                                    @for (int i = 1; i < 13; i++)
+                                    {
+                                        <option value="@i">Tháng @i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group has-feedback" ng-cloak>
+                                <label>Năm</label>
+                                <select ng-change="getRegistrationSituation()" ng-model="paramRegistrationSituation.year" class="form-control" convert-to-number>
+                                    @for (int i = 2016; i < 2021; i++)
+                                    {
+                                        <option value="@i">Năm @i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Tình hình đăng ký tổng thể phần mềm</h3>
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="chart">
+                        <canvas id="chartAllRegistration" width="597" height="298" style="display: block"></canvas>
+                    </div>
+                    <div>
+                        <div class="col-xs-4">
+                            <div class="form-group has-feedback">
+                                <label>Tháng</label>
+                                <select ng-change="getAllRegistration()" ng-model="paramAllRegistration.month" class="form-control" convert-to-number>
+                                    @for (int i = 1; i < 13; i++)
+                                    {
+                                        <option value="@i">Tháng @i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-group has-feedback" ng-cloak>
+                                <label>Năm</label>
+                                <select ng-change="getAllRegistration()" ng-model="paramAllRegistration.year" class="form-control" convert-to-number>
+                                    @for (int i = 2016; i < 2021; i++)
+                                    {
+                                        <option value="@i">Năm @i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

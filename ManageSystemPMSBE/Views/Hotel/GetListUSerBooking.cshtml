@@ -1,0 +1,81 @@
+﻿@using ManageSystemPMSBE.Models
+@using System
+@{
+    ViewBag.Title = "GetListUSerBooking";
+    List<Booking_Reservation> userBooking = (List<Booking_Reservation>)ViewData["userBooking"];
+
+    
+
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+@*<script>
+    function exportTableToExcel(tableID, filename = '') {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableID);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+        // Create download link element
+        downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+            // Setting the file name
+            downloadLink.download = filename;
+
+            //triggering the function
+            downloadLink.click();
+        }
+    }
+</script>*@
+<h2>Danh sách Booking trong tháng</h2>
+
+<div class="container">
+    <h2>Basic Table</h2>
+    <table class="table" id=" tblData " >
+        <thead>
+            <tr>
+                <th>Tên khách sạn</th>
+                <th>MÃ đặt phòng</th>
+                <th>Tên khách</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Check in</th>
+                <th>Check out</th>
+                <th>Tổng tiền</th>
+            </tr>
+        </thead>
+        @foreach (var item in userBooking)
+        {
+             <tbody>
+                 <tr>
+
+                     <td>@item.Name</td>
+                     <td>@item.ReservationId</td>
+                     <td>@item.GuestName</td>
+                     <td>@item.Email</td>
+                     <td>@item.Phone</td>
+                     <td>@item.CreateDate.ToString("MM/dd/yyyy")</td>
+                     <td>@item.DepartureDate.ToString("MM/dd/yyyy")</td>
+                     <th>@string.Format("{0:0.00}", item.Total) </th>
+                 </tr>
+        </tbody>
+        }
+
+    </table>
+    @*<button onclick="exportTableToExcel('tblData')">Export Table Data To Excel File</button>*@
+</div>

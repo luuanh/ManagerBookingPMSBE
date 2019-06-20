@@ -1,0 +1,253 @@
+﻿@using ManageSystemPMSBE.Controllers
+@using System
+@{
+    ViewBag.Title = "Thông tin khách sạn";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+    HotelDetail hotelDetail = (HotelDetail)ViewData["hotelDetail"];
+}
+<style>
+    .title {
+        width: 145px;
+        display: inline-block;
+        font-weight: 600;
+        margin-right: 15px;
+    }
+
+    .table-booking th, .table-booking td {
+        vertical-align: middle !important;
+        text-align: center !important;
+    }
+
+    .table-bordered th, .table-bordered td {
+        border: 1px solid #929292 !important;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h3>Thông tin khách sạn</h3>
+    </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-sm-8" style="margin-bottom:10px">
+                <h4>Thông tin chung</h4>
+                <div>
+                    <p>
+                        <span class="title">Tên khách sạn</span>
+                        <span class="content-item">: @hotelDetail.Hotel.Name</span>
+                    </p>
+                    <p>
+                        <span class="title">Mã nhóm khách sạn</span>
+                        <span class="content-item">: @hotelDetail.Hotel.GroupCode</span>
+                    </p>
+                    <p>
+                        <span class="title">Mã khách sạn</span>
+                        <span class="content-item">: @hotelDetail.Hotel.Code</span>
+                    </p>
+                    <p>
+                        <span class="title">Email</span>
+                        <span class="content-item">: @hotelDetail.Hotel.Email</span>
+                    </p>
+                    <p>
+                        <span class="title">Số điện thoại</span>
+                        <span class="content-item">: @hotelDetail.Hotel.Phone</span>
+                    </p>
+                    <p>
+                        <span class="title">Địa chỉ</span>
+                        <span class="content-item">: @hotelDetail.Hotel.Address</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-4" style="margin-bottom:10px">
+                <h4>Thông tin đăng ký</h4>
+                <div>
+                    <p>
+                        <span class="title">Phần mềm</span>
+                        <span class="content-item">: @hotelDetail.Hotel.GetTypeSofware()</span>
+                    </p>
+                    <p>
+                        <span class="title">Hình thức hanh toán</span>
+                        <span class="content-item">: @hotelDetail.Hotel.GetTypePayment()</span>
+                    </p>
+                    <p>
+                        <span class="title">Ngày đăng ký</span>
+                        <span class="content-item">: @hotelDetail.Hotel.CreateDate</span>
+                    </p>
+                    <p>
+                        <span class="title">Ngày gia hạn</span>
+                        <span class="content-item">: @hotelDetail.Hotel.DayStartUse</span>
+                    </p>
+                    <p>
+                        <span class="title">Thời gian gia hạn</span>
+                        <span class="content-item">: @hotelDetail.Hotel.TimeExtended Tháng</span>
+                    </p>
+                    <p>
+                        <span class="title">Trạng thái</span>
+                        <span class="content-item">: @hotelDetail.Hotel.GetStatus()</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-12" style="margin-bottom:10px">
+                <h4>Tổng quan về khách sạn</h4>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div style="overflow:auto">
+                            <table class="table table-bordered table-booking">
+                                <thead>
+                                    <tr>
+                                        <th colspan="19">Tình hình đặt phòng</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="7">Số lượng Booking</th>
+                                        <th rowspan="2">Số hóa đơn</th>
+                                        <th rowspan="2">Order (*)</th>
+                                        <th rowspan="2">Order (**)</th>
+                                        <th rowspan="2">Dịch vụ</th>
+                                        <th rowspan="2">Giường phụ</th>
+                                        <th colspan="7">Doanh thu (₫)</th>
+                                    </tr>
+                                    <tr>
+                                        <th>PMS</th>
+                                        <th>BE</th>
+                                        <th>BK.C</th>
+                                        <th>Expedia</th>
+                                        <th>Agodar</th>
+                                        <th>AirBNB</th>
+                                        <th>Tổng</th>
+                                        <th>PMS</th>
+                                        <th>BE</th>
+                                        <th>BK.C</th>
+                                        <th>Expedia</th>
+                                        <th>Agodar</th>
+                                        <th>AirBNB</th>
+                                        <th>Tổng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@hotelDetail.SituationBooking.NumberBookingPMS</td>
+                                        <td>@hotelDetail.SituationBooking.NumberBookingBE</td>
+                                        <td>@hotelDetail.SituationBooking.NumberBookingBKC</td>
+                                        <td>@hotelDetail.SituationBooking.NumberBookingExpedia</td>
+                                        <td>@hotelDetail.SituationBooking.NumberBookingAgodar</td>
+                                        <td>@hotelDetail.SituationBooking.NumberBookingAirBNB</td>
+                                        <td>
+                                            @(hotelDetail.SituationBooking.NumberBookingPMS +
+                                                                            hotelDetail.SituationBooking.NumberBookingBE +
+                                                                            hotelDetail.SituationBooking.NumberBookingBKC +
+                                                                            hotelDetail.SituationBooking.NumberBookingExpedia +
+                                                                            hotelDetail.SituationBooking.NumberBookingAgodar +
+                                                                            hotelDetail.SituationBooking.NumberBookingAirBNB)
+                                        </td>
+                                        <td>@hotelDetail.SituationBooking.NumberInvoice</td>
+                                        <td>@hotelDetail.SituationBooking.NumberOrder1</td>
+                                        <td>@hotelDetail.SituationBooking.NumberOrder2</td>
+                                        <td>@hotelDetail.SituationBooking.NumberService</td>
+                                        <td>@hotelDetail.SituationBooking.NumberExtrabed</td>
+                                        <td>@(String.Format("{0:#,0}", Math.Round(hotelDetail.SituationBooking.RevenuePMS, 0)))</td>
+                                        <td>@(String.Format("{0:#,0}", Math.Round(hotelDetail.SituationBooking.RevenueBE, 0)))</td>
+                                        <td>@(String.Format("{0:#,0}", Math.Round(hotelDetail.SituationBooking.RevenueBKC, 0)))</td>
+                                        <td>@(String.Format("{0:#,0}", Math.Round(hotelDetail.SituationBooking.RevenueExpedia, 0)))</td>
+                                        <td>@(String.Format("{0:#,0}", Math.Round(hotelDetail.SituationBooking.RevenueAGOR, 0)))</td>
+                                        <td>@(String.Format("{0:#,0}", Math.Round(hotelDetail.SituationBooking.RevenueAirBNB, 0)))</td>
+                                        <td>
+                                            @(String.Format("{0:#,0}", Math.Round(hotelDetail.SituationBooking.RevenuePMS +
+                                                                                                                               hotelDetail.SituationBooking.RevenueBE +
+                                                                                                                               hotelDetail.SituationBooking.RevenueBKC +
+                                                                                                                               hotelDetail.SituationBooking.RevenueExpedia +
+                                                                                                                               hotelDetail.SituationBooking.RevenueAGOR +
+                                                                                                                               hotelDetail.SituationBooking.RevenueAirBNB, 0)))
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="@(hotelDetail.RoomType.Count + 1)">Thông tin phòng</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Loại phòng</td>
+                                                @foreach (RoomType roomType in hotelDetail.RoomType)
+                                                {
+                                                    <th>@roomType.RoomTypeName</th>
+                                                }
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Số lượng phòng</td>
+                                                @foreach (RoomType roomType in hotelDetail.RoomType)
+                                                {
+                                                    <td>@roomType.NumberRoom</td>
+                                                }
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="4">Thông tin giường phụ</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Loại phòng</td>
+                                                <th>Giường phụ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (RoomType roomType in hotelDetail.RoomType)
+                                            {
+                                                <tr>
+                                                    <td>@roomType.RoomTypeName</td>
+                                                    <td>@roomType.Extrabed</td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th colspan="4">Thông tin dịch vụ</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Loại dịch vụ</td>
+                                        <th>Dịch vụ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (ServiceCategory service in hotelDetail.ServiceCategory)
+                                    {
+                                        <tr>
+                                            <td>@service.ServiceCategoryName</td>
+                                            <td>@service.Services</td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Thông báo cập nhật hệ thống";
+}
+<script src="~/Scripts/Settting/notify-update-system.js"></script>
+<section class="content-header">
+    <h1>
+        Thông báo cập nhật hệ thống
+    </h1>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-10 col-md-9">
+            <div class="form-group has-feedback">
+                <label>Trạng thái</label>
+                <select class="form-control" ng-model="data.Status" boolean style="max-width:250px">
+                    <option value="true">Mở</option>
+                    <option value="false">Khóa</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-3">
+            <div class="form-group has-feedback">
+                <label>Ngôn ngữ</label>
+                <select class="form-control" ng-change="GetData()" ng-model="languageId" convert-to-number>
+                    <option value="{{item.LanguageId}}" ng-repeat="item in language">{{item.Title}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12" style="margin-top:10px">
+            <textarea ng-model="data.Content" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="col-md-12 text-right" style="margin-top:10px">
+            <button class="btn btn-primary" ng-click="Put()">Cập nhật</button>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách khách sạn";
+}
+<script src="~/Scripts/Statistic/hotel-cancel-booking.js"></script>
+<section class="content-header">
+    <h1>
+        Danh sách đặt phòng khách sạn hủy
+    </h1>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-4 col-md-6">
+            <div class="form-group has-feedback">
+                <label>Trạng thái khách sạn</label>
+                <select ng-change="GetAllHotel()" class="form-control" ng-model="filters.type" convert-to-number>
+                    <option value="-1">Tất cả</option>
+                    <option value="1">Dùng thử</option>
+                    <option value="2">Dùng thật</option>
+                    <option value="3">Yêu cầu gia hạn</option>
+                    <option value="4">Đã khóa</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="form-group has-feedback">
+                <label>Khách sạn</label>
+                <select ng-change="GetData()" class="form-control" ng-model="filters.hotelId" convert-to-number>
+                    <option value="-1">Tất cả</option>
+                    <option value="{{item.HotelId}}" ng-repeat="item in hotels">{{item.Code}} - {{item.Name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div ui-grid="gridOptions" set-grid-height ui-grid-selection ui-grid-resize-columns ui-grid-move-columns
+                 ui-grid-pinning ui-grid-pagination ui-grid-exporter ui-grid-auto-resize class="grid"></div>
+        </div>
+    </div>
+</section>

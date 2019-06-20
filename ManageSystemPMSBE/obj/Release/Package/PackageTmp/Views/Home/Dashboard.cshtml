@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Tổng quan";
+}
+<style>
+    .inner h3 {
+    }
+</style>
+<script src="~/Scripts/Dashborad/dashboard.js"></script>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3><span ng-cloak>{{data.totalHotel}}</span></h3>
+                    <p>Tổng số khách sạn</p>
+                </div>
+                <div class="icon">
+                    <ion-icon name="business"></ion-icon>
+                </div>
+                <a href="#" class="small-box-footer">Chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3><span ng-cloak>{{data.totalHotelUsePMS}}</span></h3>
+                    <p>Tổng số khách sạn sử dụng PMS</p>
+                </div>
+                <div class="icon">
+                    <ion-icon name="bookmarks"></ion-icon>
+                </div>
+                <a href="#" class="small-box-footer">Chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3><span ng-cloak>{{data.totalHotelUseBE}}</span></h3>
+                    <p>Tổng số khách sạn sử dụng BE</p>
+                </div>
+                <div class="icon">
+                    <ion-icon name="wallet"></ion-icon>
+                </div>
+                <a href="#" class="small-box-footer">Chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3><span ng-cloak>{{data.totalHotelUseBEPMS}}</span></h3>
+                    <p>Tổng số khách sạn sử dụng BE và PMS</p>
+                </div>
+                <div class="icon">
+                    <ion-icon name="cloud-download"></ion-icon>
+                </div>
+                <a href="#" class="small-box-footer">Chi tiết <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+

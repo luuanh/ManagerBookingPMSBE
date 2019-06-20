@@ -1,0 +1,49 @@
+﻿.title-header {
+    margin-top: 0;
+}
+.field-require{
+    color:red
+}
+textarea{
+    resize:none
+}
+.btn-control{
+    width:40px
+}
+th,td{
+    vertical-align:middle
+}
+#loader {
+    border: 5px solid #d1d8f0;
+    border-radius: 50%;
+    border-top: 5px solid #1166a0;
+    border-bottom: 5px solid #1166a0;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+    z-index: 10005;
+    top: 40%;
+    left: 50%;
+    position: fixed;
+    display: none;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

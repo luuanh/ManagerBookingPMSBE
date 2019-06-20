@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách khách sạn";
+}
+<script src="~/Scripts/Hotel/hotel.js"></script>
+<section class="content-header">
+    <h1>
+        Danh sách khách sạn
+    </h1>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-2 col-md-3">
+            <div class="form-group has-feedback">
+                <label>Ngày gia hạn từ</label>
+                <input id="FromDate" ng-model="FromDate" type="text" class="form-control">
+                <span class="fa fa-calendar form-control-feedback"></span>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-3">
+            <div class="form-group has-feedback">
+                <label>Đến ngày</label>
+                <input id="ToDate" ng-model="ToDate" type="text" class="form-control">
+                <span class="fa fa-calendar form-control-feedback"></span>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-3">
+            <div class="form-group has-feedback">
+                <label>Trạng thái</label>
+                <select class="form-control" ng-model="filters.status" convert-to-number>
+                    <option value="-1">Tất cả</option>
+                    <option value="1">Dùng thử</option>
+                    <option value="2">Dùng thật</option>
+                    <option value="3">Yêu cầu gia hạn</option>
+                    <option value="4">Đã khóa</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-3">
+            <div class="form-group has-feedback">
+                <label>Từ khóa</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Tên/ Mã khách sạn">
+                    <span class="input-group-btn">
+                        <button ng-click="GetData()" class="btn btn-info btn-flat" type="button">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div ui-grid="gridOptions" set-grid-height ui-grid-selection ui-grid-resize-columns ui-grid-move-columns
+                 ui-grid-pinning ui-grid-pagination ui-grid-exporter ui-grid-auto-resize class="grid"></div>
+        </div>
+    </div>
+</section>

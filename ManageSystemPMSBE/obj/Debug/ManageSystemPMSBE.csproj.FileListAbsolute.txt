@@ -1,0 +1,378 @@
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ApplicationInsights.config
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ManageSystemPMSBE.dll.config
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ManageSystemPMSBE.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ManageSystemPMSBE.pdb
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csc.exe
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csc.exe.config
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csc.rsp
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csi.exe
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csi.exe.config
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csi.rsp
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.Managed.Core.targets
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.AppContext.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Collections.Immutable.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Console.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.Compression.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.FileSystem.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.Pipes.AccessControl.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.Pipes.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Reflection.Metadata.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.AccessControl.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Claims.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Principal.Windows.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.ValueTuple.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.XmlDocument.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.XPath.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\vbc.exe
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\vbc.exe.config
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\vbc.rsp
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\VBCSCompiler.exe
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\VBCSCompiler.exe.config
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Antlr3.Runtime.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\CKFinder.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\CKFinder_ImageResize.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Dapper.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Dapper.Extension.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.Agent.Intercept.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.DependencyCollector.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.Web.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.WindowsServer.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.ApplicationInsights.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.Web.Infrastructure.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Newtonsoft.Json.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Diagnostics.DiagnosticSource.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Helpers.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Mvc.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Optimization.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Razor.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Deployment.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Razor.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\WebGrease.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Dapper.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Mvc.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Helpers.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Optimization.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Razor.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Deployment.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Razor.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Newtonsoft.Json.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Antlr3.Runtime.pdb
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Diagnostics.DiagnosticSource.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.DependencyCollector.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.WindowsServer.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.Web.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.csproj.CoreCompileInputs.cache
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.csproj.CopyComplete
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.dll
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.pdb
+D:\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.csprojAssemblyReference.cache
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ApplicationInsights.config
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ManageSystemPMSBE.dll.config
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ManageSystemPMSBE.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ManageSystemPMSBE.pdb
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csc.exe
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csc.exe.config
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csc.rsp
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csi.exe
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csi.exe.config
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csi.rsp
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CSharp.Core.targets
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.Managed.Core.targets
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.VisualBasic.Core.targets
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.AppContext.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Collections.Immutable.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Console.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Diagnostics.StackTrace.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.Compression.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.FileSystem.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.FileSystem.Primitives.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.Pipes.AccessControl.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.Pipes.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Reflection.Metadata.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.AccessControl.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Claims.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.Encoding.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.Primitives.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Principal.Windows.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Text.Encoding.CodePages.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.ValueTuple.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.ReaderWriter.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.XmlDocument.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.XPath.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.XPath.XDocument.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\vbc.exe
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\vbc.exe.config
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\vbc.rsp
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\VBCSCompiler.exe
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\VBCSCompiler.exe.config
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Antlr3.Runtime.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Dapper.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Dapper.Extension.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.Agent.Intercept.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.DependencyCollector.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.PerfCounterCollector.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.ServerTelemetryChannel.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.Web.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.WindowsServer.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.ApplicationInsights.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.Web.Infrastructure.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Newtonsoft.Json.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Diagnostics.DiagnosticSource.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Helpers.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Mvc.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Optimization.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Razor.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Deployment.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Razor.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\WebGrease.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Dapper.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Helpers.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Mvc.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Razor.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Deployment.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Razor.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Optimization.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Newtonsoft.Json.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Antlr3.Runtime.pdb
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Diagnostics.DiagnosticSource.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.DependencyCollector.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.WindowsServer.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.Web.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.csprojAssemblyReference.cache
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.csproj.CoreCompileInputs.cache
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.csproj.CopyComplete
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.dll
+G:\Project\IIT\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.pdb
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ApplicationInsights.config
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ManageSystemPMSBE.dll.config
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ManageSystemPMSBE.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ManageSystemPMSBE.pdb
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csc.exe
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csc.exe.config
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csc.rsp
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csi.exe
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csi.exe.config
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csi.rsp
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.AppContext.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Console.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.Compression.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.Pipes.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Claims.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.ValueTuple.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.XPath.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\vbc.exe
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\vbc.exe.config
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\vbc.rsp
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\VBCSCompiler.exe
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Antlr3.Runtime.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Dapper.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Dapper.Extension.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.Web.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.ApplicationInsights.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Newtonsoft.Json.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Diagnostics.DiagnosticSource.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Helpers.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Mvc.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Optimization.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Razor.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Deployment.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Razor.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\WebGrease.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Dapper.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Helpers.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Mvc.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Razor.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Deployment.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Razor.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Optimization.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Newtonsoft.Json.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Antlr3.Runtime.pdb
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Diagnostics.DiagnosticSource.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.Web.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.csprojAssemblyReference.cache
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.csproj.CopyComplete
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.dll
+C:\Users\admin\Desktop\New folder (4)\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.pdb
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ApplicationInsights.config
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ManageSystemPMSBE.dll.config
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ManageSystemPMSBE.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\ManageSystemPMSBE.pdb
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csc.exe
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csc.exe.config
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csc.rsp
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csi.exe
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csi.exe.config
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\csi.rsp
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.Managed.Core.targets
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.AppContext.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Collections.Immutable.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Console.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.Compression.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.FileSystem.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.Pipes.AccessControl.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.IO.Pipes.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Reflection.Metadata.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.AccessControl.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Claims.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Security.Principal.Windows.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.ValueTuple.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.XmlDocument.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.XPath.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\vbc.exe
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\vbc.exe.config
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\vbc.rsp
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\VBCSCompiler.exe
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\roslyn\VBCSCompiler.exe.config
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Antlr3.Runtime.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Dapper.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Dapper.Extension.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.Agent.Intercept.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.DependencyCollector.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.Web.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.WindowsServer.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.ApplicationInsights.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AspNet.TelemetryCorrelation.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.Web.Infrastructure.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Newtonsoft.Json.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Diagnostics.DiagnosticSource.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Helpers.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Mvc.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Optimization.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Razor.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Deployment.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Razor.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\WebGrease.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Dapper.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Helpers.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Mvc.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Razor.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Deployment.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.WebPages.Razor.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Web.Optimization.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Newtonsoft.Json.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Antlr3.Runtime.pdb
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\System.Diagnostics.DiagnosticSource.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AspNet.TelemetryCorrelation.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.DependencyCollector.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.WindowsServer.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.AI.Web.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.csproj.CoreCompileInputs.cache
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.csproj.CopyComplete
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.dll
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.pdb
+E:\IIT\WebCustomer\Asiky\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\ManageSystemPMSBE\obj\Debug\ManageSystemPMSBE.csprojAssemblyReference.cache
