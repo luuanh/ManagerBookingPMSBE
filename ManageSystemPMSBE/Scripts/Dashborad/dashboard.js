@@ -46,6 +46,7 @@ app.controller('controller', ['$scope', '$http','uiGridConstants',
             },
             { displayName: "Ngày tạo", name: 'CreateDate', width: 150, cellFilter: 'date:"dd-MM-yyyy HH:mm"' },
             { displayName: "Ngày gia hạn", name: 'DayStartUse', width: 150, cellFilter: 'date:"dd-MM-yyyy HH:mm"' },
+            
             { displayName: "TG gia hạn", name: 'TimeExtended', width: 100 },
             {
                 displayName: "Hình thức TT",
@@ -58,6 +59,13 @@ app.controller('controller', ['$scope', '$http','uiGridConstants',
                 name: 'Status',
                 width: 120,
                 cellTemplate: '<div class="ui-grid-cell-contents" ng-bind-html="grid.appScope.getStatusHotel(row.entity.Status)"></div>'
+            },
+            {
+                displayName: "Thao tác",
+                width: 150,
+                name: 'ThaoTac',
+               
+                cellTemplate: '<div><a class="ui-grid-cell-contents box-control" style="margin-left:1em;margin-right:1em" href="/Home/GetDetailHotelById?id={{row.entity.HotelId}}">Sửa</a><a href="" ng-click="grid.appScope.DeleteHotel(row.entity.HotelId)">Xoa</a></div>'
             }
         ];
 
@@ -308,6 +316,23 @@ app.controller('controller', ['$scope', '$http','uiGridConstants',
             });
         };
 
+       
+        // delete hotel
+        $scope.DeleteHotel = function (id) {
+            alert("Không được phép xóa");
+            //$("#loader").css("display", "block")
+            //$http({
+            //    url: "/Home/DeleteHotel",
+            //    method: "Put",
+            //    params: { HotelId:id}
+            //}).then(function success(response) {
+            //    $("#loader").css("display", "none")
+            //    alert("Thanh cong");
+            //}, function error(response) {
+            //    $("#loader").css("display", "none")
+            //    alert("loi");
+            //});
+        };
 
 
 
@@ -328,6 +353,7 @@ app.controller('controller', ['$scope', '$http','uiGridConstants',
             $scope.GetAllHotelUseBE();
             $scope.GetAllHotelUsePMS();
             $scope.GetAllHotelUsePMSBE();
+        
         }
         $scope.Init();
     }

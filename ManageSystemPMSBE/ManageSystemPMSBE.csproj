@@ -1965,6 +1965,7 @@
     <Content Include="Views\Test\TestMethod3.cshtml" />
     <Content Include="Views\Hotel\GetListUSerBooking.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\Home\GetDetailHotelById.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
